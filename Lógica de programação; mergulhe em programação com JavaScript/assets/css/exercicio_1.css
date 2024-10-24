@@ -1,0 +1,28 @@
+body{
+    background: linear-gradient(#011f44 0%, #03142b 23.33%, #021023 46.67%, #000000 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body::before{
+    background-image: url("../../img/code.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+}
+.divCentral{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 0.476);
+    border-radius: 15px;
+}
