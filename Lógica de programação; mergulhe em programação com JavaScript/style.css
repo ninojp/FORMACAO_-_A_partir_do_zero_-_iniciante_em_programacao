@@ -86,8 +86,15 @@ h2 {
     font-size: 32px;
     font-weight: 400;
 }
-.divLink{
+.divLinks{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; */
     position: absolute;
     bottom: 30px;
     right: 30px;
 }
+/* .divLink1{
+
+} */
