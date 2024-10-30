@@ -789,6 +789,560 @@ Utilizamos o console para testar e depurar nosso código, exibindo mensagens e v
 Na próxima aula:
 Vamos aprender como trabalhar com estruturas de repetição!
 
-## Aula 03 - 
+## Aula 03 - Loop e Tentativas
 
-### Aula 03 -  - Vídeo 1
+### Aula 03 - Novas condições - Vídeo 1
+
+Transcrição  
+Guilherme: Nosso jogo agora está similar ao que fizemos no início, quando você escolheu o número 29. Não tínhamos combinado essa escolha.
+
+Agora, ao errar, exibimos uma mensagem de erro, lembrando da frase "Errou!" Seria interessante fornecer uma dica à pessoa jogadora, concorda? Quando testei isso contigo, você indicou se o número era menor ou maior. Foram dadas dicas até que você encontrasse o número secreto.
+
+Vamos criar essas dicas?
+
+Mônica: Vamos.
+
+Criando as dicas
+Arquivo app.js no repositório do GitHub
+
+Guilherme: Primeiramente, precisamos decidir em que ponto do nosso código introduziremos essas dicas. Vamos ao arquivo app.js.
+
+app.js
+
+```JavaScript
+alert('Boas vindas ao jogo do número secreto');
+let numeroSecreto = 2;
+console.log(numeroSecreto)
+let chute = prompt('Escolha um número entre 1 e 10');
+// se chute for igual ao número secreto
+if (chute == numeroSecreto) {
+    alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+} else {
+    alert('Você errou :(' )
+}
+```
+
+Se o palpite coincidir com o número correto, o jogo se encerra; não ocorre mais nada. Caso contrário, poderíamos implementar novas condições para informar se o número secreto é maior ou menor. Concorda com essa abordagem?
+
+Vamos estabelecer mais uma condição dentro do else, podemos remover o alert(). Utilizaremos o if(), abrindo parênteses e inserindo a condição.
+
+Se o número secreto for maior do que o chute, exibimos uma mensagem assim informando que o número secreto é maior. Faremos isso através de um alert(). Usando as aspas simples, que é nosso padrão nesse projeto, escreveria "O número secreto é maior que", e incluiria o valor.
+
+Que tal aplicar uma template string? Usamos: "O número secreto é maior que ${chute}" Usaremos o cifrão, as chaves, a palavra "chute", e fechamos as chaves. Quando lidamos com template strings, empregamos crases e encerraremos a condição com um ponto e vírgula.
+
+app.js
+
+```JavaScript
+// código omitido
+    } else {
+            if (numeroSecreto > chute) {
+                    alert(`O número secreto é maior que ${chute}`);
+            }
+}
+```
+
+Se o chute for menor que o número secreto, entramos em outra condição. Após o fechamento das chaves, implementamos mais um else e utilizamos um alert() para informar que o número secreto é menor.
+
+Para manter a padronização, o termo "chute" será sempre a primeira variável. Vamos alterar o código anterior. Portanto, se o chute for maior que o numeroSecreto o número secreto é menor:
+
+app.js
+
+```JavaScript
+// código omitido
+    } else {
+            if (chute > numeroSecreto) {
+                    alert(`O número secreto é menor que ${chute}`);
+            } else {
+                    alert()
+            }
+}
+```
+
+Se chutarmos o número 3, por exemplo, é exibida a mensagem informando que o número secreto é menor. Caso não seja menor, ele vai para a condição else(), onde vamos inserir uma mensagem parecida com a anterior.
+
+Mônica: O que temos na linha 11, agora vamos copiar e colar na linha 13 mas com a mensagem informando que o número secreto é maior.
+
+app.js
+
+```JavaScript
+// código omitido
+} else {
+        if (chute > numeroSecreto) {
+                alert(`O número secreto é menor que ${chute}`);
+        } else {
+                alert(`O número secreto é maior que ${chute}`);
+        }
+}
+```
+
+Guilherme: Vamos testar isso? Vamos definir o número secreto como 5 para facilitar a lembrança se é maior ou menor. Isso em let numeroSecreto onde vamos inserir o valor 5:
+
+app.js
+
+```JavaScript
+// código omitido
+let numeroSecreto = 5;
+// código omitido
+```
+
+Agora acessamos a aplicação pelo navegador através do endereço 127.0.0.1:5500/index.html.
+
+No pop-up com a frase "boas-vindas ao jogo do número secreto" clicamos no botão "Ok". No pop-up seguinte temos a frase "escolha um número entre 1 e 10".
+
+Vamos chutar e clicar em "Ok". Temos como retorno a mensagem "O número secreto é menor que 7", e selecionamos "Ok". E o jogo será interrompido. Não há mais nenhuma ação ocorrendo.
+
+Tudo bem, vamos resolver esse problema em breve. Vamos atualizar novamente para jogar e clicar em "OK". Agora escolhemos um número menor, vou selecionar 4. Pressionamos "OK".
+
+Nesse cenário, a mensagem indicará que o número secreto é maior, o que faz sentido, pois o número secreto é 5. Ao clicarmos em "OK", o jogo se encerra. E pior ainda, ele até exibe a mensagem: "Você acertou. Descobriu o número secreto."
+
+Isso não era exatamente o que desejávamos.
+
+Mônica: O comportamento segue a lógica de execução do JavaScript, que processa o código linha por linha. Está executando precisamente o que instruímos. Embora não seja o resultado que almejamos, é o que escrevemos.
+
+Guilherme: Nosso próximo desafio é pensar em como continuar jogando até acertarmos a resposta correta.
+
+Vamos resolver isso a seguir!
+
+### Aula 03 - Enquanto... - Vídeo 2
+
+Transcrição  
+Mônica: Quando estávamos interagindo com o jogo de forma mais manual, usando um pequeno pedaço de papel, você conseguiu fazer várias tentativas até acertar. No entanto, atualmente, estamos limitados a uma única tentativa em nosso computador. É essencial abordar essa questão.
+
+Guilherme: Na programação, existe uma maneira de indicar: "Execute essas instruções apenas enquanto uma determinada condição permanecer verdadeira". Esse conceito é conhecido como loop ou, em inglês, while. A estrutura do while é bastante similar à do if.
+
+Para empregar o while, escrevemos a palavra seguida por parênteses e chaves para delinear as condições. Dentro do "enquanto", o que ocorre?
+
+Arquivo app.js no repositório do GitHub
+
+app.js
+
+```JavaScript
+// código omitido
+// enquanto
+while (condição) {
+    // instruções a serem executadas
+}
+// código omitido
+```
+
+Mônica: Aconselhamos a fazer uma anotação do que significa cada uma desses comandos em JavaScript, que também se aplica a outras linguagens de programação. Isso será útil quando precisar procurar como fazer essas coisas, lembrando do que estamos falando.
+
+Guilherme: No nosso jogo, como regra, queremos que as tentativas continuem apenas enquanto o chute não for igual ao número secreto. Caso contrário, se acertar, o jogo termina.
+
+app.js
+
+```JavaScript
+// código omitido
+// enquanto chute não for igual ao n.s.
+while () {
+}
+// código omitido
+```
+
+Então, como vamos aplicar isso na lógica da nossa aplicação?
+
+Vamos pedir um chute para a pessoa jogadora quando estivermos dentro da condição do while ou ainda não entramos?
+
+Mônica: Já entramos, porque queremos iniciar o jogo, fazer a pergunta, a pessoa dá o chute, fazemos a pergunta de novo.
+
+Guilherme: Então, dentro da variável let chute, vamos remover a parte do prompt('Escolha um número entre 1 e 10'), deixando a variável let chute; vazia, indicando um espaço na memória onde armazenaremos o chute, que ainda não foi preenchido.
+
+Dentro do while(){} passamos que o valor do chute será o valor que pedimos na condição.
+
+app.js
+
+```JavaScript
+// código omitido
+// enquanto chute não for igual ao n.s.
+while () {
+   chute = prompt('Escolha um número entre 1 e 100');
+}
+// código omitido
+```
+
+Agora, necessitamos verificar a validade da condição. Como determinamos se a executamos ou não? Até quando repetimos? Vamos escrever essa parte agora no código.
+
+Vamos compor com base nas informações anteriores. O termo "enquanto" equivale ao while. A menção ao chute diz respeito ao chute que foi mencionado anteriormente dentro do while().
+
+O "Não for igual" tem um código específico em JavaScript que podemos usar para representar essa expressão. Portanto, para representar "não é igual", usamos != em JavaScript.
+
+Portanto, enquanto o chute não for igual ao número secreto, manteremos essa repetição. Por exemplo, pergunte e o chute, pergunte e o chute.
+
+app.js
+
+```JavaScript
+// código omitido
+// enquanto chute não for igual ao n.s.
+while (chute != numeroSecreto) {
+   chute = prompt('Escolha um número entre 1 e 100');
+}
+// código omitido
+```
+
+Agora, se eu executar isso agora (não execute o programa assim!), recebemos um loop infinito de solicitações de chutes.
+
+Ele pergunta, o chute, o chute, o chute, e assim por diante, infinitamente. Passaríamos o resto da nossa vida dizendo qual é o valor do palpite e nada mais aconteceria.
+
+Mônica: Por causa da execução de códigos sequenciais, quando ele chega à linha o while, repete indefinidamente porque a condição nunca é atendida, então ele nunca avança para o próximo número.
+
+Guilherme: Para corrigir isso, precisamos pegar as condições if que estão fora do while e movê-las para dentro do nosso laço while.
+
+Mônica: Portanto, vamos copiar da linha 10 à linha 19. Com "CTRL + X" e depois da linha 8, damos um enter e na linha 9 colamos tudo que copiamos.
+
+Por enquanto, temos:
+
+app.js
+
+```JavaScript
+// código omitido
+alert('Boas vindas ao jogo do número secreto');
+let numeroSecreto = 5;
+console.log(numeroSecreto)
+let chute
+// enquanto chute não for igual ao n.s.
+while (chute != numeroSecreto) {
+    chute = prompt('Escolha um número entre 1 e 10');
+    // se chute for igual ao número secreto
+if (chute == numeroSecreto) { 
+        alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+} else {
+    if (chute > numeroSecreto) {
+            alert(`O número secreto é menor que ${chute}`);
+} else {
+        alert(`0 número secreto é maior que ${chute}`)
+}
+// código omitido
+```
+
+Guilherme: Isso leva a um ponto importante.
+
+Vamos analisar o código. Notem que sempre que começamos uma nova instrução, iniciamos no início da linha à esquerda, está bem alinhado à esquerda. No âmbito do while, onde normalmente usamos chaves {} para delimitar esse escopo, há um recuo à esquerda.
+
+Essa prática é recomendada para garantir a legibilidade do código. No entanto, ao copiar ("Ctrl+C") e colar ("Ctrl+V") dentro do if(), os códigos não foram inseridos dentro do escopo apropriado, seja do while ou do if. Consequentemente, eles ficaram nesse formato. Isso não é apropriado.
+
+Selecionamos da linha 10 até a linha 18 (começo do if() até o else()). Pressionamos "Shift" e o caractere "{" ("Shift + {"), o caractere "{" foi inserido corretamente.
+
+app.js
+
+```JavaScript
+// código omitido
+// enquanto chute não for igual ao n.s.
+while (chute != numeroSecreto) {
+    chute = prompt('Escolha um número entre 1 e 100');
+    // se chute for igual ao número secreto
+    if (chute == numeroSecreto) {
+        alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+    } else {
+        if (chute > numeroSecreto) {
+            alert(`O número secreto é menor que ${chute}`);
+        } else {
+            alert(`O número secreto é maior que ${chute}`);
+        }
+// código omitido
+```
+
+Note que adicionamos um espaço entre cada uma dessas instruções. Por que isso torna a compreensão mais simples? Pois compreendemos que todo esse código está inserido no while.
+
+Agora vamos analisar se a lógica é coerente. No while(), o chute é idêntico ao número secreto na primeira tentativa? Não, ele começa com um valor vazio (let chute). No entanto, o número secreto está definido.
+
+Quando ingressamos no while pela primeira vez, a seguinte instrução ocorrerá: solicitaremos um valor de 1 a 10 para o chute. Após inserirmos o valor, a primeira verificação acontecerá. O chute é igual ao número secreto após essa verificação? Se for o caso, um alerta será exibido. Caso contrário, receberemos informações sobre se o chute é menor ou maior.
+
+Vamos testar isso e observar o resultado?
+
+Mônica: Gostaria de comentar algo sobre os operadores de comparação que estamos usando, como: o sinal de diferença !=, o de igualdade == e o de maior >. São operações que vemos na escola, quando comparamos números em problemas matemáticos. Só que aqui, em vez de comparar o número em si, comparamos variáveis.
+
+Também podemos comparar números, se quisermos. Vamos jogar?
+
+Guilherme: Vamos ao jogo no navegador.
+
+Sabemos que o número secreto é 5. Obrigado, console, por nos mostrar o resultado final do jogo, que não faz nenhum sentido agora, mas depois removeremos essa visualização.
+
+Mônica: Por enquanto, estamos apenas desenvolvendo o resultado final.
+
+Guilherme: No desenvolvimento, inserimos o resultado esperado, um fluxo otimista, e depois retiramos essas informações.
+
+Vamos começar com um número inferior ao número secreto, por exemplo 8. A mensagem "O número secreto é menor que 8" será exibida. Faremos um processo passo a passo. Se digitarmos 7, a mensagem "O número secreto é menor que 7" será exibida, e assim por diante... Até chegarmos no número secreto 5 e a mensagem "Você acertou o número secreto" será exibida.
+
+Clicamos em "Ok".
+
+Depois disso, testaremos o caminho oposto. Queremos digitar um número menor do que o número secreto. Então, se digitarmos 1, a mensagem "O número secreto é maior que 1" será exibida. E assim seguimos, até digitarmos o número 5 e "Você acertou o número secreto" será exibido novamente, pois o número secreto é 5.
+
+Conclusão
+Guilherme: Isso significa que nosso jogo está funcionando de acordo com o esperado. Ele é muito inspirado no que fizemos no início do curso.
+
+### Aula 03 - Tentativas - Vídeo 3
+
+Transcrição  
+Mônica: Então, você está de prova que Guilherme me pediu para corrigir quando ele não utilizar ponto e vírgula. Antes de qualquer coisa, vamos, aproximadamente na terceira linha, colocar um ponto e vírgula no final do console.log, e também na linha 4, no let shoot, assim como na linha 16 no último alert.
+
+Depois disso, agora nós podemos adicionar um pouco acrescentar mais coisas ao jogo, deixá-lo mais agradável, ou seja, a adição da funcionalidade que contabiliza quantas tentativas a pessoa demorou para acertar.
+
+Guilherme: Vamos fazer isso! A ideia é pensar em quantas tentativas foram necessárias para descobrir o número secreto. Como fazemos isso?
+
+Mônica: Primeiro, temos que armazenar esse valor em algum lugar, quantas tentativas a pessoa fez. Então, podemos criar uma variável, mais ou menos na linha 5, utilizando um let tentativas que vai iniciar com o valor 1, porque o jogo já começa com a pessoa realizando a primeira tentativa.
+
+Guilherme: Não se esqueça do ponto e vírgula.
+
+app.js
+
+```JavaScript
+// código omitido
+let chute;
+let tentativas = 1;
+// código omitido
+```
+
+Depois, quando entramos no while, note que em algum momento nós precisaremos informar: "Você perdeu uma tentativa". Então, teremos que subtrair, quando a pessoa fizer o chute, mas não é na linha 9 onde temos chute = prompt('Escolha um número entre 1 e 100'); que vamos somar.
+
+Mônica: Se fizermos isso muito próximo disso, pode ser que esta soma aconteça antes mesmo da pessoa fazer a tentativa. Muitas coisas têm que acontecer para podermos somar.
+
+Guilherme: Se adicionamos a tentativa somando após o while(chute != numeroSecreto) na primeira vez, o que vai acontecer?
+
+Mônica: Já iniciou na primeira tentativa, perguntou qual é o número secreto e já está somando mais uma, ou seja, duas tentativas na primeira vez.
+
+Guilherme: Sendo que a pessoa que está jogando fez apenas uma tentativa, então não será aqui que vamos somar essa tentativa.
+
+No if, quando acertamos o número secreto, também acho que não é o lugar de adicionar a tentativa.
+
+Mônica: Senão, essa contagem só vai acontecer quando a pessoa acertar, e isso não é o que queremos.
+
+Guilherme: Quando chegamos no else, temos uma possibilidade. Aqui faz mais sentido, pois a pessoa não acertou o número secreto e perdeu a tentativa dela. Então, independente do número secreto ser maior ou menor, notamos que estamos finalizando a instrução do else.
+
+Quando colocamos o cursor sobre o colchete {}, ele ilumina o colchete correspondente que está fechando. Se formos para a próxima linha, note que eu ainda estou na instrução do else. O que podemos fazer? Aqui temos certeza que a pessoa errou, que a pessoa não acertou e perdeu uma tentativa.
+
+Portanto, podemos fazer assim: tentativas = tentativas + 1;. Isto é, a tentativa é igual ao valor que temos na variável tentativas mais um, +1.
+
+app.js
+
+```JavaScript
+// código omitido
+    // se chute for igual ao número secreto
+    if (chute == numeroSecreto) {
+        alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+    } else {
+        if (chute > numeroSecreto) {
+            alert(`O número secreto é menor que ${chute}`);
+        } else {
+            alert(`O número secreto é maior que ${chute}`);
+        }
+        tentativas = tentativas + 1;
+    }
+// código omitido
+```
+
+O que você achou deste código aqui, Moni?
+
+Mônica: Eu acho que poderia seguir com ele, mas aí precisamos analisar a regra de negócio. A tentativa que é certa, ela conta como uma tentativa?
+
+Guilherme: Conta.
+
+Mônica: Então, não deveria ficar dentro do else. Ela deveria ficar fora para contar também quando a pessoa acerta.
+
+Guilherme: Boa, Moni. tentativas = tentativas + 1;. Faz sentido?
+
+Mônica: Faz, mas tem uma maneira que podemos escrever a mesma coisa, só que de forma mais concisa e clara.
+
+Guilherme: Certo. E é provavelmente mais utilizada no dia a dia.
+
+Mônica: Isso.
+
+Guilherme: Como podemos fazer isso?
+
+Mônica: Para isso, vamos colocar em outra linha para conseguir fazer a comparação entre as duas maneiras. Então, na linha 20, coloca tentativas++;. Com esse Tentativas++ irá ter o mesmo comportamento da linha acima.
+
+Guilherme: Podemos comentar a última forma que aplicamos. Então, sempre que quiser pegar o valor de uma variável, somar, atribuir um, incrementar um, que é o nome que utilizamos, utilizamos tentativas++ e não esqueça do ponto e vírgula.
+
+++ Atribuir +1
+
+app.js
+
+```JavaScript
+// código omitido
+    // se chute for igual ao número secreto
+    if (chute == numeroSecreto) {
+        alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+    } else {
+        if (chute > numeroSecreto) {
+            alert(`O número secreto é menor que ${chute}`);
+        } else {
+            alert(`O número secreto é maior que ${chute}`);
+        }
+        // tentativas = tentativas + 1;
+                tentativas++;
+    }
+// código omitido
+```
+
+A última coisa que nos resta agora é falar: Quantas tentativas foram necessárias para descobrir o número secreto?
+
+Quando acertamos é informado que descobrimos o número secreto vamos inserir o sinal de cifrão após o template string e abrir chaves. Dentro dessas chaves escreveremos tentativas. Isso retornará o valor contido na variável tentativas, que é exatamente o que queremos. Adicionaremos também um texto explicativo.
+
+app.js
+
+```JavaScript
+// código omitido
+    // se chute for igual ao número secreto
+    if (chute == numeroSecreto) {
+        alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas`);
+    } 
+// código omitido
+```
+
+Podemos fazer um teste agora. Vamos jogar voltando ao jogo no navegador. Môni, vou deixar você escolher os números, tudo bem?
+
+Mônica: Tudo bem!
+
+Guilherme: E não esqueça de fazer o controle das tentativas também. Vá em frente!
+
+Mônica: Assim sendo, damos as boas-vindas ao jogo do número secreto. Quero escolher o número um. Depois o número oito. E para finalizar, o número cinco.
+
+A mensagem exibida foi que eu descobri o número secreto em três tentativas. Isso porque ele conta as duas tentativas que eu errei e também a tentativa correta.
+
+#### Aula 03 - Contador 1
+
+Saber trabalhar com loops de repetição, como o while, é essencial na programação! Os loops permitem automatizar tarefas repetitivas e lidar com grandes quantidades de dados de forma eficiente.
+
+Contudo, é importante usá-los com cuidado para evitar loops infinitos (quando a condição nunca se torna falsa - o que pode travar o programa).
+
+É recomendado sempre ter uma lógica que faça com que a condição eventualmente se torne falsa para que o loop termine corretamente.
+
+Abaixo, temos um código de exemplo:
+
+```JavaScript
+let contador = 1;
+while (contador < 4) {
+  console.log('Executando a iteração ' + contador);
+  contador = contador + 1;
+}
+```
+
+Ao executar código, podemos afirmar que:
+
+while (contador < 4){ } começa o loop while. Ele continuará repetindo o bloco de código entre as chaves { } enquanto a condição contador < 4 for verdadeira.
+
+Isso aí! Essa condição significa que o loop continuará enquanto o valor da variável contador for menor que 4.
+
+Alternativa correta
+O resultado final será a impressão das mensagens "Executando a iteração 1", "Executando a iteração 2" e "Executando a iteração 3" no console.
+
+Isso aí! O loop foi executado três vezes, e o valor final da variável contador é 4. Na quarta iteração, o valor de contador é 4. Neste momento, a condição contador < 4 se torna falsa, pois 4 não é menor que 4. O loop não executa mais o código dentro das chaves e termina.
+
+#### Aula 03 - Loop infinito
+
+Willian está iniciando no mundo da programação e recentemente descobriu que existe uma maneira de executar um bloco de comandos repetidamente enquanto uma condição pré-estabelecida não for satisfeita.
+
+Animado com as possibilidades, ele decidiu treinar a utilização da estrutura while() em um projeto pessoal, de cálculo de médias aritméticas. No entanto, acabou se deparando com um loop infinito, e não conseguiu descobrir o por quê.
+
+Sabendo que você também está estudando lógica de programação, Willian pediu sua ajuda para localizar onde está o erro em seu código:
+
+```JavaScript
+let qtdNumeros = prompt('Digite a quantidade de números para o cálculo da média:');
+let soma = 0;
+let contador = qtdNumeros;
+while(contador > 0){
+    let numero = parseInt(prompt('Digite o numero:'));
+    soma += numero;
+}
+let media = soma / qtdNumeros;
+console.log(media);
+```
+
+Qual alteração você poderia sugerir a Willian para que o código tenha o resultado esperado?
+
+Quando utilizamos loops com contadores, precisamos garantir que um dia eles cheguem até a condição de parada do loop. No código acima, o contador não tem seu valor alterado e para resolver o loop infinito basta decrementá-lo a cada iteração, adicionando a linha contador-- dentro do loop.
+
+Ao decrementar o valor da variável contadora a cada iteração, eventualmente ela vai ser menor ou igual a 0, o que vai parar a execução do loop.
+
+### Aula 03 - Desafio: hora da prática
+
+Chegamos em mais uma lista de atividades (não obrigatórias) para você praticar e reforçar ainda mais seu aprendizado.Bora?!
+
+Desafios  
+
+- Crie um contador que comece em 1 e vá até 10 usando um loop while. Mostre cada número.
+
+- Crie um contador que começa em 10 e vá até 0 usando um loop while. Mostre cada número.
+
+- Crie um programa de contagem regressiva. Peça um número e conte deste número até 0, usando um loop while no console do navegador.
+
+- Crie um programa de contagem progressiva. Peça um número e conte de 0 até esse número, usando um loop while no console do navegador.
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+### Aula 03 - Para saber mais: operadores lógicos
+
+Quando escrevemos programas em JavaScript, frequentemente nos deparamos com a necessidade de tomar decisões com base em condições. É aqui que os operadores lógicos entram em cena e nos ajudam a criar uma lógica robusta e eficaz.
+
+A seguir, vamos explorar os operadores lógicos de uma forma simples e fácil de entender. Teremos exemplos claros para ilustrar seu funcionamento.
+
+**AND (&&)**  
+O operador AND, representado pelos símbolos "&&", é utilizado para combinar duas condições e avaliar se ambas são verdadeiras. Se ambas as condições forem verdadeiras, o resultado será… verdadeiro. Caso contrário, logicamente será falso. Por exemplo:
+
+```Javascript
+let idade = 25;
+let possuiCarteira = true;
+// se idade é maior que 18 e possui carteira…
+if (idade > 18 && possuiCarteira) {
+  console.log("Pode dirigir!");
+} else {
+  console.log("Não pode dirigir.");
+}
+```
+
+***OR (||)***  
+O operador OR, representado pelos símbolos "||", é usado para verificar se pelo menos uma das condições é verdadeira. Se uma das condições for verdadeira, o resultado será verdadeiro. Se ambas forem falsas, o resultado será falso. Veja um exemplo:
+
+```Javascript
+let temMaça = false;
+let temBanana = true;
+// se tem maça ou tem banana…
+if (temMaça || temBanana) {
+  console.log("Você tem frutas!");
+} else {
+  console.log("Não tem frutas.");
+}
+```
+
+**Outros tipos de operadores lógicos**  
+> Operador	Nome	Exemplo	Resultado  
+==	Igual	A == B	Verdadeiro se A for igual a B  
+!=	Diferente	A != B	Verdadeiro se A não for igual a B  
+<	Menor que	A < B	Verdadeiro se A for menor que B  
+>	Maior que	A > B	Verdadeiro se A for maior que B  
+<=	Menor ou igual	A <= B	Verdadeiro se A for menor ou igual a B.  
+>=	Maior ou igual	A >= B	Verdadeiro se A for maior ou igual a B.  
+
+Operadores Lógicos
+
+> Operador	Nome	Exemplo	Resultado  
+&&	E / AND	(A > B) && (B == C)	Verdadeiro se A fo maior que B E B for igual a C  
+ǀǀ	OU / OR	(A > B) ǀǀ (B == C)	Verdadeiro se A for maior que B OU B for igual a C  
+!	NEGAÇÃO	!(A == B)	Verdadeiro se A NÃO for igual a B  
+
+Gostou desse conhecimento e quer mais? A Rafa Ballerini tem um artigo incrível falando sobre Como utilizar [operadores de comparação em Javascript](https://www.alura.com.br/artigos/operadores-matematicos-em-javascript) que vale a pena a leitura.
+
+Tabela completa  
+![alt text](image.png)
+
+### Aula 03 - O que aprendemos?
+
+Nesta aula:  
+
+- Aprendemos a verificar se um número é maior ou menor do que outro utilizando estruturas condicionais (if/else) em nosso programa;
+
+- Utilizamos o loop "while" para repetir um bloco de código enquanto uma determinada condição for verdadeira, e permitir assim que o programa execute uma ação várias vezes;
+
+- Implementamos um contador de tentativas para acompanhar e exibir a quantidade de vezes que o usuário tentou adivinhar um número secreto. Podemos fazer isso, por exemplo, em um jogo de adivinhação.
+
+Na próxima aula:  
+Vamos aprender como evitar código duplicado e aplicar boas práticas de programação. Além disso, vamos gerar um número realmente "aleatório"!
+
+## Aula 04 - Boas Práticas de Programação
+
+### Aula 04 - Break - Vídeo 1
+
+### Aula 04 -  - Vídeo 2
+### Aula 04 -  - Vídeo 3
+### Aula 04 -  - Vídeo 4
+### Aula 04 -  - Vídeo 5
+### Aula 04 -  - Vídeo 6

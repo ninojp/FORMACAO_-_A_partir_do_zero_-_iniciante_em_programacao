@@ -87,14 +87,14 @@ h2 {
     font-weight: 400;
 }
 .divLinks{
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; */
     position: absolute;
     bottom: 30px;
     right: 30px;
+    width: 100%;
 }
-/* .divLink1{
-
-} */
+.divLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
