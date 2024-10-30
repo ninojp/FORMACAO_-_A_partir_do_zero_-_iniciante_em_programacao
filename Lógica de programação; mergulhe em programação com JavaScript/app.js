@@ -1,5 +1,5 @@
 // alert('Bem vindo ao jogo do Numero Secreto!');
-let numeroSecreto = 5;
+let numeroSecreto = parseInt(Math.random() *100 +1);
 console.log(`Numero Secreto: ${numeroSecreto}`);
 
 let numeroChute;
@@ -7,10 +7,10 @@ let tentativas = 1;
 
 //Enqunto o chute não for igual ao numero secreto
 while(numeroChute != numeroSecreto){
-    numeroChute = prompt('Diga um numero entre 1 e 10?');
+    numeroChute = prompt('Diga um numero entre 1 e 100?');
 
     if(numeroChute == numeroSecreto){
-        alert(`Você acertou o Numero Secreto ${numeroSecreto} com ${tentativas} Tentativas`);
+        break;
         // console.log('Você acertou o Numero Secreto: ' + numeroSecreto);
     }else{
         // alert('Você errou o numero :(');
@@ -24,17 +24,11 @@ while(numeroChute != numeroSecreto){
         tentativas++;
     };
 };
+let palavraTentativa = tentativas > 1 ? 'Tentativas' : 'Tentativa';
+alert(`Você acertou o Numero Secreto: ${numeroSecreto}, com ${tentativas} ${palavraTentativa}`);
+// if (tentativas > 1) {
+//     alert(`Você acertou o Numero Secreto: ${numeroSecreto} com ${tentativas} Tentativas`);
+// } else {
+//     alert(`Você acertou o Numero Secreto: ${numeroSecreto} com ${tentativas} Tentativa`);
+// };
 
-//Exercicio..
-// let qtdNumeros = prompt('Digite a quantidade de números para o cálculo da média:');
-// let soma = 0;
-// let contador = qtdNumeros;
-// while(contador > 0){
-//     let numero = parseInt(prompt('Digite o numero:'));
-//     // soma += numero;
-//     // contador++
-//     // qtdNumeros++
-//     contador--
-// }
-// let media = soma / qtdNumeros;
-// console.log(media);

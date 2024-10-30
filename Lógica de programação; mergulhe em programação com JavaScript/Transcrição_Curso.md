@@ -1341,8 +1341,416 @@ Vamos aprender como evitar código duplicado e aplicar boas práticas de program
 
 ### Aula 04 - Break - Vídeo 1
 
-### Aula 04 -  - Vídeo 2
-### Aula 04 -  - Vídeo 3
-### Aula 04 -  - Vídeo 4
-### Aula 04 -  - Vídeo 5
-### Aula 04 -  - Vídeo 6
+Transcrição  
+Guilherme: Temos um problema no nosso código. Moni, o que vai acontecer se a pessoa acertar o número de primeira?
+
+Mônica: Vamos aproveitar a nossa "cola" no console para testar isso.
+
+Guilherme: Inicialmente, recebemos o alerta com a mensagem "Boas-vindas ao jogo do número secreto". Em seguida, temos o prompt "Escolha um número entre 1 e 10". Digitamos 5 e confirmamos. Feito isso, recebemos a mensagem "Isso aí! Você descobriu o número secreto 5 com 1 tentativas". Isso soa um pouco estranho.
+
+Esperávamos que, ao descobrir na primeira tentativa, fosse exibido "Você descobriu com 1 tentativa", usando "tentativa" no singular. Então, vamos precisar escrever essa validação.
+
+Criando uma nova validação
+Mônica: Analisando a problemática, parece que vamos criar uma nova condicional.
+
+Guilherme: Isso nos causa preocupação, porque, se observarmos bem, vamos precisar criar essa condição dentro do bloco if da linha 11.
+
+app.js:
+
+```JavaScript
+if (chute == numeroSecreto) {
+    alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas.`);
+}
+```
+
+E se criarmos mais 10, 15, 20, 30 condições? Serão todas dentro do if?
+
+Mônica: Já estamos fazendo uma condição no momento. Então, imagine quão longo poderia ficar o código se adicionássemos vários blocos if repetidamente.
+
+Guilherme: De alguma forma, queremos interromper o while. Caso o chute seja igual ao numeroSecreto, queremos que o while pare. Para isso, existe um código chamado break.
+
+```JavaScript
+if (chute == numeroSecreto) {
+    break;
+    alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas.`);
+}
+```
+
+Perceba que, só de inserir o break, o alert() abaixo é ignorado. Independentemente do que tenha depois, o código irá parar. Porém, se deixarmos da forma como está, executarmos o código, e acertarmos o número, nada irá acontecer. Não será exibida a mensagem e não serão ditas quantas tentativas usamos.
+
+Mônica: Ele vai realmente parar.
+
+Guilherme: Então, o que precisaremos fazer será remover toda a linha 13 e colocá-la fora do while, na linha 24. Dessa forma, teremos o nosso jogo funcionando da maneira desejada.
+
+Trecho a ser movido:
+
+> alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto}`);
+
+Resultado do bloco condicional:
+
+```JavaScript
+if (chute == numeroSecreto) {
+    break;
+}
+```
+
+Testando o código
+Mônica: Que tal testar para garantir?
+
+Guilherme: Vamos lá! Na página do jogo no navegador, vamos digitar o número secreto indicado no console (5) para acertar de primeira. Nesse caso, a mensagem será "Isso aí! Você descobriu o número secreto 5 com 1 tentativas.".
+
+Mônica: Ainda temos o problema na frase, mas conseguimos entender o que está acontecendo. Temos um laço de repetição que repete todas as instruções até acertarmos o número. Quando acertamos, o laço para e chama o alert() que está fora do while. Basicamente, foi isso que fizemos.
+
+Ajustando o alerta exibido
+Guilherme: Nosso próximo desafio é corrigir a palavra "tentativas". Para isso, precisamos criar um if para dizer que se tentativas for maior do que 1, significa que o alert() exibido vai usar "tentativas" no plural. Caso contrário (else), o que vamos fazer?
+
+Mônica: Faremos algo semelhante ao que está na linha 25, que é o alert(), mas com a palavra "tentativa" no singular.
+
+```JavaScript
+if (tentativas > 1) {
+    alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas.`);
+} else {
+    alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativa.`);
+}
+```
+
+Vamos testar? De volta para a página no navegador, vamos acertar de primeira novamente digitando o número exibido no console (5). Agora a mensagem será "Você descobriu o número secreto 5 com 1 tentativa". Maravilha!
+
+Mônica: Vamos executar mais uma vez o jogo, agora acertando com duas tentativas. O importante é testar se nossa condicional está funcionando.
+
+Guilherme: Dessa forma, teremos a mensagem "Você descobriu o número secreto com 2 tentativas". Ficou bem melhor!
+
+### Aula 04 - Operador ternário - Vídeo 2
+
+Transcrição  
+Mônica: No nosso código, temos diversos blocos if que foram repetidos várias vezes, porque é uma estrutura comumente utilizada na programação e é importante praticá-la.
+
+Porém, existem maneiras de evitar repetir tanto o mesmo código. Como poderíamos simplificar esta condição de tentativas para alterar o uso do singular e do plural?
+
+Refatorando o código
+Guilherme: Uma dessas maneiras, que talvez não seja a mais simples, mas é bastante utilizada, é através de um código JavaScript. Você verá este tipo de código sendo usado frequentemente no mercado, e eles costumam estar escritos da forma que mostraremos a seguir.
+
+A ideia não é mudar o comportamento, mas sim a forma que o mercado escreve o bloco if…else. Se observarmos a frase Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas. na linha de código 25, percebemos que todo o texto é igual ao do bloco else, exceto a letra "S" na palavra "tentativas". De toda a nossa sentença, a única coisa que muda é o uso desta palavra no singular ou no plural.
+
+Portanto, vamos declarar com let uma variável chamada palavraTentativa. Na variável palavraTentativa, vamos verificar quantas tentativas nós temos. Para isso, vamos digitar tentativas > 1 ?.
+
+app.js:
+
+> let palavraTentativa = tentativas > 1 ?
+
+Note que agora a forma que estamos escrevendo se assemelha a escrever um texto.
+
+Após colocar a interrogação, adicionaremos um espaço. O que for colocado na sequência será realizado caso tentativas seja maior do que um. Nesse caso, se tentativas for maior do que um, será utilizada a palavra "tentativas" (no plural).
+
+Se tentativas não for maior que um, usaremos dois-pontos (:) e utilizamos a palavra "tentativa" (no singular).
+
+> let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+
+Mônica: Isso que fizemos se chama de operador ternário. Esse recurso também é encontrado em outras linguagens, não apenas no JavaScript. Ele é interessante, porque facilita a leitura do código, exatamente como escrevemos: "Tentativas é maior que um? Então, faça X. Caso contrário, faça Y".
+
+Guilherme: Obtemos o mesmo resultado, então podemos substituir o bloco anterior de código. No lugar de escrever todo o bloco if…else da linha 26 à 30, vamos comentar esse trecho.
+
+```JavaScript
+// if (tentativas > 1) {
+//     alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativas.`);
+// } else {
+//     alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} tentativa.`);
+// }
+```
+
+Feito isso, vamos copiar o alert() da linha 27 e colocar abaixo da declaração da variável palavraTentativa.
+
+Mônica: No lugar de exibir a string "tentativas", queremos exibir a nossa nova variável, palavraTentativa, que guarda se a palavra será exibida no plural ou no singular.
+
+```JavaScript
+let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+alert(`Isso ai! Você descobriu o número secreto ${numeroSecreto} com ${tentativas} ${palavraTentativa}.`);
+```
+
+Guilherme: Agora, nas duas linhas de código escritas, temos o mesmo comportamento que nas quatro linhas anteriores. Isso é algo comum com que vamos nos acostumar.
+
+Você pode estar se perguntando: "será que eu não podia criar o else e o if de outra forma em nosso código?". Sim, poderíamos. Existem diversas possibilidades. Modificar o código e alterar alguma parte dele talvez o torne mais legível, por exemplo.
+
+Lembre-se: o nosso código vai mudar e passar por alterações. O importante é saber dar nomes às variáveis de forma que façam sentido e, aos poucos, evoluir o código.
+
+Nós criamos as tentativas de uma forma que conhecemos e depois usamos uma condição diferente. Este segundo tipo de código será encontrado por você no mercado. Principalmente, no momento de trabalhar como pessoa desenvolvedora, é muito importante se familiarizar com isso.
+
+Testando o código
+Agora vamos testar! A ideia é que, em ambos os casos, tenhamos uma ou mais de uma tentativa.
+
+Atualizando o live server, vamos jogar o jogo do número secreto. Quantas tentativas nós faremos dessa vez, Moni?
+
+Mônica: Vamos testar com duas tentativas.
+
+Guilherme: Acertando com duas tentativas, receberemos a mensagem "Isso aí! Você descobriu o número secreto 5 com 3 tentativas", no plural. Por outro lado, descobrindo de primeira o número, teremos a mensagem "Você descobriu o número secreto 5 com 1 tentativa" no singular.
+
+### Aula 04 - Math random - Vídeo 3
+
+Transcrição  
+Guilherme: Há um aspecto em nosso projeto que ainda nos incomoda: todas as vezes nós sabemos qual é o número secreto. Dessa forma, o jogo não tem graça.
+
+Nosso objetivo é que, toda vez que formos jogar, haja um número novo, um número aleatório. Vamos implementar isso em nosso projeto?
+
+Mônica: Vamos explorar as funcionalidades do JavaScript!
+
+Número aleatório com a função Math.random()
+Guilherme: Primeiramente, vamos abrir a documentação do JavaScript. Para isso, basta procurar por "JavaScript" no Google e acessar o primeiro link da Mozilla.
+
+Nessa documentação, encontramos todas as informações sobre como o JavaScript funciona. Ela menciona que existe um padrão ECMAScript, ou seja, a convenção para saber o que colocar e o que não colocar no JavaScript, as funcionalidades dos navegadores, entre outras coisas.
+
+Vale a pena realizar essa leitura posteriormente!
+
+Neste momento, o que queremos é criar um número aleatório com o JavaScript. Então, vamos procurar por "número aleatório JavaScript Mozilla" no Google e selecionar o link da documentação do JavaScript.
+
+Realizada a busca no navegador, é exibida a informação de que a função chamada Math.random() retorna um número pseudo aleatório no intervalo entre 0 e 1.
+
+Vamos acessar a documentação para tentar decifrar isso?
+
+Analisando a documentação
+Por padrão, utilizamos um tipo de número chamado de inteiro. Isso significa que é um número sem casas decimais, como 1, 2, 3, -1, -2, -3 e assim por diante.
+
+A função Math.random() retorna um número pseudo aleatório, porque o computador por si só não consegue gerar um número completamente aleatório.
+
+Ele tentará obter de algum lugar, de alguma forma, alguma coisa no próprio computador, seja o relógio, o delta, ou o tempo, multiplicará por algo e nos fornecerá um número.
+
+Existem diversas funcionalidades. Existe algo chamado seed (semente), por exemplo, um número que colocamos no computador e que gerará possíveis números aleatórios.
+
+Não é nada disso que queremos agora. Por isso, se diz que a função retorna um número pseudo aleatório e não um número aleatório.
+
+Mônica:
+
+Inclusive, existem outros conteúdos aqui na Alura. Há um artigo que estará no Para saber mais que explica minuciosamente como funciona a geração de números aleatórios.
+
+Guilherme: Nosso desafio é ler a documentação e tentar entender como funciona a função Math.random(). No site, é mencionado que o número pseudo aleatório que será gerado está no intervalo de 0 e 1 ([0, 1[), incluindo o próprio 0, mas sem incluir o próprio 1.
+
+Em outras palavras, isso significa que será gerado um número maior do que 0, ou seja, algo como 0.9354, e menor do que 1. O valor passado como segundo argumento para a função sempre será excluído.
+
+Abaixo na documentação, temos alguns exemplos de como gerar essa função.
+
+Vamos testar isso no navegador?
+
+Mônica: Vamos lá!
+
+Guilherme: Vamos clicar com o botão direito na tela do navegador para abrir a aba "Inspecionar", como já aprendemos anteriormente. Em seguida, vamos clicar na aba "Console".
+
+Para limpar o console, usaremos o atalho "Ctrl + L".
+
+Vamos começar a digitar a função Math.random(). Ao fazer isso, note que uma sugestão para completar a função é apresentada. Duas coisas importantes nessa função: o "M" de “Math” precisa ser em letra maiúscula e o "random" em letra minúscula.
+
+Sempre que quisermos utilizar essa geração de números pseudo aleatórios, vamos abrir e fechar parênteses ao final da função.
+
+> Math.random()
+
+Dessa forma, ao teclar "Enter", será gerado um número aleatório, que no caso do instrutor foi 0.581 e assim por diante. Usando novamente a função, é gerado outro número: 0.929.
+
+Existe um problema: nosso jogo não solicita que se digite um número menor do que zero.
+
+Mônica: Imagine quão difícil seria acertar o número 0.2595555, nós precisaríamos de várias tentativas para chegarmos próximo do número.
+
+Guilherme: Não conseguiríamos acertar esse número com tantas casas decimais. Então, qual é o problema? Podemos utilizar a função Math.random? Sim, mas não desta forma.
+
+E se nós pegássemos esse número gerado, que é sempre menor do que 1, e mudássemos a posição da vírgula uma casa para a direita? Ou seja, se nós multiplicássemos esse número por 10, nós teríamos um número maior do que zero.
+
+Então, vamos estar essa multiplicação por 10 no console.
+
+> Math.random() * 10
+
+Mônica: Ao pressionar "Enter", teremos números maiores que zero, um avanço, mas ainda há muitas casas decimais nos números, e nós precisamos apenas do número inteiro.
+
+Guilherme: Já sabemos que vamos utilizar Math.random() * 10, mas precisamos apenas da parte inteira do número. Há um comando em JavaScript que faz exatamente isso: ele pega somente a parte inteira do número, descartando os decimais após a vírgula. Esse comando é chamado de parseInt.
+
+Mas temos um desafio. Precisamos pegar todo o conteúdo Math.random() * 10 e utilizá-lo dentro do comando parseInt(). Então, vamos colocar esse trecho entre os parênteses do comando e pressionar "Enter".
+
+> parseInt(Math.random() * 10)
+
+Mônica:
+
+Caso queira saber mais sobre parseInt(), recomendamos que você consulte a documentação. Saber ler a documentação é um recurso muito importante para quem trabalhará com desenvolvimento de software.
+
+Às vezes, o exemplo que precisamos está tão longe do que usamos que parece que a documentação não nos ajuda, porém é importante conseguir pesquisar, testar e não ter medo de executar o código.
+
+Isso não é exclusivo do JavaScript. Qualquer linguagem que você decidir utilizar nessa jornada também terá uma documentação bem completa disponível na internet. É apenas uma questão de aprender a pesquisar nela corretamente!
+
+Guilherme: Toda vez que pedirmos para gerar um número com parseInt(Math.random() * 10), o computador gerará um número onde o valor pelo qual estamos multiplicando será exclusivo. Ou seja, não será gerado o número 10.
+
+No nosso projeto, precisamos de um número entre 1 e 10. Como parseInt(Math.random() * 10) gera um número entre 0 e 9, nós podemos simplesmente adicionar 1 a esse resultado por meio de concatenação. Porém, essa explicação ficará para a próxima aula.
+
+> parseInt(Math.random() * 10 + 1)
+
+Dessa forma, será gerado um número entre 1 e 10 através de um comando JavaScript.
+
+Conclusão  
+Nosso próximo desafio é adicionar esse comando ao nosso código, testá-lo e torcer para acertarmos o número aleatório. Conseguir um número entre 1 e 10 é fácil. Então, que tal aumentarmos o nível de dificuldade para entre 1 e 100? Faremos isso na sequência!
+
+### Aula 04 - Número aleatório - Vídeo 4
+
+Transcrição  
+Mônica: Nós já revisamos a documentação e testamos como funciona a questão de gerar números aleatórios de uma maneira geral, mesmo que não tenhamos usado no nosso projeto. Nós conseguimos desmembrar e visualizar o que cada uma daquelas funcionalidades fazem.
+
+Chegou a hora de aplicar o gerador de números aleatórios!
+
+Aplicando o gerador de números aleatórios
+Guilherme: De volta ao nosso código, na linha 2, onde declaramos a variável numeroSecreto, vamos escrever o que estudamos no vídeo anterior
+
+Relembrando: a função Math.random() vai gerar um número entre 0 e 1, sendo que 1 é exclusivo, ou seja, não vai aparecer. Vamos multiplicar esse número por 10, o que irá mover a casa decimal para o lado e receberemos números maiores ou iguais a zero, como 1, 2, 3, 0, 5, 9, seguido de vários valores decimais depois da vírgula.
+
+Nós não queremos esses valores após a vírgula, apenas a parte inteira. Portanto, envolveremos o trecho Math.random() * 10 no comando parseInt(). No entanto, dessa forma, teremos um número entre 0 e 9, e queremos um número entre 1 e 10. Para isso, concatenaremos a multiplicação por 10 ao valor 1.
+
+app.js:
+
+> let numeroSecreto = parseInt(Math.random() * 10 + 1);
+
+Ao testar no navegador, teremos a mensagem de boas-vindas ao jogo inicialmente; em seguida, tentaremos adivinhar o número. Nesse caso, o número secreto foi 2, então nosso código funcionou corretamente!
+
+Ampliando o jogo
+O desafio é o seguinte: descobrir o número entre 1 e 10 está fácil; com 3 ou 4 tentativas, conseguimos adivinhar. Que tal colocar um número bem maior? Por exemplo, entre 1 e 100?
+
+Minha dúvida é, onde, de fato, alteramos esses valores?
+
+Mônica: Como multiplicamos a linha do Math.random() por 10, porque queríamos que passasse uma casa decimal para a direita, uma vez que já tinha uma, nós obtivemos um número com duas casas decimais.
+
+Quando chegamos no 100, queremos três. Por isso, acredito que podemos multiplicar por 100; assim, teremos números com três dígitos até o 100.
+
+> let numeroSecreto = parseInt(Math.random() * 100 + 1);
+
+Guilherme: Então, os números vão de 0 a 99 nesse primeiro passo. Porém, concatenamos com 1, então teremos números de 1 a 100, conforme desejado.
+
+Mônica: Precisamos também alterar o prompt() do chute, na linha de código 9. Isso é importante, pois a pessoa jogadora não vai saber que mudamos o jogo.
+
+> chute = prompt('Escolha um número entre 1 e 100');
+
+Guilherme: Note que isso é um acoplamento. O valor alterado na variável numeroSecreto reflete em outra parte do nosso código.
+
+**Testando o código**  
+Vamos jogar novamente? Após a mensagem de boas-vindas, teremos o prompt "Escolha o número entre 1 e 100". O chute será 50. O número secreto é maior que 50, então vamos testar 75. Teremos o retorno "O número secreto é maior que 75", então vamos testar 83. "O número secreto é menor que 83". Testando 78, temos que o número é ainda menor. Ao testar 76, temos que o número é maior. Então, o número secreto é 77. Descobrimos com 6 tentativas!
+
+#### Aula 04 - Número aleatórios
+
+A função Math.random em JavaScript gera um número decimal aleatório entre 0 (inclusivo) e 1 (exclusivo) de forma pseudo aleatória. Isso significa que os números gerados podem estar em qualquer lugar entre 0 (inclusive) e quase 1 (exclusivo), com uma precisão de até 16 casas decimais. A função Math.random usa um valor interno inicial que é geralmente baseado no horário atual do sistema, gerando números pseudo aleatórios.
+
+Confira abaixo alguns exemplos:
+
+> 0.5248738910328501  
+0.08458620904957355  
+0.9347284927568912
+
+Sabendo disso, analise as alternativas abaixo e marque apenas a verdadeira:
+
+**Alternativa correta**  
+Para gerar um número entre 1 e 3, podemos usar o código: let numeroAleatorio1a3 = parseInt(Math.random() * 3) + 1;.
+
+Isso aí! O código acima gera um número aleatório inteiro entre 1 e 3, ambos inclusivos. Portanto, os números possíveis que podem ser gerados por esse código são: 1, 2 e 3.
+
+#### Aula 04 - Operador ternário
+
+Aline está dando seus primeiros passos na programação utilizando o JavaScript e recentemente descobriu uma funcionalidade que achou fascinante: o operador ternário.
+
+Ela achou muito interessante a possibilidade que o operador traz para diminuir a quantidade de código escrito em algumas ocasiões e decidiu aplicar na prática, em um de seus projetos pessoais. No entanto, ao tentar fazer essa refatoração, acabou se esquecendo da sintaxe do operador ternário.
+
+Sabendo que você estudou sobre o operador recentemente, ela pediu sua ajuda e mostrou o código que pretende refatorar:
+
+```Javascript
+let palavraPessoa = "";
+
+if(quantidadePessoas == 1){
+    palavraPessoa = "pessoa";
+}else{
+    palavraPessoa = "pessoas"
+}
+```
+
+Como você poderia mostrar à Aline um exemplo de como transformar esse trecho de código em outro que tenha o mesmo comportamento, mas utilizando o operador ternário?
+
+> let palavraPessoa = quantidadePessoas == 1 ? "pessoa" : "pessoas";
+
+O operador ternário é uma forma concisa de escrever uma expressão condicional, simplificando o código e tornando-o mais legível. No seu exemplo, você verificou se a variável `quantidadePessoas` é igual a 1, e atribuiu o valor "pessoa" à variável `palavraPessoa` caso a condição seja verdadeira, e "pessoas" caso seja falsa.
+
+#### Aula 04 - Desafio: hora da prática
+
+E vamos exercitar nosso conhecimento com mais uma lista de atividades (não obrigatório) para você praticar e reforçar ainda mais seu aprendizado!
+
+**Desafios finais**  
+
+1. Crie um programa que utilize o console.log para exibir uma mensagem de boas-vindas.
+
+2. Crie uma variável chamada "nome" e atribua a ela o seu nome. Em seguida, utilize o console.log para exibir a mensagem "Olá, [seu nome]!" no console do navegador.
+
+3. Crie uma variável chamada "nome" e atribua a ela o seu nome. Em seguida, utilize o alert para exibir a mensagem "Olá, [seu nome]!" .
+
+4. Utilize o prompt e faça a seguinte pergunta: Qual a linguagem de programação que você mais gosta?. Em seguida, armazene a resposta em uma variável e mostre no console do navegador.
+
+5. Crie uma variável chamada "valor1" e outra chamada "valor2", atribuindo a elas valores numéricos de sua escolha. Em seguida, realize a soma desses dois valores e armazene o resultado em uma terceira variável chamada "resultado". Utilize o console.log para mostrar a mensagem "A soma de [valor1] e [valor2] é igual a [resultado]." no console.
+
+6. Crie uma variável chamada "valor1" e outra chamada "valor2", atribuindo a elas valores numéricos de sua escolha. Em seguida, realize a subtração desses dois valores e armazene o resultado em uma terceira variável chamada "resultado". Utilize o console.log para mostrar a mensagem "A diferença entre [valor1] e [valor2] é igual a [resultado]." no console.
+
+7. Peça ao usuário para inserir sua idade com prompt. Com base na idade inserida, utilize um if para verificar se a pessoa é maior ou menor de idade, exibindo uma mensagem apropriada no console.
+
+8. Crie uma variável "numero" e peça um valor com prompt verifique se é positivo, negativo ou zero. Use if-else para imprimir a respectiva mensagem.
+
+9. Use um loop while para imprimir os números de 1 a 10 no console.
+
+10. Crie uma variável "nota" e atribua um valor numérico a ela. Use if-else para determinar se a nota é maior ou igual a 7 e exiba "Aprovado" ou "Reprovado" no console.
+
+11. Use o Math.random para gerar qualquer número aleatório e exiba esse número no console.
+
+12. Use o Math.random para gerar um número inteiro entre 1 e 10 e exiba esse número no console.
+
+13. Use o Math.random para gerar um número inteiro entre 1 e 1000 e exiba esse número no console.
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+Opinião do instrutor
+
+Para te ajudar a verificar seus códigos, deixo disponibilizado uma possível [resolução dos desafios neste link](https://github.com/alura-cursos/logica-js/tree/desafios) para você construir ou validar suas soluções.
+
+### Aula 04 - Para saber mais: preciso decorar cada linha de código ou comando?
+
+Compreender cada linha de código ou comando em detalhes é certamente uma aspiração louvável, mas não é necessário decorar. O desenvolvimento de software moderno é uma tarefa complexa, e as linguagens de programação oferecem uma ampla gama de recursos e bibliotecas.
+
+Em vez de memorizar cada linha, é mais valioso entender os conceitos fundamentais por trás das estruturas de programação e saber como usar a documentação efetivamente.
+
+A documentação de uma linguagem de programação é uma ferramenta essencial para todos os desenvolvedores. Ela não apenas fornece uma referência rápida para a sintaxe e os comandos, mas também explica os conceitos subjacentes, oferece exemplos práticos e ajuda a compreender os diferentes recursos disponíveis.
+
+Através da documentação você pode aprender a utilizar bibliotecas, explorar casos de uso avançados e entender as melhores práticas recomendadas pela comunidade. Isso economiza tempo, evita erros e permite que você se mantenha atualizado com as últimas atualizações da linguagem.
+
+Em vez de se preocupar em memorizar cada detalhe, concentre-se em desenvolver habilidades de resolução de problemas, compreender os princípios de design de software e aprender a pesquisar eficientemente na documentação. A capacidade de ler e interpretar a documentação é uma habilidade valiosa, pois permite que você aprenda novas linguagens e tecnologias de maneira eficaz, adaptando-se rapidamente às mudanças do cenário de desenvolvimento. Portanto, em sua jornada como pessoa desenvolvedora, lembre-se de que a habilidade de compreender e usar a documentação é tão importante quanto saber escrever código.
+
+Nesta aula, vimos como usar a documentação para gerar um número aleatório através da [documentação do Mozilla](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Porém, existe também o [W3Schools (W3S)](https://www.w3schools.com/js/default.asp) que é um recurso online amplamente conhecido e utilizado para aprender diversas tecnologias de desenvolvimento web, incluindo JavaScript (JS).
+
+O site oferece tutoriais interativos, exemplos de código, referências de sintaxe e conceitos fundamentais relacionados ao JavaScript e outras linguagens web.
+
+Ao explorar o W3Schools, você pode adquirir uma compreensão sólida dos princípios do JS, desde o básico até tópicos mais avançados, como manipulação do DOM, interações do usuário e requisições assíncronas.
+
+O W3Schools é uma ferramenta valiosa para aprimorar suas habilidades em JavaScript, oferecendo um ambiente prático para experimentar o código, compreender os conceitos-chave e aplicar o conhecimento adquirido em seus próprios projetos de desenvolvimento web.
+
+Outros links importantes que eu vou deixar são:
+
+- [MDN Curso de JavaScript](https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+
+- [MDN JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+
+- [MDN Guia do JavaScript pt-br](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide)
+
+- [MDN JavaScript Reference](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference)
+
+- [Documentação oficial do ECMAScript](https://tc39.es/ecma262/) (English).
+
+### Aula 04 - O que aprendemos?
+
+Luri:
+Explique com suas próprias palavras os principais conceitos que você aprendeu nesta aula.
+
+Minha resposta:  
+Nesta aula eu conheci o comando break, usado para interomper o loop do while. Também aprendi sobre como utilizar o operador ternário ao invés do if else e gerar numeros aleatório com a função Math.random().
+
+Luri:  
+Parabéns pela dedicação aos estudos! Você mencionou o comando `break`, que é fundamental para controlar o fluxo de execução de loops, e também a utilização do operador ternário como alternativa ao `if else`, o que pode tornar o código mais conciso em algumas situações. Além disso, você aprendeu a gerar números aleatórios com a função `Math.random()`, abrindo um leque de possibilidades para criar jogos e desafios mais dinâmicos. Também vimos como evitar código duplicado utilizando estratégias para exibir a palavra "tentativas" no singular ou plural, dependendo do número de tentativas realizadas. Essa técnica é importante para manter o código limpo e organizado. E não podemos esquecer da importância de consultar a documentação para encontrar informações relevantes durante o desenvolvimento do nosso programa. A documentação é uma fonte inestimável de conhecimento e pode nos ajudar a solucionar problemas e entender melhor as funcionalidades das ferramentas que estamos utilizando. Continue estudando e praticando!
+
+## Aula 05 - Desafio
+
+### Aula 05 - Apresentação do desafio - Vídeo 1
+
+
+### Aula 05 -  - Vídeo 2
+### Aula 05 -  - Vídeo 3
+### Aula 05 -  - Vídeo 4
