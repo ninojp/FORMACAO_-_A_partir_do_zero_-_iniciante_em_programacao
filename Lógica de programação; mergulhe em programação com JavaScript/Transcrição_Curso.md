@@ -1750,7 +1750,159 @@ Parabéns pela dedicação aos estudos! Você mencionou o comando `break`, que �
 
 ### Aula 05 - Apresentação do desafio - Vídeo 1
 
+Transcrição
+Mônica: Está na hora de nos desafiar!
 
-### Aula 05 -  - Vídeo 2
-### Aula 05 -  - Vídeo 3
-### Aula 05 -  - Vídeo 4
+Guilherme foi tomar um café e nos deixou a sós para praticar um pouco mais e implementar novas funcionalidades no projeto.
+
+O desafio dessa vez será…
+
+Lembram que nos últimos vídeos, precisávamos aumentar a dificuldade do jogo e alterar o número secreto de 1 a 100?
+
+Se quiséssemos alterar para 1 a 1.000 ou 1 a qualquer número que você imaginar, precisávamos mudar a linha 2, onde temos let numerosecreto.
+
+app.js:
+
+> let numeroSecreto = parseInt(Math.random() * 100 + 1);
+
+E também a linha 9, onde definimos o prompt() para informar à pessoa usuária qual era o número máximo.
+
+```JavaScript
+while (chute != numeroSecreto) {
+    chute = prompt('Escolha um número entre 1 e 100');
+    // código omitido…
+}
+```
+
+Agora, queremos que isso seja dinâmico!
+
+Ou seja, trocar em somente um lugar e, nos demais, eles já executem essa função para nós.
+
+### Aula 05 - Resolvendo o desafio - Vídeo 2
+
+Transcrição  
+Mônica: Agora, vamos resolver rapidamente antes do Guilherme retornar.
+
+Resolução do desafio
+Quero criar um local onde possa inserir o valor que será o máximo do jogo. Para criar essa lógica, necessito de uma variável.
+
+Na linha 2, pressionamos "Enter" para pular linha. Vamos inserir outra variável chamada numeroMaximo somente com "M" em maiúsculo, que receberá do número máximo desejado.
+
+Por enquanto, vou inserir 5000. Mas este valor é apenas para teste, você pode colocar qualquer um.
+
+> let numeroMaximo = 5000;
+
+Agora vamos realizar algumas substituições. Queremos que o código faça uma alteração no método Math.random() de acordo com o valor dentro da variável numeroMaximo.
+
+Na linha 3, onde tem a variável numeroSecreto, trocamos o 100 por numeroMaximo.
+
+let numeroSecreto = parseInt(Math.random() * numeroMaximo + 1);
+Copiar código
+Atenção: Precisamos garantir que numeroMaximo seja escrito exatamente como o nome da variável que criamos anteriormente!
+
+Outro local que precisa ser alterado é o feedback para a pessoa usuária. Como ela saberá que o jogo mudou o intervalo para 1 a 5000 se não a informamos?
+
+Portanto, na linha 10, onde temos o chute, vamos remover as aspas e inserir crases, tanto no início quanto no final da frase "Escolha um número entre 1 a 100".
+
+Em vez de 100, vamos apagar e adicionar o símbolo cifrão ($) seguido de abre e fecha chaves ({}). Dentro das chaves, vamos colocar o numeroMaximo.
+
+```JavaScript
+while (chute != numeroSecreto) {
+    chute = prompt(`Escolha um número entre 1 a ${numeroMaximo}`);
+    // código omitido…
+}
+```
+
+Teste
+Vamos testar se esta alteração funcionou. No navegador, já temos o console aberto.
+
+Dica: Você pode abrir o console usando um atalho, a tecla "F12" do seu teclado!
+
+Na mensagem de boas-vindas ao jogo do número secreto, podemos apertar "OK". O jogo já informa que devemos escolher um número entre 1 e 5.000.
+
+No console, podemos conferir que o número sorteado foi 538. Antes, o máximo seria apenas 100. Com isso, já percebemos que a alteração funcionou.
+
+Caso a pessoa que está jogando deseje modificar o valor máximo, ela pode simplesmente ir na linha 2, no Visual Studio Code, onde tem o let numeroMaximo e alterar para o número desejado.
+
+Por fim, conseguimos concluir esse desafio, revisando os conceitos de variável e template strings, além do uso dessas variáveis em expressões semelhantes a expressões matemáticas, como é o caso do Math.random().
+
+### Aula 05 - Referências
+
+1. [Lógica de Programação Crie seus primeiros programas usando Javascript e HTML](https://www.casadocodigo.com.br/products/livro-programacao?_pos=1&_sid=4661f8240&_ss=r)
+
+Este livro apresenta uma abordagem totalmente prática. Uma didática pensada no iniciante, com a qual os conceitos são apresentados com motivações práticas, através do surgimento da necessidade para depois mostrar a solução.
+
+2. [Lógica de programação com Portugol](https://www.casadocodigo.com.br/products/livro-portugol?_pos=2&_sid=4661f8240&_ss=r)
+
+Neste livro, Joice Mendes e Rafael Muniz apresentam todos os conceitos necessários para a criação da lógica de programação e dos algoritmos. Você vai aprimorar sua percepção lógica e aprender a aplicá-la na programação, cobrindo tópicos desde a sintaxe do Portugol, variáveis, comandos, estruturas condicionais, operadores relacionais e lógicos, estruturas de repetição, até vetores, matrizes e funções. O material é recheado com 85 exemplos de código, 55 exercícios de fixação com gabarito e um projeto prático ao longo do aprendizado. Todos os capítulos contam com um vídeo complementar disponibilizado na internet.
+
+3. [Livro: "Estruturas de Dados e Algoritmos com JavaScript"](https://www.google.com.br/books/edition/Estruturas_de_dados_e_algoritmos_com_Jav/0nWKDwAAQBAJ?hl=pt-BR&gbpv=1&dq=estrutura+de+dados+javascript&printsec=frontcover)
+
+Este livro aborda de forma detalhada as estruturas de dados e algoritmos mais comuns, fornecendo exemplos práticos em JavaScript.
+
+4. [Site: MDN Web Docs](https://developer.mozilla.org/pt-BR/)
+
+A documentação oficial da Mozilla Developer Network (MDN) é uma excelente fonte de informações sobre JavaScript. Lá você encontrará explicações detalhadas sobre a sintaxe, recursos da linguagem e exemplos de código.
+
+5. [Eloquent JavaScript 3rd edition (2018)](https://eloquentjavascript.net/)
+
+Este é um livro sobre JavaScript, programação e as maravilhas do mundo digital. Um guia essencial para toda a pessoa desenvolvedora web. Em inglês.
+
+6. [Algoritmos - Teoria e Prática, Thomas H. Cormen](https://books.google.com.br/books/about/Algoritmos_Teoria_e_Pr%C3%A1tica.html?id=6iA4LgEACAAJ&source=kp_book_description&redir_esc=y)
+
+Este livro apresenta um texto abrangente sobre o moderno estudo de algoritmos para computadores. É uma obra clássica, cuja primeira edição tornou-se amplamente adotada nas melhores universidades em todo o mundo, bem como padrão de referência para profissionais da área.
+
+7. [JavaScript: O Guia Definitivo](https://www.amazon.com.br/JavaScript-Guia-Definitivo-David-Flanagan/dp/856583719X/ref=sr_1_1?keywords=javascript&qid=1701835643&sr=8-1&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d)
+
+Referência completa para programadores, JavaScript: O guia definitivo fornece uma ampla descrição da linguagem JavaScript básica e das APIs JavaScript do lado do cliente definidas pelos navegadores Web. Recomendado para programadores experientes que desejam aprender a linguagem de programação da Web e para programadores JavaScript que desejam ampliar seus conhecimentos e dominar a linguagem, este é o guia do programador e manual de referência de JavaScript completo e definitivo.
+
+8. [HTML5 e CSS3 Domine a web do futuro](https://www.casadocodigo.com.br/products/livro-html-css?_pos=2&_sid=ee24eb627&_ss=r)
+
+Neste livro você irá aprender a criar páginas elegantes de forma simples! HTML e CSS, quando bem utilizados, podem ser o sucesso de um projeto e, com os novos recursos, muito do que antes era trabalhoso agora não é mais. Aprenda as melhores técnicas para escrever seu site por meio de exemplos práticos de funcionalidades úteis do cotidiano. Construa menus, aplique efeitos, estilize elementos visuais, melhore a semântica da sua página e muito mais!
+
+9. [Guia Front-End: O caminho das pedras para ser um dev Front-End](https://www.casadocodigo.com.br/products/livro-guia-frontend?_pos=5&_sid=ee24eb627&_ss=r)
+
+Neste livro, Diego Eis nos guia sobre o mundo de desenvolvimento web por meio de uma análise franca e objetiva de diversas tecnologias adotadas, necessidades do mercado e postura profissional. Você não vai aprender diretamente sobre essas tecnologias aqui, mas certamente vai desenvolver um senso mais apurado e uma nova forma de olhar para elas, o que é fundamental nesse mundo de aprendizado não linear.
+
+10. [Como utilizar operadores de comparação em Javascript](https://www.alura.com.br/artigos/operadores-matematicos-em-javascript)
+
+Neste artigo de Rafa Ballerini você aprenderá as diferenças entre operadores de comparação em JavaScript e como utilizá-los
+
+11. [Documentação MDN: O que é JavaScript?](https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+
+Neste primeiro artigo há uma análise profunda da linguagem, respondendo questões como "O que é JavaScript?", e "O que ele faz?", para você se sentir confortável com a proposta da linguagem.
+
+12. [JavaScript Tutorial - Documentação W3Schools](https://www.w3schools.com/js/default.asp)
+
+Este tutorial ensina JavaScript do básico ao avançado. Em Inglês
+
+13. [Guia de JavaScript: o que é e como aprender a linguagem mais popular do mundo?](https://www.alura.com.br/artigos/javascript)
+
+Neste artigo, você vai conhecer o que é JavaScript, para que serve e como utilizá-lo.
+
+### Aula 05 - Conclusão - Vídeo 4
+
+Transcrição  
+Guilherme: Se você chegou até este ponto, parabéns! Você está finalizando o curso de Lógica de Programação da Alura.
+
+Mônica: Este é o primeiro de muitos em sua jornada.
+
+Guilherme: Moni, a carreira de desenvolvimento de software não se resume a um curso ou a uma formação, certo?
+
+Mônica: Sim, envolve várias horas de prática. Durante todo o projeto do jogo do número secreto, ainda praticamos diversos conceitos.
+
+Isso acontece frequentemente, porque tudo que aprendemos na prática se torna um hábito que pode ser aplicado em qualquer jornada que você optar seguir depois deste curso.
+
+Guilherme: Essas ideias e conceitos de variáveis, condicionais, loops, if e else são utilizados na maioria das linguagens de programação.
+
+Portanto, vamos conseguir pegar esse aprendizado de lógica de programação, e aproveitar em outras linguagens.
+
+Sejam elas, o próprio JavaScript no futuro, ou Java, C#, Python e assim por diante.
+
+Mônica: Podemos perceber isso na prática. Eu e o Gui não somos da mesma área da programação, mas conseguimos nos comunicar na mesma linguagem para vocês.
+
+Guilherme: Portanto, não esqueça de fazer parte da comunidade do Discord da Alura. Se tiver alguma dúvida ou quiser ajudar outra pessoa também no fórum, será muito bem-vindo ou bem-vinda.
+
+Lembre-se também de avaliar este curso. Ao final de todo curso, você pode atribuir uma nota e escrever os pontos que mais gostou.
+
+Mônica: Até o próximo curso!
