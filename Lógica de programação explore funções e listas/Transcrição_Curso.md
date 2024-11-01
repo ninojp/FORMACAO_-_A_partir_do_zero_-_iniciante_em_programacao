@@ -263,4 +263,466 @@ Vamos aprender o que são funções de forma prática e qual a sua importância 
 
 ## Aula 2 - Funções
 
-### Aula 2 - Funções com parâmetros - Vídeo 5
+### Aula 2 - Funções com parâmetros - Vídeo 1
+
+Transcrição  
+Guilherme: Vamos aprofundar ainda mais em relação a funções.
+
+Funções com parâmetros
+Guilherme: Moni, se você observar o nosso código, especificamente nas linhas 1 e 2 e nas linhas 4 e 5, você pode pensar que ambas são muito diferentes e não têm qualquer semelhança.
+
+app.js:
+
+```JavaScript
+let titulo = document.querySelector('h1');
+titulo.innerHTML = 'Jogo do número secreto';
+
+let paragrafo = document.querySelector('p');
+paragrafo.innerHTML = 'Escolha um número entre 1 e 10';
+```
+
+Em uma, pegamos o conteúdo do h1 e, na outra, pegamos o conteúdo do parágrafo, criando variáveis e assim por diante.
+
+Mônica: No entanto, elas estão bem semelhantes. Apesar de pegar elementos diferentes, elas fazem a mesma ação. Elas pegam o elemento, armazenam em uma variável e também alteram seu texto.
+
+Guilherme: Vamos analisar isso detalhadamente? Primeiro, temos let titulo, let paragrafo. Qual é a diferença entre eles?
+
+No caso de let titulo, criamos uma variável para guardar a seleção do h1. Enquanto em let paragrafo, criamos uma variável para guardar o elemento do parágrafo.
+
+Basicamente, estamos fazendo algo do tipo, let campo, let tag ou let elemento, seguindo essa ideia. Um desses campos é o título, o outro é o parágrafo.
+
+Após isso, colocamos um igual à document.querySelector(). Dentro os parênteses, tem algo diferente. No titulo, buscamos pelo h1, no outro, buscamos por uma tag p.
+
+Portanto, a única diferença aqui é a tag.
+
+Na linha seguinte, pegamos a valor desse campo, que um é título e o outro é parágrafo, e fazemos campo.innerHTML para atribuir outro valor.
+
+A diferença está no texto de cada um. O texto do título é "jogo do número secreto" e o texto do parágrafo é "escolha um número entre 1 e 10".
+
+Exemplo
+
+> let campo = document.querySelector(tag)  
+campo.innerHTML = texto
+
+Você pode perguntar: "Guilherme, isso não vai funcionar. O que você está fazendo?".
+
+A explicação é a seguinte:
+
+Sempre que temos padrão de código ou um código muito parecido, onde apenas alguns detalhes são modificados, podemos isolar esse comportamento em uma função.
+
+Em vez de escrever quatro linhas de código, escrevemos menos linhas.
+
+Mônica: Sim, é uma boa prática evitar a repetição de código com funções!
+
+Guilherme: Nesse caso, utilizamos dois seletores. O seletor do h1 e o seletor do p.
+
+Mas imagine se no nosso projeto tivéssemos que lidar com 50 seletores, como h1, h2, parágrafo e outros diversos seletores? Seria bastante difícil e trabalhoso escrever o mesmo código 50 vezes.
+
+Mônica: Agora, você pode estar se perguntando: "Por que primeiro você mostra o modo errado e depois o modo correto?". Bom, não é errado, estamos apenas aprimorando uma boa prática.
+
+Guilherme: Na verdade, o código que temos está em evolução. Isso é comum. Lembre-se, a maneira atual não é a maneira errada, pois o código ainda funciona.
+
+No contexto em que estamos inseridos, a estrutura atual funciona. A questão é: "Como podemos tornar esse código independente do campo, onde passamos uma tag e passamos um texto?". Poderemos fazer isso usando funções.
+
+Por isso, vamos criar uma nova função a partir da linha 7, usando o termo function. Esta função terá um nome, por exemplo, exibirTextoNaTela().
+
+Mônica: Para seguir o padrão de boas práticas, a primeira letra de cada palavra deve ser maiúscula, exceto a primeira.
+
+Guilherme: Abrimos e fechamos chaves e recortamos a lógica do campo dentro do bloco da função.
+
+Mônica: Também, vamos adicionar o ponto e vírgula no final dessas duas linhas.
+
+Guilherme: Sim, Moni! Essa é a razão pela qual o Pair Programming (programação em dupla) é tão útil.
+
+Mônica: Pronto, na linha 14 após o console.log(), falta um ponto e vírgula também. Portanto, vamos conferindo e fazendo as alterações necessárias à medida que avançamos.
+
+```JavaScript
+function exibirTextoNaTela() {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+}
+function verificarChute() {
+    console.log('O botão foi clicado!');
+}
+```
+
+Guilherme: Agora vem a parte desafiadora. Precisamos fazer com que o código funcione usando uma função.
+
+O que é diferente é a tag, o h1 e o p. Por isso, na hora de invocar essa função, podemos especificar que o JavaScript deve usar a função exibirTextoNaTela() especificamente para o h1. Posteriormente, o JavaScript deverá usar a função exibirTextoNaTela() especificamente para o parágrafo.
+
+Vamos comentar a linha do let titulo ao paragro.innerHTML, adicionando // no começo. Assim, poderemos usar a função que criamos.
+
+```JavaScript
+// let titulo = document.querySelector('h1');
+// titulo.innerHTML = 'Jogo do número secreto';
+
+// let paragrafo = document.querySelector('p');
+// paragrafo.innerHTML = 'Escolha um número entre 1 e 10';
+```
+
+Na linha abaixo da função, vamos digitar exibirTextoNaTela(). Assim, primeiro criamos a função e, agora, estamos de fato executando esta função.
+
+Queremos exibir o texto na tela. Porém, o texto na tela refere-se ao h1. Para conseguir capturar o h1 e passar dentro da tag no querySelector(), vamos passar a tag como parâmetro da função. Ou seja, escrevemos tag entre os parênteses de function exibirTextoNaTela().
+
+Com isso, na chamada da função exibirTextoNaTela(), passados o h1 entre aspas. Pois, queremos que esse valor de tag seja substituído pela string h1. Dessa forma, todos os lugares onde existir tag serão substituídos por h1.
+
+Mas, queremos fazer o mesmo para o parágrafo também. Em uma nova linha, basta escrever exibirTextoNaTela() para o parágrafo, ou seja, informando o p entre aspas.
+
+```JavaScript
+function exibirTextoNaTela(tag) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+}
+
+exibirTextoNaTela('h1');
+exibirTextoNaTela('p');
+```
+
+Mônica: Através desses parênteses após o nome da função, conseguimos nos comunicar com aquela função sobre o que queremos que aconteça lá dentro.
+
+Guilherme: Perceba que na primeira vez que chamamos a função exibirTextoNaTela(), passando o h1, todo lugar que tiver tag será substituído pelo h1.
+
+Na segunda vez que chamamos essa função exibirTextoNaTela(), passando p, todo lugar que tiver tag será substituído pelo valor p.
+
+Mônica: Sim, mas também temos que informar o texto para o campo.innerHTML. O que é texto? Também é algo que precisaremos comunicar para essa função. Então, dentro dos parênteses da função na linha 7, vamos adicionar uma vírgula para informar outro parâmetro que essa função vai receber e adicionamos o texto.
+
+Agora, onde chamamos o exibirTextoNaTela(), vamos informar o texto que queremos. Após enviar o primeiro parâmetro, adicionamos uma vírgula, e enviamos o segundo parâmetro.
+
+Na primeira chamada da função, o segundo parâmetro será Jogo do número secreto entre aspas. Na segunda chamada, será o texto Escolha um número entre 1 e 10 também entre aspas.
+
+```JavaScript
+function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+}
+
+exibirTextoNaTela('h1', 'Jogo do número secreto');
+exibirTextoNaTela('p', 'Escolha um número entre 1 e 10');
+```
+
+No curso anterior, mencionamos muito que o JavaScript lê linha a linha. Por isso, estamos criando a função e chamando-a depois.
+
+Mas, se colocássemos a função depois, também funcionaria. O JavaScript pega tudo que está declarado como função, guarda em algum lugar para ser lido somente quando invocamos (chamamos) essa função.
+
+Guilherme: Lembrando que isso é algo específico do JavaScript, tanto que não estamos fazendo desta forma. Preferimos declarar a função e, abaixo, usar essa função.
+
+Podemos apagar da linha 1 a 5, onde tínhamos os trechos comentados de código. Dessa forma, evoluímos o nosso código.
+
+Qual é o desafio agora? Precisamos testar para verificar se as alterações funcionam. Vamos voltar no navegador. Ainda temos os textos: "Jogo do nome secreto" e "Escolha um número entre 1 e 10". Excelente!.
+
+Ao clicar em "Chutar", aparece a mensagem no console:
+
+O botão foi clicado.
+
+Mônica: Portanto, aprendemos dois tipos de funções: com parâmetros e sem parâmetros. No entanto, essas não são as únicas operações que podemos realizar com funções.
+
+### Aula 2 - Funções com retorno - Vídeo 2
+
+Transcrição  
+Mônica: Já criamos dois tipos de funções: uma para exibir textos na tela e outra para verificar a interação com o botão.
+
+Agora, precisamos gerar um número aleatório. Como isso é uma nova funcionalidade, podemos implementá-la utilizando funções.
+
+Funções com retorno
+Guilherme: Vamos criar uma nova função na linha 13 do nosso código, após verificarChute().
+
+Repare que quando começamos a escrever function, o Visual Studio Code já sugere a criação de um function statement. Quando confirmamos, pressionando "Enter", a estrutura básica de uma função é criada automaticamente.
+
+app.js:
+
+> function name(params) {  
+  
+}
+
+Aproveite as sugestões da IDE!
+
+No lugar de name, podemos nomear a função da forma que achamos mais adequado. Vamos chamá-la de gerarNumeroAleatorio.
+
+Mônica: Há uma sugestão para que um parâmetro seja adicionado à função. Mas, neste caso, não precisamos disso, pois desejamos que a máquina gere um número aleatório sem a necessidade de receber qualquer informação prévia.
+
+Por isso, podemos apagar params que está entre os parênteses, deixando-os vazios.
+
+Guilherme: Para gerar o número aleatório, utilizaremos o código que conhecemos: Math.random(). Será uma função que multiplica por 10 e soma 1 para ter um número entre 1 e 10.
+
+Mônica: A função Math.random() retorna um valor decimal, mas queremos um número inteiro. Por isso, colocamos a expressão matemática entre parênteses e utilizamos parseInt() para converter o resultado em um número inteiro.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    parseInt(Math.random() * 10 + 1);
+}
+```
+
+Guilherme: Dessa forma, isolamos esse processo. Em outras palavras, existe uma parte da nossa aplicação que é capaz de gerar esse número aleatório.
+
+Imagine se tivéssemos um código com 500 linhas. Encontrar onde é gerado um número aleatório poderia ser bem complicado. Ao utilizar a função, a aplicação fica mais fácil de ser compreendida.
+
+Não nos aprofundamos em Math.random(), porque já aprendemos essa função anteriormente. Dúvidas sobre essa função? Revisite o curso anterior!
+
+Mônica: Agora, precisamos guardar o valor do número aleatório em algum lugar para posteriormente fazer sua verificação.
+
+Guilherme: Por isso, vamos criar na linha 1 a variável let numeroSecreto que vai ser igual à função gerarNumeroAleatorio().
+
+> let numeroSecreto = gerarNumeroAleatorio();
+
+Mas, temos um problema. Diferente das outras funções, como exibirTextoNaTela() e verificarChute(), esperamos que a função gerarNumeroAleatorio() nos retorne uma informação.
+
+Mônica: Atualmente, o que acontece em nosso código? Essa função é chamada na linha 1, ela é executada e gera um número aleatório. Mas para onde vai essa informação? Ela precisa ser armazenada na memória.
+
+Guilherme: Ao gerar o número aleatório, queremos que a função nos retorne esse número que terá valor entre 1 e 10. Para garantir esse comportamento, precisamos informar que queremos este retorno utilizando a palavra reservada return na linha 16, antes de toda a expressão matemática.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    return parseInt(Math.random() * 10 + 1);
+}
+```
+
+Mônica: Com isso, o valor gerado será atribuído à variável numeroSecreto através do retorno da função.
+
+Guilherme: Nesse ponto, podemos perceber que existem diferentes modelos de funções. Por exemplo, temos uma função que não possui parâmetros e nem retorno, que é a função verificarChute().
+
+Temos a função exibirTextoNaTela(). Ela realiza a tarefa de exibir um texto na tela, mas não esperamos que ela nos devolva uma informação. Por isso, ela possui parâmetros que são as informações que queremos exibir, mas não possui um retorno.
+
+Na função de gerarNumeroAleatorio(), não definimos nenhum parâmetro. Por isso, não tem nenhuma informação entre os parênteses. Contudo, há um retorno. Qual é o retorno? A geração de um número entre 1 e 10.
+
+E o que fazemos quando essa função é chamada, ou seja, quando a utilizamos na linha let numeroSecreto?
+
+Note que não estamos utilizando a função quando a declaramos como function. Nesse momento, apenas estamos declarando que a função existe. Para efetivamente usar a função, precisamos invocá-la como gerarNumeroAleatorio().
+
+Com isso, pegamos o resultado retornado pela função e o armazenamos na variável chamada numeroSecreto.
+
+Agora, vamos testar a geração desse número secreto para certificar que a função funciona corretamente.
+
+Mônica: Precisamos imprimir esse número em algum lugar.
+
+Guilherme: Podemos imprimi-lo no console. Podemos substituir o texto do console.log() da função verificarChute() pela variável numeroSecreto.
+
+```JavaScript
+function verificarChute() {
+    console.log(numeroSecreto);
+}
+```
+
+Após salvar o arquivo, voltamos ao projeto no navegador e atualizamos a página. Desse modo, o número secreto só será exibido quando clicarmos no botão "Chutar".
+
+Vamos limpar o console com "CTRL + L" e clicar em "Chutar". Foi gerado o 8.
+
+8
+
+Clicamos de novo, foi gerado novamente o número 8.
+
+Mônica: O número 8 não está sendo gerado repetidamente, o que acontece é que chamamos a função de geração de número aleatório apenas uma vez. Essa primeira vez gerou o número 8 aleatoriamente. Nas vezes seguintes, estamos apenas imprimindo o mesmo número.
+
+Guilherme: Se atualizamos a página e limpamos o console, podemos clicar em "Chutar" de novo. Ai, sim, teremos outro número gerado.
+
+5
+
+Conclusão  
+Guilherme: Já criamos três tipos de funções: funções com retorno, funções com parâmetros e funções sem retorno e sem parâmetros.
+
+Mônica: Além disso, exploramos algo novo. Antes, havíamos criado variáveis que recebiam valores do tipo string ou número. Agora, estamos atribuindo funções às variáveis.
+
+### Aula 2 - Tipo booleano - Vídeo 3
+
+Transcrição  
+Guilherme: Agora é a hora da verdade. No HTML do nosso programa, temos uma propriedade chamada input após o parágrafo de "Escolha um número entre 1 e 10". O que ela faz?
+
+index.html:
+
+> `<input type="number" min="1" max="10" class="container__input">`
+
+Se observamos o jogo no navegador, esse campo input é onde a pessoa jogadora irá inserir um número entre 1 e 10.
+
+Nesse campo, podemos digitar o valor 5, por exemplo. Para chutar esse valor, clicamos no botão "Chutar". Mas, o número aleatório gerado foi 6, erramos.
+
+Mônica: No momento, só imprimimos o número aleatório, não o nosso chute.
+
+Guilherme: Então, o que queremos fazer? Ao clicar em "Chutar", queremos pegar o valor especificado no input que é a entrada da pessoa usuária, e compará-lo com o número aleatório. Inicialmente, vamos mostrar no console para conferir se acertamos ou erramos o chute.
+
+Tipo booleano
+Mônica: Como queremos um elemento que está dentro do HTML, usaremos um modo muito semelhante ao que fizemos para pegar o parágrafo e o título.
+
+Guilherme: Porém, temos uma diferença. Diferentemente do h1 e p, o que queremos é obter a informação inserida, não exibi-la. Portanto, não usaremos a função de exibirTextoNaTela().
+
+Na função verificarChute(), vamos criar um campo novo. Por exemplo, let chute vai ser igual à document.querySelector(). Entre os parênteses, vamos escrever o input entre aspas.
+
+Como sabemos que é a campo input? Porque verificamos a linha 25 do código HTML, onde escrito input do tipo número de 1 a 10. Esse é o campo que queremos.
+
+Pegamos essa informação, porém queremos apenas o valor inserido no campo. Não queremos o HTML completo. Por exemplo, queremos apenas o valor 5 que foi digitado.
+
+Quando temos um input e queremos apenas o valor inserido, utilizamos .value após a seleção que fizemos. Precisa ser escrito desta maneira. Lembre-se de colocar o ponto e vírgula ao final.
+
+app.js:
+
+```JavaScript
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+    console.log(numeroSecreto);
+}
+```
+
+Mônica: E por qual motivo fazemos isso? Quando usamos o h1 e p, guardamos o texto direto dentro da variável. Mas o input não é um texto, é um valor inserido por alguém, portanto, usamos .value.
+
+Guilherme: Em seguida, vamos fazer a comparação dentro do console para verificar que tipo de resposta vai ser gerada.
+
+No console.log(), vamos escrever chute == numeroSecreto.
+
+```JavaScript
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+    console.log(chute == numeroSecreto);
+}
+```
+
+Por que utilizamos == e não =? Sempre que usamos =, queremos atribuir um valor. Quando usamos ==, queremos comparar um valor.
+
+No JavaScript, existem outras formas de comparação. Mas, esses dois já são suficientes para nós por enquanto.
+
+O que faremos no navegador? Iremos clicar no botão de "Novo jogo" para dar um refresh na tela. Em seguida, vamos inserir um valor e clicar no botão "Chutar". O que esse botão fará? Vai verificar o nosso chute. Ou seja, vai pegar o valor que inserimos e mostrará no console se o chute é igual ao número secreto.
+
+Antes de tudo, vamos limpar o nosso console mais uma vez com "Ctrl + L". Agora, insira um número 2 no campo de input e apertamos "Chutar".
+
+false
+
+Apareceu algo diferente. O que é um false no JavaScript? Vamos pesquisar?
+
+No buscador, vamos colocar false JavaScript e entrar na documentação do JavaScript sobre booleanos. Olha que interessante.
+
+O tipo booleano é um nome muito comum para outras linguagens de programação também. É um valor que pode ser verdadeiro ou falso.
+
+Quando desenvolvemos o jogo pela primeira vez, o que ele esperava quando fazíamos as comparações? Se é verdadeiro ou se é falso.
+
+Sempre que encontramos o nome booleano na programação, seja no JavaScript ou outras linguagens, esperamos que esse valor será verdadeiro ou falso.
+
+Pode haver um valor ou outro diferente. Talvez o JavaScript trabalhe um pouco diferente, mas o que importante para nós é entender se esse valor é verdadeiro ou falso.
+
+Mônica: Percebam como o conhecimento vai aumentando, porque já conhecemos vários tipos. Aprendemos sobre o tipo string (texto), o tipo number (número), e agora o tipo boolean (verdadeiro ou falso).
+
+Guilherme: Podemos até manipular o jogo para dar verdadeiro. Vamos remover temporariamente a chamada da função gerarNumeroAleatorio() que guardamos na variável numeroSecreto. No lugar, vamos colocar um número qualquer, como o 5.
+
+Exemplo
+
+> let numeroSecreto = 5;
+
+No navegador, vamos digitar o número 5 no campo de input para verificar qual tipo de retorno que será exibido no console.
+
+> true
+
+É retornado o valor true que, em inglês, significa verdadeiro. E false significa falso.
+
+Vamos desfazer a última alteração no código para ser gerado, de fato, um número aleatório.
+
+Conclusão  
+Em resumo, sempre que fazemos uma comparação, esperamos um valor verdadeiro ou falso - mais conhecido como tipo booleano.
+
+Na sequência, o que vamos fazer? Podemos usar uma alternativa ao console, para exibir na tela uma resposta que faça mais sentido.
+
+#### Aula 2 - Anatomia de uma função
+
+A anatomia de uma função em JavaScript é composta por diversas partes que definem seu comportamento. É importante compreender esses elementos para criar funções reutilizáveis e modularizar o código de forma eficiente.
+
+Assim, conhecer a estrutura das funções em JavaScript é fundamental para dominar a linguagem e desenvolver aplicações complexas de forma organizada e funcional.
+
+Com base no que vimos nesta aula, analise as afirmações abaixo e marque apenas as opções verdadeiras sobre funções.
+
+Selecione 3 alternativas
+
+- As funções em JavaScript podem ter um nome.
+
+As funções em JavaScript podem ter um nome. Na verdade, é uma prática comum dar um nome descritivo às funções para facilitar a leitura e o entendimento do código. Esses nomes são usados para chamar a função posteriormente ou para se referir a ela dentro do próprio código, permitindo que você reutilize a função em diferentes partes do programa.
+
+- Palavra-chave function: É usada para declarar uma função em JavaScript.
+
+Isso! Toda função em JavaScript é declarada utilizando a palavra-chave function. Essa palavra-chave é utilizada para criar uma função.
+
+- Parênteses (): Após o nome da função (se houver), os parênteses são usados para definir os parâmetros da função.
+
+Os parênteses em uma função no JavaScript são usados para conter os argumentos que a função recebe, permitindo a passagem de informações para a função e influenciando seu comportamento e resultados.
+
+#### Aula 2 - Função que verifica números
+
+Você é uma pessoa desenvolvedora de software que trabalha com JavaScript e precisa criar uma função que verifique se um número é positivo, negativo ou zero. Sua tarefa é implementar uma função que recebe como parâmetro um número inteiro e exibe uma mensagem no console conforme as seguintes regras:
+
+- Se o número for maior que zero, a mensagem deve ser: "O número é positivo."
+- Se o número for menor que zero, a mensagem deve ser: "O número é negativo."
+- Se o número for igual a zero, a mensagem deve ser: "O número é zero."
+
+Você pode utilizar a estrutura de controle if-else para verificar as condições e exibir a mensagem correspondente no console. Sabendo disso, analise as alternativas abaixo e marque aquela que possui o código que atende todas as regras citadas acima.
+
+```JavaScript
+function verificarNumero(numero) {
+  if (numero > 0) {
+    console.log("O número é positivo.");
+  } else if (numero < 0) {
+    console.log("O número é negativo.");
+  } else {
+    console.log("O número é zero.");
+  }
+}
+```
+
+Neste código, usamos a estrutura de controle if-else para verificar as três possibilidades: se o número é maior que zero, se é menor que zero ou se é igual a zero. Dependendo da condição, a função imprime a mensagem correspondente no console.
+
+### Aula 2 - Para saber mais: funções com JavaScript
+
+As funções desempenham um papel central na programação e no desenvolvimento de software, permitindo encapsular blocos de código reutilizáveis e executáveis. Elas podem ser definidas para executar tarefas específicas, desde cálculos simples até manipulação complexa de dados. As funções em JavaScript podem ter ou não parâmetros, bem como retornar ou não valores.
+
+|Tipo de Função | Exemplo de Código | Uso |
+|:---:|:---:|:---:|
+|Sem retorno e sem parâmetro|function saudacao() { ... }|Execução de bloco de código simples.|
+|Sem retorno e com parâmetro|function cumprimentar(nome) { ... }|Execução de bloco de código com argumentos.|
+|Com retorno e sem parâmetro|function gerarNumeroAleatorio() { ... }|Cálculo e retorno de um valor específico.|
+|Com retorno e com parâmetro|function somar(a, b) { ... }|Cálculo e retorno baseado em argumentos.|
+|Função anônima|let saudacao = function() { ... };|Definição de função sem nome localmente.|
+|Arrow function|let quadrado = x => x * x;|Definição concisa de funções curtas.|
+
+Seu uso é essencial para criar aplicações dinâmicas, interativas e eficientes em JavaScript. Porém, você não precisa criar todos os tipos de funções neste momento. Acompanhe as aulas e saiba que essas variações existem e conforme a necessidade, vamos mergulhando cada vez mais profundamente em lógica e JavaScript.
+
+### Aula 2 - Desafio: hora da prática
+
+Saber como usar funções é um dos conceitos fundamentais da programação e do desenvolvimento de software. As funções desempenham um papel crucial na organização, modularização e reutilização de código.
+
+Pensando nisso, criamos uma lista de atividades (não obrigatórias) focada em prática para melhorar ainda mais sua experiência de aprendizagem. Bora praticar então?
+
+**Desafios**  
+
+1. Criar uma função que exibe "Olá, mundo!" no console.
+
+2. Criar uma função que recebe um nome como parâmetro e exibe "Olá, [nome]!" no console.
+
+3. Criar uma função que recebe um número como parâmetro e retorna o dobro desse número.
+
+4. Criar uma função que recebe três números como parâmetros e retorna a média deles.
+
+Criar uma função que recebe dois números como parâmetros e retorna o maior deles.
+
+Criar uma função que recebe um número como parâmetro e retorna o resultado da multiplicação desse número por ele mesmo
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+Opinião do instrutor
+
+Para te ajudar a verificar seus códigos,está disponível uma possível resolução dos [desafios neste link](https://github.com/alura-cursos/js-curso-2/tree/desafio_2) para você construir ou validar suas soluções.
+
+Boa sorte nos estudos!
+
+### Aula 2 - O que aprendemos?
+
+Explique com suas próprias palavras os principais conceitos que você aprendeu nesta aula.
+
+Minha Resposta:  
+Nesta aula eu aprendi sobre as funções e seus parametros, também sobre o retorne de uma função que pode ser do tipo boleano por exemplo.
+
+Luri(I.A)  
+Parabéns pela dedicação aos estudos! Você mencionou funções e seus parâmetros, o que é ótimo! Além disso, aprendemos que funções podem retornar valores, como números aleatórios gerados com `Math.random()`, e que esses valores podem ser utilizados em outras partes do código. Também vimos que funções podem retornar valores booleanos, como `true` ou `false`, que podem ser usados para controlar o fluxo do programa. Continue estudando e praticando!
+
+## Aula 3 - Reiniciando o Jogo
+
+### Aula 3 - Verificando o chute - Vídeo 1
+
+### Aula 3 -  - Vídeo 2
+
+### Aula 3 -  - Vídeo 3
+
+### Aula 3 -  - Vídeo 4
+
+### Aula 3 -  - Vídeo 5
