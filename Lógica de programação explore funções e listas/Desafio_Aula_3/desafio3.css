@@ -7,22 +7,18 @@ body{
     background-color: #000;
     color: #fff;
 }
-h1{
-    text-align: center;
-    padding: 5rem;
-}
 main{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     padding: 2rem;
-    gap: 2rem;
+}
+h1{
+    font-size: 28pt;
+    margin: 2rem;
+    text-align: center;
 }
 li{
-    padding: .6rem;
-    font-size: 16pt;
-}
-button{
-    padding: .3rem;
-    cursor: pointer;
+    padding: 1rem;
 }

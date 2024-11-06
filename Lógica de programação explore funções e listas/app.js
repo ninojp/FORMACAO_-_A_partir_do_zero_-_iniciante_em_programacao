@@ -1,24 +1,65 @@
+"use strict"
 let numeroSecreto = gerarNumeroSecreto();
+let tentativas = 1;
+limparCampo();
 console.log(numeroSecreto);
 
-function verificarChute(){
-    let numeroChute = document.querySelector('input').value;
-    console.log(numeroChute == numeroSecreto);
-    
+function msgInicial(){
+    inserirNoCampo('h1', 'Jogo do Numero Secreto');
+    inserirNoCampo('p', 'Escolha um Numero entre 1 e 10');
 };
+
+msgInicial();
 
 function inserirNoCampo(tag, texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
 };
-inserirNoCampo('h1', 'Jogo do Numero Secreto');
-inserirNoCampo('p', 'Escolha um Numero entre 1 e 10');
+
+function verificarChute(){
+    let numeroChute = parseInt(document.querySelector('input').value);
+    // console.log(numeroChute == numeroSecreto);
+    if (numeroChute === numeroSecreto) {
+        inserirNoCampo('h1', 'Acertou!');
+        let palavraTentativas = tentativas > 1 ? 'Tentativas' : 'Tentativa';
+        let msgTentativas = `Você descobriu o número secreto! ${numeroChute}, com ${tentativas} ${palavraTentativas}`; 
+        inserirNoCampo('p', msgTentativas);
+        document.getElementById('reiniciar').removeAttribute('disabled');
+    } else {
+        numeroChute > numeroSecreto 
+        ? inserirNoCampo('p', `O número secreto é menor que: ${numeroChute}`)
+        : inserirNoCampo('p', `O número secreto é maior que: ${numeroChute}`);
+        tentativas++;
+        limparCampo();
+    };
+};
 
 function gerarNumeroSecreto() {
     return parseInt(Math.random()*10 +1);
 };
 
+function limparCampo(){
+    let campoChute = document.querySelector('input');
+    campoChute.value = '';
+};
 
+function reiniciarJogo(){
+    numeroSecreto = gerarNumeroSecreto();
+    msgInicial();
+    limparCampo();
+    tentativas = 1;
+    document.getElementById('reiniciar').setAttribute('disabled', true);
+    console.log(numeroSecreto);
+};
+
+function verificaBtn(){
+    let btnDisabled = document.getElementById('reiniciar');
+    if (!(btnDisabled.disabled == true)) {
+        btnDisabled.disabled = true;
+        console.log(btnDisabled);    
+    }
+}
+verificaBtn();
 
 //======================================================================
 // let titulo = document.querySelector('h1');

@@ -719,10 +719,482 @@ Parabéns pela dedicação aos estudos! Você mencionou funções e seus parâme
 
 ### Aula 3 - Verificando o chute - Vídeo 1
 
-### Aula 3 -  - Vídeo 2
+Transcrição  
+Guilherme: Môni, acredito que deveríamos mostrar no console um valor True ou False para mostrar a criação do jogo para os amigos.
 
-### Aula 3 -  - Vídeo 3
+Mônica: É bom reforçar que o console é uma ferramenta para a pessoa desenvolvedora e não para a usuária.
 
-### Aula 3 -  - Vídeo 4
+Guilherme: Então, considerando que nós já discutimos a questão dos valores booleanos, vamos fazer um if() e else().
 
-### Aula 3 -  - Vídeo 5
+Em function verificarChute(), abaixo de let chute, escrevemos if(). Se o chute for igual ao número secreto, isso significa que acertamos. Então, nos parênteses passamos chute == numeroSecreto e adicionamos chaves.
+
+Para passar a informação indicando que a pessoa acertou, podemos exibir o texto na tela no lugar do h1, passando outro valor, por exemplo, "acertou".
+
+Para isso, nas chaves e na linha abaixo, escrevemos exibirTextoNaTela(). Nos parênteses passamos 'h1', 'Acertou!' e salvamos.
+
+```JavaScript
+//Código omitido
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+    
+    if (chute == numeroSecreto) {
+        exibirTextoNaTela('h1', 'Acertou!');
+        }
+}
+//Código omitido
+```
+
+Será muito difícil acertar no chute, então, na primeira linha de código, em let numeroSecreto passamos o número 7.
+
+> let numeroSecreto = 7;
+
+Para testar, acessamos o jogo, digitamos o número "7" e clicamos em "Chutar". Feito isso, o texto exibido muda de "Jogo do número secreto" para "Acertou!".
+
+Mônica: Deu certo!
+
+Guilherme: Mas, repare que a mensagem "Escolha um número entre 1 e 10" continua sendo exibida. Podemos definir uma mensagem melhor quando a pessoa acerta o número.
+
+Para isso, na linha 16, escrevemos exibirTextoNaTela() e dentro dos parênteses passamos 'p', 'Você descobriu o número secreto!'.
+
+```JavaScript
+//Código omitido
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+    
+    if (chute == numeroSecreto) {
+        exibirTextoNaTela('h1', 'Acertou!');
+                exibirTextoNaTela('p', 'Você descobriu o número secreto!')
+        }
+}
+```
+
+Para testar novamente, abrimos o jogo e passamos o número "7". Feito isso, visualizamos a mensagem "Acertou! Você descobriu o número secreto!". Ficou muito bom!
+
+Nos casos de erro, precisamos informar se o número que foi chutado é maior ou menor que o número da sorte. Para isso, na linha 17 escrevemos else e adicionamos chaves. Dentro delas, passamos if(chute > numeroSecreto) seguido de chaves.
+
+Dentro das chaves e na linha abaixo escrevemos exibirTextoNaTela(). Nos parênteses, passamos 'p', 'O número secreto é menor'.
+
+Na linha seguinte escrevemos else {}. Nas chaves passamos 'p', 'O número secreto é maior'.
+
+```JavaScript
+//Código omitido
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+    
+    if (chute == numeroSecreto) {
+        exibirTextoNaTela('h1', 'Acertou!');
+        exibirTextoNaTela('p', 'Você descobriu o número secreto!');
+        } else {
+                if (chute > numeroSecreto) {
+                        exibirTextoNaTela('p', 'O número secreto é menor');
+                } else {
+                        exibirTextoNaTela('p', 'O número secreto é maior');
+                }
+        }
+}
+//Código omitido
+```
+
+Feito isso, na primeira linha de código, apagamos o número 7 e escrevemos gerarNumeroAleatorio().
+
+> let numeroSecreto = gerarNumeroAleatorio();
+
+Abrimos o jogo e testaremos novamente. Chute um número, Môni.
+
+Mônica: Número 2.
+
+Guilherme: Repare que a mensagem "O número secreto é maior" é exibida na tela.
+
+Chutarei o número 8. A mensagem exibida é "O número secreto é menor".
+
+Mônica: Número 4.
+
+Guilherme: O número é maior. Vou tentar o número 6. Feito isso, a mensagem exibida é "Acertou! Você descobriu o número secreto!".
+
+Deu certo! Para jogar de novo, atualizamos a página.
+
+Mônica: Número 4.
+
+Guilherme: O número é menor, 2 também.
+
+Mônica: Então é o número 1.
+
+Guilherme: Deu certo! Temos a ideia do jogo sem o alert e o prompt, entendendo como criar funções e usando retorno.
+
+Repare que essa questão de termos uma função que exibe na tela, passando somente a tag, ficou muito interessante.
+
+### Aula 3 - Contando tentativas - Vídeo 2
+
+Transcrição
+Mônica: Seguindo a lógica do jogo que estávamos desenvolvendo com o prompt e o alert, falta exibir o número de tentativas.
+
+Guilherme: Exatamente, Môni! É interessante sabermos que foram necessárias, por exemplo, 5 tentativas para descobrir o número secreto. Faremos isso agora!
+
+Implementando o número de tentativas
+Na linha 16, alteramos o conteúdo do texto da tag p para Você descobriu o número secreto com 5 tentativas!.
+
+> let mensagemTentativas = `Você descobriu o número secreto com 5 tentativas!`;
+
+Para controlar o número de tentativas, na linha 2, criamos uma variável chamada tentativas e inicializamos com o valor 1. A lógica do nosso jogo é que, desde o início, caso o número seja acertado de primeira, já teremos ali uma tentativa.
+
+> let tentativas = 1;
+
+Se passarmos uma template string diretamente para exibir o texto na tela, talvez o HTML não entenda. Isso porque ele espera uma string e não uma template string, que é algo que somente o JavaScript entende.
+
+Sendo assim, na linha 17, criamos uma variável chamada let mensagemTentativas = Você descobriu o número secreto com 5 tentativas. Para indicar que essa string é uma template string usamos as crases no início e no final.
+
+Mônica: Feito isso, vamos ao invés de deixar definido o número de tentativas, apagamos o 5 e passamos ${tentativas}.
+
+```JavaScript
+//Código omitido
+if (chute == numeroSecreto) {
+        exibirTextoNaTela('h1', 'Acertou!');
+        let mensagemTentativas = `Você descobriu o número secreto com  ${tentativas} tentativas!`;
+        exibirTextoNaTela('p', 'Você descobriu o número secreto com 5 tentativas!');
+        } else {
+            if (chute > numeroSecreto) {
+                            exibirTextoNaTela('p', 'O número secreto é menor');
+            } else {
+                            exibirTextoNaTela('p', 'O número secreto é maior');
+            }
+        }
+```
+
+Guilherme: No entanto, devemos nos lembrar que se o número for acertado de primeira, a frase será "Você descobriu o número secreto com 1 tentativas". Então, precisamos criar uma variável para tentativas.
+
+Na linha 17 escrevemos let palavraTentativa igual à tentativas > 1 ? 'tentativas' : 'tentativa'. Em seguida, na linha 18, apagamos a palavra tentativas e passamos ${palavraTentativa}.
+
+Mônica: Também precisamos trocar o parâmetro que enviava texto. Então, na linha 19 apagamos o texto e passamosmensagemTentativas.
+
+```JavaScript
+//Código omitido
+if (chute == numeroSecreto)
+        exibirTextoNaTela('h1', 'Acertou!');
+        let palavraTentativa = tentativas > 1 ? 'tentativas': 'tentativa';
+        let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
+        exibirTextoNaTela('p', mensagemTentativas);
+//Código omitido
+```
+
+Mônica: O JavaScript é uma linguagem não-tipada, então quando informamos que vamos receber um parâmetro, não precisamos especificar qual o seu tipo. Isso nos permite trocar o tipo do parâmetro para uma variável.
+
+Guilherme: Agora, precisamos atualizar a contagem de tentativas sempre que o chute for errado.
+
+Para isso, no fim do else{} escrevemos tentativas++.
+
+```JavaScript
+//Código omitido
+function verificarChute() {
+        let chute = document.querySelector('input').value;
+        if (chute == numeroSecreto) 
+                exibirTextoNaTela('h1', 'Acertou!');
+                let palavraTentativa = tentativas > 1 ? 'tentativas': 'tentativa';
+                let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`; 
+                exibirTextoNaTela('p', mensagemTentativas);
+        } else {
+                if (chute > numeroSecreto) { exibirTextoNaTela ('p', '0 número secreto é menor');
+                } else {
+                        exibirTextoNaTela('p', 'O número secreto é maior');
+                }
+                tentativas++;
+        }
+```
+
+Guilherme: Agora, vamos testar o jogo para verificar se tudo está funcionando corretamente. No navegador, atualizamos a página do jogo.
+
+Primeiro tentamos o número "5". A mensagem exibida é "O número secreto é menor". Tentamos "2" e o número secreto é menor. Em seguida, tentamos o número "3". A mensagem exibida é "Você descobriu o número secreto com 3 tentativas!".
+
+Agora, vamos testar da outra forma. Para isso, na primeira linha do código, apagamos gerarNumeroAleatorio() e escrevemos 2.
+
+> let numeroSecreto = 2;
+
+Atualizamos o jogo e chutamos o número "2". Feito isso, aparece a mensagem "Você descobriu o número secreto com 1 tentativa!".
+
+Mônica: Importante ressaltar que a contagem considera apenas a primeira tentativa de acerto. Em caso de acertos posteriores, não são consideradas uma tentativa. Somamos apenas os casos de erro.
+
+Guilherme: Para finalizar, na primeira linha de código, apagamos o 2 e voltamos o gerarNumeroAleatório().
+
+Agora, sim, temos as mensagens corretas no singular e plural, dependendo do número de tentativas realizadas para descobrir o número secreto.
+
+### Aula 3 - Botão reiniciar - Vídeo 3
+
+Transcrição  
+Guilherme: Tem uma parte do jogo que me deixa um pouco confuso. Vou digitar o número "5" e depois clicar em "Chutar". Feito isso aparece a mensagem dizendo que o número secreto é menor.
+
+Perceba que o número 5 continua aparecendo no campo. Seria interessante que a cada tentativa o campo fosse limpo. Faremos isso agora!
+
+Implementando o campo vazio  
+Analisando nosso código, percebemos que, quando acertamos o chute, deixamos o número exibindo na tela. Mas, quando erramos, é melhor deixarmos o campo de texto limpo.
+
+Para isso, abaixo da linha tentativas++, escrevemos limparCampo. Como isso é algo que o Javascript não sabe o que é, podemos criar uma função.
+
+Mônica: Inclusive, essa é uma prática que pode nos ajudar em outros casos futuros em que queiramos limpar o campo de texto.
+
+Guilherme: Na linha 35, escrevemos function limparCampo(). Sua única responsabilidade será limpar o campo, dela não esperamos nenhum retorno.
+
+Então, após os parênteses adicionamos chaves. Dentro, passamos a variável chute igual à document.querySelector('input').
+
+Não colocamos .value porque não estamos querendo pegar o valor. Ao invés disso, na linha seguinte, passamos chute.value igual à '', ou seja, uma string vazia.
+
+```JavaScript
+//Código omitido
+function limparCampo() {
+    chute = document.querySelector('input');
+    chute.value = '';
+}
+```
+
+Mônica: Strings são sempre textos entre aspas. Como não definimos nenhum texto, o campo deve ficar vazio.
+
+Guilherme: Vamos testar! Abrimos o jogo e atualizamos a página. Digitamos o número 5 e clicamos em "Chutar". Aparece a mensagem "O número secreto é menor" e o campo fica vazio.
+
+Depois, chutamos o número "4" e a mensagem "Você descobriu o número secreto com 3 tentativas" aparece. Abaixo, o campo exibe o número4. Deu certo!
+
+Se analisarmos o jogo, temos um botão chamado "Novo Jogo". Faremos com que quando o número for acertado ele seja habilitado. Depois podemos fazer a implementação.
+
+index.html
+
+Mônica: Podemos abrir o arquivo index.html para identificar como o botão está sendo desativado.
+
+Na linha 28 temos o botão com clique vazio. No fim desse trecho de código, encontramos o disable. É isso o que está desativando o botão. Sendo assim precisamos editar esse atributo para ativá-lo.
+
+Habilitando o Botão Novo Jogo
+app.js
+
+Guilherme: Não mexeremos no HTML. Então, voltamos para o arquivo app.js.
+
+Mônica: O botão precisa ser ativado quando o número secreto for ativado e assim iniciar um novo jogo.
+
+Guilherme: Exatamente! A primeira coisa que faremos é pegar esse botão do HTML.
+
+Porém, temos um problema. Existem dois botões, então se definirmos document.querySelector("button"), como estávamos fazendo antes,o código provavelmente selecionará o primeiro botão ao buscar entre todos os elementos.
+
+Repare que o segundo botão possui uma característica diferente, o id="reiniciar".
+
+O id é um atributo que especifica o botão e deve ser único, não pode ser usado em outro lugar.
+
+Então, na linha 20, escrevemos document.getElementById.
+
+Lembrando que, por padrão, o "E", "B" e "I" precisam ser letras maiúsculas.
+
+Mônica: Para especificar qual é o id que queremos, colocamos parênteses. Dentro adicionamos aspas seguido da palavra reiniciar, o nome do ID. Precisa ser igual ao HTML.
+
+Guilherme: Se nessa mesma linha adicionarmos um ponto, que é como acessaremos esse elemento, a ferramenta sugere vários atributos.
+
+Mônica: Segundo a lógica, queremos remover o atributo que faz com que o botão seja desativado. Nesse caso, irá funcionar se usarmos o removeAttribute. Existem várias funções, mas essa é a que queremos, remover o atributo e não o removeAttributeNS(Node).
+
+Guilherme: Então, em após removeAttribute() adicionamos aspas simples e escrevemos disable.
+
+```JavaScript
+//Código omitido
+function verificarChute() {
+    let chute = document.querySelector('input').value;
+
+    if (chute == numeroSecreto) {
+        exibirTextoNaTela('h1', 'Acertou!');
+        let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
+        let mensagemTentativas = `Você descobriu o número secreto com ${tentativas} ${palavraTentativa}!`;
+        exibirTextoNaTela('p', mensagemTentativas);
+        document.getElementById('reiniciar').removeAttribute('disabled');
+//Código omitido
+```
+
+Guilherme: Agora, vamos testar. No jogo, chutamos o número "5" e a mensagem "Você descobriu o número secreto com 1 tentativa!" aparece. Logo em seguida, note que o botão "Novo jogo" é habilitado.
+
+O próximo passo é fazermos com que esse botão funcione e comece um novo jogo.
+
+### Aula 3 - Reiniciando o Jogo - Vídeo 4
+
+Transcrição  
+Guilherme: Agora definiremos uma funcionalidade para o botão "Novo Jogo". Ao clicá-lo, queremos que as tentativas sejam zeradas e um novo número seja sorteado.
+
+Mônica: Como queremos que isso seja iniciado com um clique, então usaremos o onClick.
+
+Definindo a funcionalidade do botão Novo Jogo
+index.html
+
+Guilherme: Se acessarmos o HTML, na linha 28 temos um onclick vazio. Após o sinal de igual, dentro de aspas duplas, criamos uma função chamada reiniciarJogo().
+
+Lembrando que precisamos usar os parênteses para indicar que é uma função.
+
+```HTML
+//Código omitido
+class="container_input">
+<div class="chute container_botoes">
+    <button onclick="verificarChute()"
+    class="container botao">Chutar</button>
+    <button onclick="reiniciarJogo()" id="reiniciar"
+    class="container_botao" disabled>Novo jogo</
+    button>
+    </div>
+</div>
+```
+
+app.js
+
+Feito isso, voltamos no app.js. No fim do código, na linha 41, criamos a função reiniciarJogo(), que não receberá nenhum parâmetro.
+
+Vamos executar essa função quando o botão for clicado, diferente de como geralmente usamos funções no JavaScript, aqui não invocamos a função.
+
+Ao iniciar o jogo queremos que um novo número secreto seja sorteado. Então, adicionamos chaves e dentro passamos numeroSecreto igual à gerarNumeroAleatorio().
+
+Mônica: Em seguida, precisamos que o campo fique vazio e que as tentativas sejam iniciadas como 1.
+
+Guilherme: Isso mesmo! Então, passamos limparCampo() e na linha abaixo tentativas = 1.
+
+```JavaScript
+//Código omitido
+function reiniciarJogo() {
+    numeroSecreto = gerarNumeroAleatorio();
+    limparCampo();
+    tentativas = 1;
+}
+```
+
+Guilherme: Vamos testar. Primeiro precisamos acertar o número secreto, então digitamos "5".
+
+Depois, clicamos no botão "Novo jogo". Um novo número é sorteado, mas temos um problema, a mensagem "Acertou" e "Você descobriu o número secreto em 1 tentativa" continuam aparecendo. Precisamos mudar isso.
+
+Para facilitar, copiamos as linhas 9 e 10, referente as funções exibirTextoNaTela() e colamos na linha 45. Agora, faremos as alterações necessárias.
+
+Vamos testar de novo. Ao acertar o número secreto clicamos em "Novo jogo" e a mensagem muda para "Jogo do número secreto. Escolha um número entre 1 e 10".
+
+Mônica: Deu certo! Está funcionando, mas há código repetido e isso não é uma boa prática.
+
+Guilherme: Verdade, Môni! Suponhamos que o jogo foi atualizado para a versão 2.0. Nesse caso, se na linha 9, mudarmos o texto para "Jogo do número secreto 2.0" quando rodarmos o jogo pela segunda vez, essa mensagem não será exibida.
+
+Fazer essa alteração nos dois trechos de código não é uma boa prática. Sendo assim, precisamos isolar esse comportamento em uma função.
+
+Na linha 9, criamos a função exibirMensagemInicial(). A única responsabilidade dessa função será exibir as mensagens iniciais.
+
+Então, colamos as duas funções exbirNaTela() e colamos logo abaixo.
+
+```JavaScript
+function exibirMensagemInicial() { 
+    exibirTextoNaTela('h1', 'Jogo do número secreto'); 
+    exibirTextoNaTela('p', 'Escolha um número entre 1 e 10'); I
+}
+//Código omitido
+```
+
+Guilherme: Agora, precisamos colocar essa mensagem inicial na função reiniciarJogo(). Para isso, apagamos as linhas 48 e 49. No lugar, passamos a função exibirMensagemInicial().
+
+```JavaScript
+//Código omitido
+function reiniciarJogo() {
+    numeroSecreto = gerarNumeroAleatorio();
+    limparCampo();
+    tentativas = 1;
+    exibirMensagemInicial()
+}
+```
+
+Mônica: Em seguida, precisamos chamar a nova função fora de qualquer outra função para ser iniciada na primeira vez que o app.js for lido.
+
+Guilherme: Exatamente! Então, na linha 14, escrevemos exibirMensagemInicial(). Lembrando que poderia ser em outra linha.
+
+```JavaScript
+function exibirMensagemInicial() { 
+    exibirTextoNaTela('h1', 'Jogo do número secreto'); 
+    exibirTextoNaTela('p', 'Escolha um número entre 1 e 10'); I
+}
+
+exibirMensagemInicial()
+//Código omitido
+```
+
+Guilherme: Vamos testar. Chutamos até acertar. Depois, clicamos em "Novo Jogo" e ele é iniciado. Deu certo!
+
+Porém, repare que ainda temos um problema. Sempre que clicamos em "Novo Jogo", ele traz um novo jogo. Seria interessante se pudéssemos restaurar o status da nossa aplicação o campo desabilitado. Faremos isso.
+
+No fim do código, na função reiniciarJogo() passamos document.getElementById(). Nos parênteses adicionamos aspas simples e escrevemos reiniciar seguido do atributo .setAttribute().
+
+Dentro dos parênteses, passamos o nome do atributo que queremos setar, então 'disabled'. Adicionamos vírgula e passamos o segundo parâmetro true.
+
+```JavaScript
+//Código omitido
+function reiniciarJogo() {
+    numeroSecreto = gerarNumeroAleatorio();
+    limparCampo();
+    tentativas =1;
+    exibirMensagemInicial();
+    document.getElementById('reiniciar').setAttribute('disabled', true)
+}
+```
+
+Voltamos no jogo. Repare que começamos com o botão "Novo Jogo" desabilitado. Após acertar o número da sorte ele é habilitado. Ao clicá-lo ele desabilita novamente.
+
+### Aula 3 - Calculadora de Média e Situação do Aluno
+
+Você foi contratado (a) para desenvolver uma calculadora de média e verificar a situação de aprovação de um aluno com base em suas quatro notas. A média para aprovação é 5. Sua tarefa é implementar duas funções em JavaScript:
+
+calcularMedia(nota1, nota2, nota3, nota4)=> Esta função recebe as quatro notas do aluno como parâmetros e retorna a média calculada com base nessas notas.
+verificarAprovacao(media) => Esta função recebe a média do aluno como parâmetro e retorna "Aprovado" se a média for maior ou igual a 5, caso contrário, retorna "Reprovado".
+Utilize esses valores para as notas:
+
+> let nota1 = 7;  
+let nota2 = 6;  
+let nota3 = 3;  
+let nota4 = 5;
+
+Posto disso, analise cada afirmação abaixo e marque apenas aquelas que mostram partes de código que seguem as regras de negócio citadas acima.
+
+> function verificarAprovacao(media) {  
+    return media >= 5 ? "Aprovado" : "Reprovado";  
+}
+
+Isso aí! A função verifica se a média passada como parâmetro é maior ou igual a 5 e retorna um valor em formato de texto informando se foi aprovado ou reprovado.
+
+> function calcularMedia(nota1, nota2, nota3, nota4) {  
+  let media = (nota1 + nota2 + nota3 + nota4) / 4;  
+  return media;  
+}
+
+Certo! Esta função calcula a média aritmética das quatro notas fornecidas. Primeiro, ela soma as quatro notas e depois divide essa soma por 4, que é o número total de notas. E por fim retorna o resultado dessa operação, que é a média do aluno.
+
+### Aula 3 - Desafio: hora da prática
+
+Saber como usar funções é um dos conceitos fundamentais da programação e do desenvolvimento de software. As funções desempenham um papel crucial na organização, modularização e reutilização de código.
+
+Pensando nisso, criamos uma lista de atividades (não obrigatórias) focada em prática para melhorar ainda mais sua experiência de aprendizagem. Bora praticar então?
+
+Desafios
+
+1. Crie uma função que calcule o índice de massa corporal (IMC) de uma pessoa, a partir de sua altura, em metros, e peso, em quilogramas, que serão recebidos como parâmetro.
+
+2. Crie uma função que calcule o valor do fatorial de um número passado como parâmetro.
+
+3. Crie uma função que converte um valor em dólar, passado como parâmetro, e retorna o valor equivalente em reais. Para isso, considere a cotação do dólar igual a R$4,80.
+
+4. Crie uma função que mostre na tela a área e o perímetro de uma sala retangular, utilizando altura e largura que serão dadas como parâmetro.
+
+5. Crie uma função que mostre na tela a área e o perímetro de uma sala circular, utilizando seu raio que será fornecido como parâmetro. Considere Pi = 3,14.
+
+6. Crie uma função que mostre na tela a tabuada de um número dado como parâmetro.
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+Para te ajudar a verificar seus códigos, deixo disponível uma possível resolução dos desafios [neste link](https://github.com/alura-cursos/js-curso-2/tree/desafio_3) para você construir ou validar suas soluções.
+
+Boa sorte nos estudos!
+
+### Aula 3 - O que aprendemos?
+
+Nesta aula:
+
+- Aprendemos como criar um programa para verificar se o “chute” inserido é igual ao número secreto definido. Utilizamos estruturas condicionais para tomar decisões com base no resultado dessa comparação;
+
+- Criamos uma variável para armazenar a quantidade de tentativas realizadas pelo usuário;
+
+- Vimos a importância de consultar a documentação da linguagem e das bibliotecas utilizadas no desenvolvimento do programa. A documentação é uma fonte valiosa de informações que nos auxilia na compreensão de conceitos e no uso correto das funcionalidades disponíveis.
+
+Na próxima aula:  
+Vamos aprender como funcionam as listas (ou arrays, em inglês) e como são fundamentais na carreira de desenvolvimento de software!
+
+## Aula 4 - Listas
+
+### Aula 4 -  - Vídeo 1
+### Aula 4 -  - Vídeo 1
+### Aula 4 -  - Vídeo 1
+### Aula 4 -  - Vídeo 1
+### Aula 4 -  - Vídeo 1

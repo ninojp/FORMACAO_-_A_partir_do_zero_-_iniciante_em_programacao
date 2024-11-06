@@ -138,3 +138,16 @@ button:disabled {
         padding: 1rem
     }
 }
+.divDesafios{
+    display: block;
+    position: absolute;
+    bottom: 0;
+}
+.divLinks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+    margin: 2rem;
+}
