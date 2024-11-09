@@ -1,4 +1,6 @@
 "use strict"
+let listaNumerosSecretos = [];
+let nMaximoGerado = 10;
 let numeroSecreto = gerarNumeroSecreto();
 let tentativas = 1;
 limparCampo();
@@ -8,9 +10,7 @@ function msgInicial(){
     inserirNoCampo('h1', 'Jogo do Numero Secreto');
     inserirNoCampo('p', 'Escolha um Numero entre 1 e 10');
 };
-
 msgInicial();
-
 function inserirNoCampo(tag, texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
@@ -35,7 +35,17 @@ function verificarChute(){
 };
 
 function gerarNumeroSecreto() {
-    return parseInt(Math.random()*10 +1);
+    let numeroSecretoGerado = parseInt(Math.random() * nMaximoGerado + 1);
+    if(listaNumerosSecretos.length == nMaximoGerado){
+        listaNumerosSecretos = [];
+    }
+    if(listaNumerosSecretos.includes(numeroSecretoGerado)){
+        return gerarNumeroSecreto();
+    }else{
+        listaNumerosSecretos.push(numeroSecretoGerado);
+        console.log(listaNumerosSecretos);
+        return numeroSecretoGerado;
+    }
 };
 
 function limparCampo(){

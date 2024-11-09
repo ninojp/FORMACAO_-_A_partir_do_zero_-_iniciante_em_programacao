@@ -1193,8 +1193,438 @@ Vamos aprender como funcionam as listas (ou arrays, em inglês) e como são fund
 
 ## Aula 4 - Listas
 
-### Aula 4 -  - Vídeo 1
-### Aula 4 -  - Vídeo 1
-### Aula 4 -  - Vídeo 1
-### Aula 4 -  - Vídeo 1
-### Aula 4 -  - Vídeo 1
+### Aula 4 - Documentação sobre listas - Vídeo 1
+
+Transcrição  
+Mônica: O jogo já parece completo. Conseguimos jogar e já existem várias funcionalidades. Contudo, seria interessante se o mesmo número não fosse sorteado várias vezes. No vídeo anterior, percebemos que o número 5 foi sorteado duas vezes seguidas.
+
+Guilherme: E você desconfiou.
+
+Mônica: Sim, mas pensei que a "inteligência artificial" estava ajudando o Guilherme.
+
+Guilherme: Não queremos sortear um número que já saiu, então pensaremos em uma lógica para definir quando esse número poderá ser inserido. Portanto, acessaremos a documentação do JavaScript, porque ela ensina uma estrutura de dados comum, não só em JavaScript, como em Python, Java e outras linguagens de programação, conhecida como listas ou, no termo técnico em inglês, Array.
+
+Em uma nova aba, pesquisamos por "array JavaScript" e abriremos a documentação do JavaScript sobre array, que é o primeiro link dos resultados. Essa documentação define um Array da seguinte forma:
+
+O objeto Array do JavaScript é um objeto global usado na construção de 'arrays': objetos de alto nível semelhantes a listas.
+
+Essa explicação não é totalmente compreensível, então continuaremos lendo a documentação para entendermos melhor. Abaixo dessa explicação inicial, temos a demonstração da criação de uma lista de frutas.
+
+> var frutas = ["Maçã", "Banana"];  
+>
+> console.log(frutas.length);
+> // 2
+
+Ele utilizou var para declarar uma variável, mas é semelhante ao let. Então seria como let frutas =. Depois temos uma estrutura diferente, onde utilizamos colchetes ([]). }=Isso não é exclusivo do JavaScript, a maioria das linguagens de programação utiliza colchetes para se tratar de listas.
+
+Sempre que criarmos uma lista, conseguimos visualizar o tamanho dessa lista. No exemplo, temos dois elementos separados por uma vírgula: "Maçã", Banana". Entretanto, existem métodos que auxiliam para sabermos algumas informações dessa lista como o tamanho dela e qual é o primeiro ou o segundo elemento.
+
+Nessa lista de frutas com maçã e banana, o primeiro elemento da lista sempre terá o índice zero, e para acessarmos qualquer elemento dessa lista, utilizamos seus respectivos índices. Então no segundo exemplo, da documentação, para encontrar Maçã ele escreve o nome da lista e o índice.
+
+> var primeiro = frutas[0];  
+// Maçã
+
+Vamos fazer esse teste no console do navegador. Para isso, clicamos com o botão direito na página, selecionamos "Inspecionar" e, nas abas da parte superior, clicaremos em "Console".
+
+Dica: Caso a aba console não esteja aparecendo, clique nas setas duplas ">>" para abrir o menu flutuante e selecione "Console".
+
+Com o Console aberto, pressionaremos "Ctrl + L" para limparmos qualquer conteúdo que tenha escrito nele e escreveremos uma lista chamada "numeros", porque faz mais sentido para o nosso projeto:
+
+> let numeros = [1,5,9]
+
+Sempre que falarmos em lista, utilizaremos os colchetes e, dentro dos colchetes, podemos criar uma lista de palavras, como no exemplo da documentação, ou de números. Na nossa lista "numeros", temos os elementos 1, 5 e 9.
+
+Pressionando "Enter", criamos essa lista. Agora se escrevemos numeros, o console retorna que essa é uma lista de três elementos: 1, 5 e 9.
+
+> numeros  
+>
+> (3) [1, 5, 9]
+
+Para verificarmos quantos elementos temos em uma lista, podemos utilizar nomeDaLista.length. Nesse caso, codamos numeros.length. O método .length sempre retorna a quantidade de elementos que temos na lista.
+
+Importante: Precisamos saber como escrever "length". O final é "GTH". A maioria das pessoas programadoras inverte a escrita para "GHT", invertendo o "H" e o "T".
+
+> numeros.length  
+3
+
+Mônica: Embora o método length seja do JavaScript, ele também é usado em algumas outras linguagens. Entintando, existem outros métodos que se utilizam para lista, então podem ter outros nomes em outras linguagens. Ainda assim, é importante sabermos que há ferramentas para facilitar o nosso acesso às listas.
+
+Guilherme: Agora, eu quero obter alguns elementos da lista numeros. Como eu já disse, se quisermos somente o valor 1, por exemplo, que é o primeiro elemento da lista, usaremos sempre o índice 0.
+
+Qualquer lista começa pelo índice 0, depois temos o índice 1 e o índice 2, nesse caso, respectivamente os números 1, 5 e 9. Portanto, se codarmos numeros[0], passando o índice entre colchetes, que é o símbolo da lista, teremos como retorno o número 1.
+
+> numeros[0]  
+1
+
+Para praticarmos mais, criaremos uma lista de linguagens de programação. Então escreveremos let linguagens = ['javaScript', 'java', 'python'] e pressionamos "Enter".
+
+> let linguagens = ['javascript', 'java', 'python']
+
+Então temos a linguagem JavaScript, que estamos usando, e as linguagens Java e Python, que também são linguagens de programação. Agora como fazemos para acessar o elemento java?
+
+Mônica: Escrevemos linguagens[1].
+
+> linguagens[1]  
+'java'
+
+Guilherme: Lembrando que usamos o índice 1 porque o elemento javascript está com o índice 0. Se quisermos o último elemento dessa lista, usamos o índice 2, porque a sequência dos índices é 0, 1, 2. Com o índice 2 ele retorna o python.
+
+> linguagens[2]  
+'python'
+
+Agora, o que acontece se pedimos um índice que não existe? Por exemplo, se pedirmos linguagens[90], não teremos nenhum resultado, então ele retorna "undefined" (indefinido). Então ele não sabe o que é.
+
+> linguagens[90]  
+undefined
+
+Mônica: Ele não inventa nenhum número. Ele avisa mesmo que não tem.
+
+Guilherme: Se temos uma lista muito grande, como é comum do cotidiano do trabalho de dev, e quisermos o último elemento da lista, temos um método para isso no exemplo da documentação. No espaço do índice, ele passa o tamanho da lista menos 1.
+
+> var ultimo = frutas[frutas.length - 1];  
+// Banana
+
+Por que o nomeDaLista.length - 1 mostra o último elemento?
+
+Mônica: Porque o tamanho não começa com zero. Ele está contando todos os elementos da lista.
+
+Guilherme: Se o índice começa com o valor zero, se fizermos diminuirmos o tamanho da lista em 1, obteremos o último elemento da lista. Vamos fazer esse teste também na nossa lista de linguagens.
+
+> linguagens[linguagens.length - 1]  
+'python'
+
+Ele retornou o Python, e faz sentido. O 'javascript' está no índice zero, o 'java' está no índice 1 e o 'python' no índice 2.
+
+Mônica: Como tamanho de lista é 3, linguagens.length - 1 é como 3 - 1, que é igual a 2 , ou seja, temos o índice 2. Ficou igual ao linguagens[2], que também retorna Python.
+
+Guilherme: Existem outros métodos que podemos usar para inserirmos ou removermos um elemento na lista ou limparmos a lista. Também podemos buscar um elemento baseado em alguma lógica ou regra, como "quero só os elementos da lista que possuam números".
+
+Esse não é o foco desse curso, mas existem outros cursos aqui na Alura sobre esses assuntos. O que nós precisamos entender é que colocaremos no nosso projeto uma lista de números que já foram sorteados, e esses números não podem ser sorteados novamente.
+
+### Aula 4 - Implementando a lista - Vídeo 2
+
+Transcrição  
+Mônica: Anteriormente analisamos a documentação de Arrays (listas), mas por que estávamos testando no console?
+
+Guilherme: Sendo franco, por preguiça. Eu não queria criar um novo projeto e abrir um documento. É comum quando queremos testar algo rapidamente, usarmos o console.
+
+Mônica: Ótimo, mas agora vamos praticar com o jogo.
+
+Guilherme: Vamos! A ideia agora é criar uma lista para os números secretos que já foram sorteados para não os sortear novamente.
+
+Mônica: Precisamos pensar onde queremos que essa lista. Queremos adicionar itens nela quando um número aleatório é gerado, mas existe uma particularidade do Javascript.
+
+Como mencionei várias vezes, o Javascript lê linha a linha. Se declararmos a lista depois de algum comando, antes de chamar a função que gera o número aleatório, ocorrerá um erro.
+
+Guilherme: Exato. Então eu cliquei no começo da linha 1 e pressionei "Enter", para deixar a linha 1 vazia. Você que está vendo a aula faça o mesmo. Na linha 1, criaremos uma variável chamada listaDeNumerosSorteados, que será uma lista vazia, ou seja, deixamos colchetes vazio ([]).
+
+> let listaDeNumerosSorteados = [];
+
+Mônica: Assim como criamos um texto vazio, que são strings sem nada dentro, escrevendo "", para criar uma lista vazia, abrimos e fechamos colchetes.
+
+Guilherme: Em seguida, acessaremos nossa função gerarNumeroAleatorio(), que está na linha 37.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    return parseInt(Math.random() * 10 + 1);
+}
+```
+
+Nessa função, guardaremos o número aleatório, porque já estamos retornando ele diretamente. Então removeremos o return onde geramos o número aleatório com a função Math.random() e arredondamos para cima. Ao invés disso, escreveremos let numeroEscolhido.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+}
+```
+
+Mônica: Lembrando de seguir o padrão com camelCase. Então, numero com 'n' minúsculo e Escolhido com 'E' maiúsculo.
+
+Guilherme: Agora queremos verificar se já temos o número escolhido na nossa lista. Portanto, faremos uma verificação com um if():
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    if (listaDeNumerosSorteados)
+}
+```
+
+Repare que é muito comum verificarmos se um elemento já está na lista ou não. Para tudo que é recorrente, é importante tentarmos descobrir se não existe algum método pronto, ou alguém que já passou por isso e deixou uma solução possível.
+
+Felizmente, alguém já passou por isso e criou um método chamado includes(), que verifica se o elemento está na lista. Se estiver, retorna true e, se não estiver, retorna false. Assim, podemos tomar decisões a partir desse resultado.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    if (listaDeNumerosSorteados.includes())
+}
+```
+
+Mônica: Precisamos informar para o includes() o que ele precisa verificar se está incluído na lista.
+
+Guilherme: Isso! E como ele é uma função, usamos parênteses e, dentro dos parênteses, passamos o numeroEscolhido. Cuidado para não passar o numeroSorteado.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    if (listaDeNumerosSorteados.includes(numeroEscolhido)) {
+    }
+}
+```
+
+Atenção: O número escolhido está entre os parênteses de includes(), que é uma função dentro dos parênteses do if(), então, ao final, fechamos dois parênteses.
+
+Se o número já foi sorteado, fazemos algo chamado recursão, ou seja, chamaremos a própria função gerarNumeroAleatorio() novamente, gerando um novo número aleatório. Com isso, ele verificará novamente se aquele número já foi escolhido ou não.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    if (listaDeNumerosSorteados.includes(numeroEscolhido)) {
+        return gerarNumeroAleatorio();
+    }
+}
+```
+
+Portanto, pediremos para que um novo número seja gerado caso o número já esteja na lista.
+
+Mônica: É importante frisar que o includes() é algo específico do JavaScript. Pode ser que a linguagem que você escolheu para seguir na sua jornada tenha outro método ou nome para resolver o mesmo problema, mas, como o Gui mencionou, é sempre importante verificarmos se o problema que estamos enfrentando foi resolvido na documentação da linguagem.
+
+Guilherme: Esse é um método comum. Provavelmente a maioria das linguagens já possui um método específico para verificar se um elemento está ou não na lista.
+
+Agora tratar o caso do else, em que o elemento não está na lista. Se não está na lista, queremos retornar o numeroEscolhido, e para isso usaremos o return:
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 10 + 1);
+    if (listaDeNumerosSorteados.includes(numeroEscolhido)) {
+        return gerarNumeroAleatorio();
+    } else {
+        return numeroEscolhido;
+    }
+}
+```
+
+Mônica: Faz sentido, mas temos algo a mais a considerar. A lista sempre estará vazia do jeito que estamos fazendo agora. Nós precisamos inserir o número que foi sorteado na lista para conseguir fazer a verificação adequada.
+
+Guilherme: Agora temos o desafio de inserir algo na listaDeNumerosSorteados. Observem que, quando escrevemos um ponto final (.) após listaDeNumerosSorteados, existem várias opções de métodos que podemos trabalhar nas listas, como o includes().
+
+Para adicionarmos algo na lista com JavaScript, utilizaremos o método push(). Sendo assim, dentro do else e antes do return, escreveremos listaDeNumerosSorteados.push(). Dentro dos parênteses do método push(), passaremos o numeroEscolhido, que é a informação que queremos adicionar à lista.
+
+```JavaScript
+//código omitido
+} else {
+    listaDeNumerosSorteados.push(numeroEscolhido);
+    return numeroEscolhido;
+}
+```
+
+Lembrete: O nome do método pode ser diferente em outras linguagens. Em JavaScript, o método para adicionar elementos na lista é o push(), mas em outras linguagens pode ter outros nomes.
+
+Mônica: O método push() adiciona o elemento que passamos nos parênteses ao final da lista. Se passarmos o mouse por cima do nome push(), no VS Code, teremos uma explicação de como o método funciona.
+
+Guilherme: Abaixo do listaDeNumerosSorteados.push(numeroEscolhido), escreveremos console.log(listaDeNumerosSorteados) e salvaremos nossas alterações para conseguirmos testá-las.
+
+Informação: Utilize o console.log() para checar o comportamento do código.
+
+Antes de testarmos, perceba que o código atual está gerando 10 números, o que é muito. Sendo assim, alteraremos a variável numeroEscolhido, que está logo no começo da função gerarNumeroAleatorio. Deixaremos apenas os valores de 1 a 3, mudando o multiplicador da variável para 4.
+
+> let numeroEscolhido = parseInt(Math.random() * 4 + 1);
+
+Após salvarmos nossas alterações, vamos retornar para a página do nosso jogo, onde o Console já está aberto. Pressionaremos "Ctrl + L" para limparmos o Console.
+
+No campo de texto da página, escreveremos o número 5 e clicaremos no botão "Chutar".
+
+Mônica: Antes de testarmos, precisamos atualizar a página para que um novo número seja sorteado.
+
+Guilherme: Atualizei a página e limpei o Console novamente. "Chutei" novamente o número 5, mas ele não está mostrando nada no Console.
+
+Mônica: Ele só mostrará a lista de números sorteados no Console quando acertamos o número secreto ou começarmos um novo jogo.
+
+Guilherme: No caso, o número correto era 4 e, quando eu acertei e cliquei no botão "Novo jogo", a lista com o número sorteado aparece no console. Percebemos que ele sorteou o número 4 e depois o número 1.
+
+Como o número 4 saiu no índice 0, significa que o número sorteado só pode ser de 1 a 3. Sendo assim, vamos fazer novos sorteios até adivinhar todos os números. Quando isso acontece, recebemos um erro, pois não há mais números para sortear além desses.
+
+Lembrando, pessoal, usamos uma recursão, chamando a função gerarNumeroAleatorio() dentro da própria função. Como o nosso projeto é pequeno, não tem problema, mas se for um projeto grande, precisamos ter muito cuidado para não chamarmos uma função de verificação para um banco de dados grande, que precisa repetir a verificação até acertar um único número.
+
+Mesmo com o nosso banco de dados sendo pequeno, chegamos a um erro, mas estamos felizes com ele. Isso porque sabemos como resolver e vamos te mostrar como no próximo vídeo.
+
+### Aula 4 - Limitando os números sorteados - Vídeo 3
+
+Transcrição  
+Guilherme: Estamos com um erro que informa que atingimos o tamanho máximo de chamadas para a função Math.random(), porque temos todos os números já sorteados na nossa lista.
+
+Mônica: Havíamos limitado a quatro números e todos eles foram sorteados.
+
+Guilherme: Esse foi o problema. Instruímos o programa a não sortear os números que já haviam saído. O sorteio dos números aconteceu na ordem: 4, 1, 3 e 2, sendo que o número 4 ficou no índice 0 o número 2 ficou no índice 3. Todos foram sorteados e agora não temos mais possibilidade de sortear um número.
+
+Não pensamos em uma maneira de limpar nossa lista caso ela atinja o número máximo de elementos, então agora, criaremos uma variável para ter a quantidade de elementos na lista. Ainda na função gerarNumeroAleatorio(), abaixo do let numeroEscolhido, escreveremos let quantidadeDeElementosNaLista = listaNumerosSorteados.length;.
+
+Agora que já sabemos a quantidade de elementos que essa lista tem, podemos codar uma verificação se o número máximo foi atingido. Para isso, mudaremos o multiplicador em numeroEscolhido para 3: (Math.random() * 3 + 1).
+
+Em seguida, abaixo da quantidadeDeElementosNaLista, escreveremos uma condicional: se a quantidadeDeElementosNaLista for 3, iremos limpar essa lista.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * 3 + 1);
+    let quantidadeDeElementosNalista = listaDeNumerosSorteados.length;
+
+    if (quantidadeDeElementosNaLista == 3) {
+        listaDeNumerosSorteados = [];
+        }
+    //código omitido
+}
+```
+
+Agora, nosso jogo tem um pequeno desafio, pois temos somente 3 números que podem ser sorteados. Vamos começar um novo jogo, mas a resposta já aparece no Console.
+
+Mônica: Lembrando que precisamos clicar no botão "Novo jogo" para ele sortear um novo número aleatório.
+
+Guilherme: O primeiro número sorteado foi o 2, depois o 1 e por último o 3. Quando acertamos o último número da lista, que é o 3, e clicamos no botão "Novo jogo", o comportamento esperado é o esvaziamento da lista, e é isso que acontece.
+
+Mônica: Ele esvaziou a lista e adicionou um novo número sorteado ao índice 0.
+
+Guilherme: O cuidado que precisamos ter no nosso código é em relação ao limite do número sorteado. O mesmo valor que usarmos para multiplicar o Math.random(), usaremos na condicional que iguala a quantidadeDeElementosNaLista.
+
+Mônica: Para não precisarmos mudar sempre em dois locais, podemos torná-lo dinâmico, criando uma nova variável para isso. Faremos isso no começo do código, abaixo da variável listaDeNumerosSorteados.
+
+Guilherme: Podemos chamar essa variável de numeroLimite e deixaremos o valor dessa variável como 10.
+
+```JavaScript
+let listaDeNumeros Sorteados = [];
+let numeroLimite = 10;
+let numeroSecreto = gerarNumeroAleatorio();
+let tentativas = 1; I
+//código omitido
+```
+
+Mônica: Voltaremos para função gerarNumeroAleatorio e, na linha onde criamos a variável numeroEscolhido, trocaremos o multiplicador por numeroLimite. Também faremos a substituição na condicional que criamos.
+
+```JavaScript
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
+    let quantidadeDeElementosNalista = listaDeNumerosSorteados.length;
+    if (quantidadeDeElementosNaLista == numeroLimite) {
+        listaDeNumerosSorteados = [];
+        }
+    //código omitido
+}
+```
+
+Guilherme: Dessa forma, temos o sorteio de 1 a 10 e não permitimos que os números que já foram sorteados apareçam novamente, a menos que todos os números já tenham sido sorteados.
+
+### Aula 4 - Manipulação de Listas em JavaScript
+
+Você foi encarregado (a) de criar um pequeno programa para gerenciar uma lista de compras. O programa deve permitir que o usuário adicione itens à lista e, em seguida, exiba o conteúdo da lista na tela. Além disso, a pessoa usuária deve ser capaz de ver um item específico da lista, digitando o índice do item desejado.
+
+```JavaScript
+let listaCompras = [];
+
+listaCompras.push("Maçã");
+listaCompras.push("Arroz");
+listaCompras.push("Leite");
+listaCompras.push("Pão");
+listaCompras.push("Carne");
+```
+
+Sabendo disso, analise as alternativas abaixo e marque apenas as sentenças verdadeiras:
+
+listaCompras.lengthexibe a quantidade de elementos de uma lista.
+
+Isso aí! A propriedade length é usada para obter a quantidade de elementos em uma lista/array em JavaScript.
+
+O código listaCompras[3] vai exibir o item Pão.
+
+Isso aí! O código listaCompras[3] na verdade vai exibir o item "Pão", já que índice 0 é Maçã, 1 é Arroz, 2 é Leite e o 3 é Pão.
+
+### Aula 4 - Para saber mais: vamos ler mais sobre listas?
+
+Uma array no JavaScript é uma estrutura de dados que permite armazenar e organizar vários valores em uma única variável. Os valores em uma array podem ser de qualquer tipo de dado, como números, strings, objetos, outras arrays e assim por diante. As arrays em JavaScript são indexadas, o que significa que cada valor dentro dela é associado a um índice numérico, começando geralmente do índice 0.
+
+Criando uma array  
+Você pode criar uma array em JavaScript declarando uma variável e atribuindo-lhe valores entre colchetes [].
+
+> let frutas = ["Maçã", "Uva", "Laranja"];
+
+Acessando os valores
+Os elementos de uma array são acessados usando índices numéricos, que começam em 0.
+
+Índice - Elemento
+0 - "Maçã"
+1 - "Uva"
+2 - "Laranja"
+console.log(frutas[0]); // Saída: "Maçã"
+console.log(frutas[2]); // Saída: "Laranja"
+
+Adicionando novos elementos
+Para adicionar um elemento ao final da array, você pode usar o método push.
+
+> frutas.push("Morango");  
+console.log(frutas); // Saída: ["Maçã", "Uva", "Laranja", "Morango"]
+
+Removendo o último elemento
+Para remover o último elemento, você pode usar o método pop.
+
+> frutas.pop();  
+console.log(frutas); // Saída: ["Maçã", "Uva", "Laranja"]
+
+Quais linguagens de programação usam arrays?
+Aqui está uma lista de algumas linguagens de programação que utilizam arrays:
+
+JavaScript
+Python
+Java
+C++
+C#
+Ruby
+PHP
+Swift
+Kotlin
+Go
+
+Outras linguagens também suportam o uso de arrays ou estruturas de dados semelhantes para armazenar coleções de valores. Aprender sobre arrays é importante porque elas desempenham um papel fundamental no desenvolvimento de aplicações de software.
+
+As listas ou Arrays fornecem uma maneira eficiente de armazenar e acessar conjuntos de dados, permitindo que os programadores organizem informações de forma lógica e manipulem esses dados de maneira eficaz.
+
+Tendo o conhecimento de como trabalhar com arrays, é possível criar algoritmos mais poderosos, resolver problemas de programação de forma mais eficiente e criar aplicações mais dinâmicas e interativas.
+
+### Aula 4 - Desafio: hora da prática
+
+Saber como usar listas é um dos conceitos fundamentais da programação e do desenvolvimento de software.
+
+Pensando nisso, criamos uma lista de atividades (não obrigatórias) focada em prática para melhorar ainda mais sua experiência de aprendizagem. Bora praticar então?
+
+Desafios
+
+1. Crie uma lista vazia, com o nome listaGenerica.
+2. Crie uma lista de linguagens de programação chamada linguagensDeProgramacao com os seguintes elementos: 'JavaScript','C','C++', 'Kotlin' e 'Python'.
+3. Adicione à lista linguagensDeProgramacao os seguintes elementos: 'Java', 'Ruby' e 'GoLang'.
+4. Crie uma lista com 3 nomes e exiba no console apenas o primeiro elemento.
+5. Crie uma lista com 3 nomes e exiba no console apenas o segundo elemento.
+6. Crie uma lista com 3 nomes e exiba no console apenas o último elemento.
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+Opinião do instrutor
+
+Para te ajudar a verificar seus códigos, está disponível uma possível resolução dos desafios [neste link](https://github.com/alura-cursos/js-curso-2/tree/desafio_4) para você construir ou validar suas soluções.
+
+Boa sorte nos estudos!
+
+### Aula 4 - O que aprendemos?
+
+Nesta aula:
+
+- Aprendemos a melhorar o código existente, tornando-o mais eficiente e legível. Neste caso, refatoramos a função que realiza o sorteio do número secreto, tornando-a mais robusta e garantindo que o número sorteado não seja repetido;
+
+Na próxima aula:  
+Você terá a chance de colocar todo o conhecimento que adquiriu em prática resolvendo um desafio. Até lá, boa sorte!
+
+## Aula 5 - 
+
+### Aula 5 -  - Vídeo 1
+### Aula 5 -  - Vídeo 2
+### Aula 5 -  - Vídeo 3
+### Aula 5 -  - Vídeo 4
+### Aula 5 -  - Vídeo 5
+### Aula 5 -  - Vídeo 6
+### Aula 5 -  - Vídeo 7
