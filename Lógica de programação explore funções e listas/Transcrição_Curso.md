@@ -1619,12 +1619,361 @@ Nesta aula:
 Na próxima aula:  
 Você terá a chance de colocar todo o conhecimento que adquiriu em prática resolvendo um desafio. Até lá, boa sorte!
 
-## Aula 5 - 
+## Aula 5 - Publicando o Projeto
 
-### Aula 5 -  - Vídeo 1
-### Aula 5 -  - Vídeo 2
-### Aula 5 -  - Vídeo 3
-### Aula 5 -  - Vídeo 4
-### Aula 5 -  - Vídeo 5
-### Aula 5 -  - Vídeo 6
-### Aula 5 -  - Vídeo 7
+### Aula 5 - Speech - Vídeo 1
+
+Transcrição  
+Mônica: Já temos um jogo com todas as funcionalidades necessárias, mas podemos realizar uma atividade bônus: fazer com que o computador leia tudo que está escrito, assim, acompanharemos melhor o jogo.
+
+Guilherme: É importante destacar o incrível trabalho realizado pelo time de Front-end. Na linha 7 há um script, script src, contendo o seguinte código:
+
+`<script src="https://code.responsivevoice.org/responsivevoice. js"></script>`
+
+Ele traz alguns códigos em Javascript para o nosso projeto que possuem a capacidade de falar. Portanto, escrevemos um texto e ele conseguirá narrá-lo. Vamos fazer isso?
+
+Mônica: Vale lembrar que isto não é nativo do Javascript. Se não houvesse a importação através do script, o recurso não funcionará no projeto.
+
+Guilherme: Exatamente!! Um detalhe importante: se você quiser conhecer mais sobre ele, o nome é Responsive Voice. Basta buscar no navegador e acessar a documentação, ResponsiveVoice Text To Speach, com orientações de uso. Não é necessário criar uma conta para utilizá-lo.
+
+Então, Moni, em que momento faz sentido inserir esse código de Javascript para funcionar na nossa aplicação?
+
+Mônica: Sempre que exibirmos o texto na tela, pois assim, o código carrega a escrita e também fala.
+
+Guilherme: Isso! Até esse texto que estamos utilizando:
+
+```Javascript
+let numerolimite = 10;
+let numeroSecreto = gerarNumeroAleatorio();
+let tentativas = 1;
+
+function exibirTextoNaTela (tag, texto)
+    { let campo = document.querySelector(tag); 
+        campo.innerHTML = texto;
+}
+```
+
+Podemos usá-lo para falar.
+
+Mônica: Estamos nos referindo ao parâmetro texto da função exibirTextoNaTela.
+
+Guilherme: É necessário ter muita atenção, principalmente com relação à diferença entre letras maiúsculas e minúsculas, ok? Vamos escrever responseVoice.speak, sendo que .speak, que quer dizer "fale".
+
+Mônica: Uma correção necessária é que não é Responsive Voice, mas, sim ResponsiveVoice, assim como o nome da documentação.
+
+Guilherme: Certo! responsiveVoice.speak():
+
+```Javascript
+function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag)
+        campo.innerHTML = texto;
+        responsiveVoice.speak(texto)
+```
+
+Dentro de responsiveVoice.speak(), vamos indicar o que queremos. Temos que seguir alguns parâmetros. O primeiro parâmetro é o texto. E de onde vem este texto que vamos falar? Vem de 'Jogo do número secreto', 'Escolha um número entre 1 e 10':
+
+```Javascript
+}
+function exibirMensagemInicial() {
+    exibirTextoNaTela ('h1', 'Jogo do número secreto');
+        exibirTextoNaTela('p', 'Escolha um número entre 1 e 10');
+}
+```
+
+No segundo parâmetro, precisaremos especificar qual idioma estamos utilizando. Vamos checar na documentação os idiomas disponíveis. São várias opções e escolheremos: "Brazilian Portuguese Female".
+
+Mônica: É uma mulher que vai falar em português brasileiro.
+
+Guilherme: Infelizmente não consigo copiar. Vou precisar escrever manualmente. Por favor, Moni, você me ajudaria nisso? Vamos lá!:
+
+```Javascript
+// código omitido. 
+function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag)
+        campo.innerHTML = texto;
+        responsiveVoice.speak(texto, 'Brazilian Portuguese Female', )
+
+}
+function exibirMensagemInicial() {
+    exibirTextoNaTela ('h1', 'Jogo do número secreto');
+        exibirTextoNaTela('p', 'Escolha um número entre 1 e 10');
+}
+```
+
+Ao final, conseguiremos alterar uma propriedade, que é a velocidade da fala. Para isso, vamos escrever entre chaves {rate:} e definir um valor. Vamos escolher um valor que já testamos: 1.2. Ao final das chave e parênteses, adicionaremos ponto e vírgula:
+
+```Javascript
+// código omitido. 
+function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag)
+        campo.innerHTML = texto;
+        responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
+}
+function exibirMensagemInicial() {
+    exibirTextoNaTela ('h1', 'Jogo do número secreto');
+        exibirTextoNaTela('p', 'Escolha um número entre 1 e 10');
+}
+```
+
+Está correto assim, Moni?
+
+Mônica: Sim! agora vamos testar?
+
+Guilherme: Vamos atualizar a página. Feito isso, apareceu uma "caixinha". Ela indica que podemos habilitar o som ou não. Apertando "Deny" (Recusar), não permitiremos a fala. Por outro lado, clicando em "Allow" (Permitir), permitiremos que o programa fale.
+
+Vamos aumentar o som do programa. Atenção! Pois o volume pode ficar alto! Vamos lá! Em 3, 2, 1:
+
+Voz do programa: Escolha um número entre 1 e 2.
+
+Mônica: Que tecnologia de primeira!
+
+Guilherme: Isso é tecnologia! No campo "Escolha um número entre 1 e 10", vamos inserir o número 4 e apertar o botão "Chutar".
+
+Voz do programa: O número secreto é menor.
+
+Guilherme: O programa disse que o número secreto é menor. Agora, vamos passar o número 3.
+
+Voz do programa: Acertou.
+
+Guilherme: Agora temos nosso jogo que é capaz de dizer o que está ocorrendo na tela!
+
+### Aula 5 - GitHub - Vídeo 2
+
+Transcrição  
+Guilherme: Tudo que é bom e belo necessita ser mostrado, certo? Nós precisamos compartilhar as coisas incríveis que fazemos com outras pessoas. E mais, você já imaginou, Moni, se as pessoas pudessem realmente jogar esse jogo que acabamos de desenvolver pelo celular?
+
+Mônica: Seria legal!
+
+Guilherme: Acessar uma página, um endereço, e conseguir jogar. É sobre isso que estamos falando e é isso que vamos fazer agora!
+
+Mônica: Uma conquista boa é uma conquista compartilhada!
+
+Guilherme: Que frase bonita! Você sabe de quem é?
+
+Mônica: Não.
+
+Guilherme: A ideia, portanto, é pegar o jogo que criamos e que funciona no nosso computador e deixar disponível para que qualquer pessoa, em qualquer lugar do mundo, acesse um determinado endereço e consiga jogar o que nós desenvolvemos.
+
+Para isso, selecionaremos todo o código que está no Visual Studio Code. Quando digo todo, é tudo mesmo: o img; o app.js; o index.html; e o style.css. Vamos pegar tudo isso e colocar num lugar que chamamos de cloud (nuvem). Disponibilizar em um servidor que as pessoas possam acessar.
+
+Um dos locais de cloud onde podemos hospedar nosso código é o GitHub. Sempre que acessamos o GitHub, e logamos na nossa conta, aparece a nossa foto de perfil e nome.
+
+Caso você não tenha conta no GitHub e queira criar, basta acessar "Sign up" no canto superior direito. Em seguida, aparecerá uma janela de boas-vindas com um campo em que preencheremos nosso e-mail. É importante fornecer um e-mail válido pois haverá uma verificação de segurança.
+
+Após inserir o e-mail, basta escolher um nome de usuário. Você receberá neste e-mail uma notificação para confirmar que é você mesmo. Lembre-se, o GitHub é gratuito. Qualquer pessoa pode usar. Não precisa fornecer número de cartão de crédito ou informações semelhantes.
+
+Com a conta criada e confirmada, você estará com tudo pronto para utilizar o GitHub!
+
+Para conseguirmos, de fato, disponibilizar esse projeto que desenvolvemos no Visual Studio Code, criaremos um repositório no GitHub.
+
+O repositório é um local em que armazenamos nossos projetos.
+
+Mônica: No canto superior direito da tela, localizaremos nosso avatar (com a nossa foto). Ao selecioná-lo, aparecerá uma lista de opções. Acessaremos a terceira: "Your repositories" (Seus repositórios). Na guia de repositórios, vamos selecionar "New".
+
+Guilherme: Caso você já esteja logado no GitHub, pode abrir o navegador, pesquisar repo.new e apertar "Enter", isso te levará diretamente à página de criação de repositório.
+
+Estamos na página de criação de repositórios, "Create a new repository". Qual é o nome desse repositório? Precisamos preencher o campo "Repository name" com ele.
+
+Mônica: O nome é "Jogo do número secreto". Acho que não é possível adicionar um nome tão grande.
+
+Guilherme: Certo! O nome será "jogo-do-numero-secreto".
+
+Vale lembrar que não podemos ter dois projetos com nomes parecidos em nosso mesmo repositório.
+
+Não nos preocuparemos com nenhuma das outras configurações. Basta apertar "Create repository" ao final da página.
+
+O próximo passo é copiar todo o código que já fizemos e colá-lo no GitHub. Podemos fazer isso nesta tela mesmo?
+
+Mônica: Sim. Podemos acessar o link "uploading an existing file". Na outra tela, encontraremos a opção para arrastar ou escolher arquivos. Como temos uma pasta, além de arquivos, é mais fácil arrastar.
+
+Guilherme: Para isso, temos que abrir a pasta do computador onde está o projeto, selecionar os arquivos e arrastá-los.
+
+Mônica: Com isso, todos os arquivos serão carregados, inclusive as imagens.
+
+Guilherme: Em seguida, apertaremos o botão verde "Commit Changes", que serve para inserir de fato essas alterações.
+
+Mônica: Até existe uma opção de descrever o que está acontecendo. Mas, automaticamente, o GitHub informa que estamos colocando arquivos através de um upload.
+
+Guilherme: Apertado o botão de "Commit Changes", nosso projeto foi carregado. Agora, como podemos realmente disponibilizar esse projeto que nós criamos, de modo que qualquer pessoa possa acessá-lo a partir de um endereço?
+
+Utilizaremos uma aplicação chamada vercel.com. Ela aponta para um dos nossos repositórios do GitHub e realiza im Deploy (desdobramento), que é justamente a ação de disponibilizar o projeto para as pessoas.
+
+Mônica: Vamos apertar o botão "Start Deploying", que está no centro da página. Em seguida, aparecerão algumas opções: "Continue with GitHub"; "Continue with GitLab"; e "Continue with Bitbucket". Escolheremos a primeira para importarmos um repositório do GitHub.
+
+Guilherme: Quando abrimos o GitHub, ele mostra todos os repositórios existentes. No caso, queremos disponibilizar para as pessoas o repositório do Jogo do Número Secreto. Então, localizaremos "jogo-do-numero-secreto" e apertaremos "Import".
+
+Um detalhe importante é que podemos alterar esse nome, pensando que será o nome pelo qual as pessoas vão poder acessar a aplicação. Vamos substituí-lo por "jogo" e apertar "Deploy". Espero que funcione! Depois analisamos as demais etapas.
+
+Ele está fazendo a configuração e o Deploy da aplicação.
+
+Mônica: Este é o momento de deixar o computador, levantar, tomar uma água e voltar quando estiver pronto!
+
+Guilherme: O processo foi bem rápido! E ele mostrou uma mensagem na tela: "Parabéns, você fez o seu Deploy na Vercel". Quer dizer, caso você esteja fazendo o deploy pela primeira vez, parabéns, você está colocando o seu primeiro projeto no ar para as pessoas poderem acessar.
+
+Mônica: Ele vai fazer uma prévia do nosso site. Para abri-lo e conseguir ter acesso ao link que será compartilhado, é só clicar na prévia.
+
+Guilherme: Clicamos na prévia e apareceu a verificação, perguntando se desejamos colocar o áudio do jogo. Vamos habilitar o áudio apertando "Allow".
+
+No campo "Escolha um número entre 1 e 10", passaremos o número 5 e apertaremos "Chutar".
+
+Voz do programa: O número secreto é menor.
+
+Está funcionando corretamente! O número é menor. Agora vamos passar o número 2.
+
+Voz do programa: O número secreto é menor.
+
+Por fim, vamos passar o número 1.
+
+Voz do programa: Acertou! Você descobriu o número secreto.
+
+Conseguimos descobrir o número secreto com 4 tentativas. Nosso jogo está funcionando corretamente!
+
+Espero que você tenha gostado. Compartilhe esse código com outras pessoas. Abra no celular e teste. Vai funcionar!
+
+### Aula 5 - Para saber mais: criando conta no GitHub e Vercel (passo a passo)
+
+Criando a conta no GitHub  
+O GitHub é uma plataforma de hospedagem de código-fonte e colaboração amplamente utilizada por pessoas desenvolvedoras de software para gerenciar e compartilhar projetos. Ele oferece recursos de controle de versão, permitindo que equipes de programadores trabalhem juntas de maneira eficiente, realizando alterações, revisões e resolvendo conflitos de código de forma colaborativa. É como se fosse a “rede social” de devs! 😀
+
+Além disso, o GitHub facilita o rastreamento de problemas e solicitações de pull, tornando o processo de desenvolvimento mais transparente e organizado.
+
+O primeiro passo para você criar uma conta no GitHub é acessar o site do [GitHub através deste link](https://github.com/) e clicar em Sign up.
+
+![alt text](image-1.png)
+
+Print da página inicial do GitHub com um campo de e-mail na parte inferior esquerda; no canto superior direito no topo da página há dois botões um de cadastro Sign up e o outro de login Sign in.
+
+Na sequência, você verá uma página como essa:
+![alt text](image-2.png)
+
+Print da página de cadastro do GitHub onde há um campo de preenchimento de email no centro com um botão continue do lado direito.
+
+Faça o seguinte:
+
+Digite o seu e-mail;
+Crie uma senha;
+Digite um nome de usuário;
+
+Se desejar receber atualizações e anúncios de produtos por e-mail, digite "y" para sim ou "n" para não;
+
+Clica no botão Continue.  
+Após preencher suas informações pessoais e clicar em Continue, clique em Create Account e você receberá uma confirmação de cadastro por email. Depois de validar sua conta é só utilizar os serviços do GitHub :)
+
+**Criando a conta na Vercel**  
+A Vercel, por sua vez, é uma plataforma de hospedagem e implantação de aplicativos da web moderna, especializada em oferecer experiências de carregamento rápido e desempenho otimizado. Ela é frequentemente utilizada para hospedar sites estáticos e aplicações de página única (ou SPAs), aproveitando técnicas avançadas e eficiente aos usuários finais.
+
+A Vercel simplifica a implantação contínua e a escalabilidade automática, permitindo que os (as) desenvolvedores (as) concentrem-se na criação de excelentes experiências digitais sem se preocuparem com a complexidade subjacente da infraestrutura.
+
+Primeiro passo para você criar uma conta no Vercel é acessar o [site do Vercel através deste link](https://vercel.com/) e clicar em Sign up.
+
+![alt text](image-3.png)
+
+Print da página inicial da Vercel onde há um botão de Login e outro de cadastro Sign Up ambos no canto superior direito.
+
+Após clicar em Sing up você verá uma página como essa:  
+![alt text](image-4.png)
+
+Print d página de cadastro do Vercel com três botões no lado direito da página, com a primeira opção de iniciar com GitHub, segunda opção com GitLab e terceira opção com Bitbucket.
+
+Então, clique em continuar com GitHub e pronto, sua conta foi criada! Agora é só utilizar os serviços da Vercel :)
+
+### Aula 5 - Projeto final do curso
+
+Aqui você pode baixar o [zip da aula 05](https://github.com/alura-cursos/js-curso-2/archive/refs/heads/aula_5.zip) ou acessar os [arquivos no Github](https://github.com/alura-cursos/js-curso-2/tree/aula_5)!
+
+### Aula 5 - Parabéns
+
+Chegou o momento de celebrar sua grande conquista!  
+![alt text](image-5.png)
+
+Neste curso de lógica, todas as barreiras foram vencidas e você mergulhou na programação. Você aprendeu como preparar o ambiente de desenvolvimento até a criação de um jogo completo com diferentes interações.
+
+E o melhor de tudo é que agora você faz parte da comunidade de pessoas desenvolvedoras que têm acesso a um vasto ecossistema de ferramentas, documentação e suporte técnico.
+
+Nossa… Quanta coisa legal!
+
+"A coragem não é ausência do medo; é a persistência apesar do medo.." (Desconhecido)
+
+Agora, dê uma nota para o curso, faça download do seu certificado e comemore bastante essa conquista.
+
+Guilherme Lima
+Monica Hillman
+
+### Aula 5 - Carreira em programação - Vídeo 3
+
+Olá! Essa aula foi super legal, né? Nela, o Fabrício, a Etianne e o Rafael falaram sobre a carreira em programação, desde o início até o nível sênior. Eles deram dicas importantes para quem está começando, como a importância de ter foco, estudar com consistência e construir um bom portfólio.
+
+Eles também falaram sobre a importância da lógica de programação, que é a base para qualquer linguagem de programação. E, por fim, discutiram sobre a carreira em Y, que permite que você siga o caminho técnico ou de gestão.
+
+Este vídeo é oferecido pela FIAP, a faculdade do ecossistema da Alura.
+
+Quer conhecer mais sobre a FIAP, cursos e graduações relacionadas à temática deste vídeo? Basta clicar nos links a seguir:
+
+[FIAP](https://www.fiap.com.br/?utm_source=plataforma-alura&utm_content=%5BA-partir-do-zero-iniciante-em-programa%C3%A7%C3%A3o%5D&utm_campaign=connect-the-dots)
+[Graduação em Análise e Desenvolvimento de Sistemas](https://www.fiap.com.br/?utm_source=plataforma-alura&utm_content=%5BA-partir-do-zero-iniciante-em-programa%C3%A7%C3%A3o%5D&utm_campaign=connect-the-dots)
+[Graduação em Sistemas de Informação](https://www.fiap.com.br/online/graduacao/bacharelado/sistemas-de-informacao/?utm_source=plataforma-alura&utm_content=%5BA-partir-do-zero-iniciante-em-programa%C3%A7%C3%A3o%5D&utm_campaign=connect-the-dots)
+
+### Aula 5 - Conclusão - Vídeo 4
+
+Transcrição  
+Parabéns!! Chegamos ao final de mais um treinamento da Alura!!
+
+Mônica: Nessa formação, aprendemos conceitos essenciais para a nossa trajetória como pessoas desenvolvedoras.
+
+Guilherme: É importante lembrar que a vida de desenvolvimento de software - criando aplicações, sejam telas ou Back-end, escrevendo códigos em JavaScript, HTML, CSS e assim por diante - requer dedicação: muito tempo de estudo e esforço.
+
+Algumas coisas não vão funcionar, outras vão. Já aconteceu comigo de ir dormir e no outro dia, perceber a solução de algo que não estava funcionando.
+
+Mônica: Perdi a conta de quantas vezes eu sonhei com soluções.
+
+Guilherme: É isso mesmo. Faz parte do processo!
+
+Se você achou os dois primeiros cursos um pouco desafiadores, pensou "será que isso é para mim?" Minha dica pessoal para você é: não desista. Os primeiros passos realmente são mais complexos.
+
+Pode parecer confuso entender como as coisas estão acontecendo na tela, mas, não perca a motivação, não perca a vontade de continuar, porque nós também já passamos por esses momentos, seja na faculdade ou em trabalhos anteriores.
+
+Mônica: Sim, e ter pessoas ao nosso lado é essencial nesse processo. Nós temos uma comunidade gigante no Discord, onde existem grupos de estudos, eventos, lives, e muito mais. Participe!
+
+Guilherme: Além disso, não deixe de ajudar as pessoas no Fórum da Alura e Discord, assim como mencionado pela Moni.
+
+Também não se esqueça de avaliar o curso destacando o que você mais gostou. Nos encontramos nos próximos cursos! Boa sorte na sua carreira de desenvolvimento!!
+
+### Aula 5 - Referências
+
+1. [Lógica de Programação Crie seus primeiros programas usando Javascript e HTML](https://www.casadocodigo.com.br/products/livro-programacao?_pos=1&_sid=4661f8240&_ss=r)
+
+Este livro apresenta uma abordagem totalmente prática. Uma didática pensada no iniciante, com a qual os conceitos são apresentados com motivações práticas, através do surgimento da necessidade para depois mostrar a solução.
+
+2. [Lógica de programação com Portugol](https://www.casadocodigo.com.br/products/livro-portugol?_pos=2&_sid=4661f8240&_ss=r)
+
+Neste livro, Joice Mendes e Rafael Muniz apresentam todos os conceitos necessários para a criação da lógica de programação e dos algoritmos. Você vai aprimorar sua percepção lógica e aprender a aplicá-la na programação, cobrindo tópicos desde a sintaxe do Portugol, variáveis, comandos, estruturas condicionais, operadores relacionais e lógicos, estruturas de repetição, até vetores, matrizes e funções. O material é recheado com 85 exemplos de código, 55 exercícios de fixação com gabarito e um projeto prático ao longo do aprendizado. Todos os capítulos contam com um vídeo complementar disponibilizado na internet.
+
+3. Livro: ["Estruturas de Dados e Algoritmos com JavaScript"](https://www.google.com.br/books/edition/Estruturas_de_dados_e_algoritmos_com_Jav/0nWKDwAAQBAJ?hl=pt-BR&gbpv=1&dq=estrutura+de+dados+javascript&printsec=frontcover)
+
+Este livro aborda de forma detalhada as estruturas de dados e algoritmos mais comuns, fornecendo exemplos práticos em JavaScript.
+
+4.Site: [MDN Web Docs](https://developer.mozilla.org/pt-BR/)
+
+A documentação oficial da Mozilla Developer Network (MDN) é uma excelente fonte de informações sobre JavaScript. Lá você encontrará explicações detalhadas sobre a sintaxe, recursos da linguagem e exemplos de código.
+
+5. [Eloquent JavaScript 3rd edition (2018)](https://eloquentjavascript.net/)
+
+Este é um livro sobre JavaScript, programação e as maravilhas do mundo digital. Um guia essencial para toda a pessoa desenvolvedora web. Em inglês.
+
+6. [Algoritmos - Teoria e Prática, Thomas H. Cormen](https://books.google.com.br/books/about/Algoritmos_Teoria_e_Pr%C3%A1tica.html?id=6iA4LgEACAAJ&source=kp_book_description&redir_esc=y)
+
+Este livro apresenta um texto abrangente sobre o moderno estudo de algoritmos para computadores. É uma obra clássica, cuja primeira edição tornou-se amplamente adotada nas melhores universidades em todo o mundo, bem como padrão de referência para profissionais da área.
+
+7. [JavaScript: O Guia Definitivo](https://www.amazon.com.br/JavaScript-Guia-Definitivo-David-Flanagan/dp/856583719X/ref=sr_1_1?keywords=javascript&qid=1701835643&sr=8-1&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d)
+
+Referência completa para programadores, JavaScript: O guia definitivo fornece uma ampla descrição da linguagem JavaScript básica e das APIs JavaScript do lado do cliente definidas pelos navegadores Web. Recomendado para programadores experientes que desejam aprender a linguagem de programação da Web e para programadores JavaScript que desejam ampliar seus conhecimentos e dominar a linguagem, este é o guia do programador e manual de referência de JavaScript completo e definitivo.
+
+8. [HTML5 e CSS3 Domine a web do futuro](https://www.casadocodigo.com.br/products/livro-html-css?_pos=2&_sid=ee24eb627&_ss=r)
+
+Neste livro você irá aprender a criar páginas elegantes de forma simples! HTML e CSS, quando bem utilizados, podem ser o sucesso de um projeto e, com os novos recursos, muito do que antes era trabalhoso agora não é mais.
+
+Aprenda as melhores técnicas para escrever seu site por meio de exemplos práticos de funcionalidades úteis do cotidiano. Construa menus, aplique efeitos, estilize elementos visuais, melhore a semântica da sua página e muito mais!
+
+9. [Guia Front-End O caminho das pedras para ser um dev Front-End](https://www.casadocodigo.com.br/products/livro-guia-frontend?_pos=5&_sid=ee24eb627&_ss=r)
+
+Neste livro, Diego Eis nos guia sobre o mundo de desenvolvimento web por meio de uma análise franca e objetiva de diversas tecnologias adotadas, necessidades do mercado e postura profissional. Você não vai aprender diretamente sobre essas tecnologias aqui, mas certamente vai desenvolver um senso mais apurado e uma nova forma de olhar para elas, o que é fundamental nesse mundo de aprendizado não linear.
