@@ -729,8 +729,487 @@ Jacqueline: Pois é. Ele está com uma propriedade que nem nos permite clicar em
 
 Rodrigo: Então, no próximo vídeo, vamos implementar o último botão, e a última lógica, para fechar o nosso projeto de sorteador de número secreto.
 
-### Aula 1 -  - Vídeo 5
-### Aula 1 -  - Vídeo 6
-### Aula 1 -  - Vídeo 2
-### Aula 1 -  - Vídeo 2
-### Aula 1 -  - Vídeo 2
+### Aula 1 - Botão de reiniciar - Vídeo 5
+
+Transcrição  
+Rodrigo: O sorteador já está funcionando e gerando números, mas ainda precisamos implementar a última lógica do botão de reiniciar.
+
+Basicamente, essa lógica vai limpar os três inputs, substituindo o texto existente por um texto vazio, e retornar os números sorteados que ficam abaixo dos botões para o texto original, "nenhum até agora".
+
+Esse botão serve para resetar tudo para que o site volte ao estado original, como quando uma pessoa acessa pela primeira vez.
+
+Lógica do botão de reiniciar
+Jacqueline: Atualmente, o botão "Reiniciar" está cinza e não permite clique - ao contrário do botão "Sortear" que está azul e com ponteiro de mão que indica o clique.
+
+Para entender a diferença entre ambos, vamos conferir os botões no arquivo index.html:
+
+index.html:
+
+```HTML
+<div class="chute container__botoes">
+        <button onclick="sortear()" id="btn-sortear" class="container__botao">Sortear</button>
+        <button onclick="reiniciar()" id="btn-reiniciar" class="container__botao-desabilitado" >Reiniciar</button>
+</div>
+```
+
+Cada um tem seu id, que é único, mas também possuem classes diferentes. Um chama a classe container__botao e o outro tem a classe container__botao-desabilitado. Isso indica que algo diferente está acontecendo, pois se tivesse apenas container__botao, provavelmente eles estariam com a mesma configuração.
+
+Mas, onde conseguimos entender o que é container__botao e container__botao-desabilitado?
+
+Rodrigo: A propriedade class, que as tags HTML possuem, referencia trechos de código do CSS, que cuida da parte visual. Essas duas classes são nomes que colocamos para referenciar dois elementos que estão no arquivo CSS do projeto.
+
+Jacqueline: No arquivo CSS do nosso projeto, após container__botoes, podemos encontrar container__botao e container__botao-desabilitado:
+
+style.css:
+
+```CSS
+.container__botao {
+    border-radius: 16px;
+    background: #1875E8;
+    padding: 16px 24px;
+    font-size: 24px;
+    width: 100%;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+.container__botao-desabilitado {
+    border-radius: 16px;
+    background: #6f6f70;
+    padding: 16px 24px;
+    font-size: 24px;
+    width: 100%;
+    font-weight: 700;
+    border: none;
+    cursor: not-allowed;
+}
+```
+
+São duas classes com suas propriedades. O container__botao define um tamanho, um fundo azul, o tipo de cursor, que é um ponteiro, enquanto o container__botao-desabilitado define que ele tem um fundo cinza e que o cursor é aquele que não permite clicar.
+
+Antes de limpar os campos, precisamos alterar esse status do botão, deixá-lo como o botão que não está desabilitado, para que a pessoa possa clicar nele.
+
+Mudando a classe do botão
+Rodrigo: Essas duas classes referem-se a elementos visuais, por isso estão no código CSS. Mas não vamos mexer no CSS, pois ele já está configurado. O que vamos fazer é trocar a classe CSS no JavaScript.
+
+É possível manipular a classe de um elemento no JavaScript, removendo ou adicionando classes.
+
+E, ao fazer essa troca das classes, o próprio navegador já entende que vai ter que trocar o visual, porque trocou a classe - e no arquivo CSS, essa outra classe tem esse outro comportamento.
+
+Isso deve ser feito na função de sortear(). Após fazer o sorteio e colocar o elemento na página, precisamos trocar a classe CSS do botão de reiniciar para ele ficar com a mesma classe que tem no botão de sortear.
+
+Jacqueline: Portanto, depois de exibir o resultado, no resultado.innerHTML, vamos chamar alguém para trocar a classe do botão. Pode ser um método, por exemplo, alterarStatusBotao().
+
+Rodrigo: Vamos deixá-lo separado em uma função, para não deixar o código da função sortear() muito extenso.
+
+app.js:
+
+```JavaScript
+function sortear() {
+        // código omitido…
+
+        resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`;
+        alterarStatusBotao();
+}
+```
+
+Jacqueline: Então, ele vai exibir o resultado dos números sorteados e também alterar o status do botão para que a pessoa possa clicar e reiniciar, limpando os campos.
+
+Agora que declaramos alterarStatusBotao(), precisamos criar essa função. No final do nosso código, vamos criar uma nova função chamada alterarStatusBotao().
+
+Essa função não precisa de parâmetros, pois simplesmente vamos verificar o status e trocar.
+
+Para alterar o status do botão, precisamos primeiramente pegar o elemento. Qual o elemento que queremos trocar ou verificar? No HTML, vamos conferir qual é o id desse botão. Nesse caso, é btn-reiniciar.
+
+Devemos fazer um getElementById para recuperar esse botão, e verificar qual a classe que ele tem, se ele está com a classe container__botao-desabilitado ou container__botao.
+
+Basta fazer um let botao igual à document.getElementById() para pegar o btn-reiniciar.
+
+```JavaScript
+function alterarStatusBotao() {
+        let botao = document.getElementById('btn-reiniciar');
+}
+```
+
+Rodrigo: Até agora, criamos uma nova função e recuperamos o elemento. Porém, o elemento que queremos agora não é mais o input, nem o texto. É o botão reiniciar.
+
+Jacqueline: Em seguida, precisamos fazer uma verificação. Se ele estiver desabilitado, precisamos deixá-lo habilitado. Isso indica que vamos ter que usar um condicional, ou seja, um if/else. Se algo estiver acontecendo, faz isso aqui. Se não, vamos ter outra tratativa para esse botão.
+
+Como verificamos se o botao está com essa classe container__botao-desabilitado ou container__botao?
+
+Rodrigo: Um elemento HTML pode ter múltiplas classes - diferentemente do ID, que só pode ter um. Isto é, pode ter zero, uma ou cinquenta classes.
+
+Então, quando recuperamos o elemento com JavaScript e o guardamos numa variável, podemos acessar uma propriedade chamada classList dessa variável. O nome é bem intuitivo. Ele fornece a lista de classes desse elemento.
+
+E, a partir da classList, podemos chamar uma função para verificar se ela contém uma determinada classe.
+
+Jacqueline: Dentro dos parênteses do if, vamos colocar botao.classList.contains(). Se ele contiver aquela característica do botão desabilitado, precisamos fazer algo. Vamos copiar o nome dessa classe, container__botao-desabilitado e colar dentro do contains(), entre aspas simples.
+
+Se botao.classList contém o desabilitado, o que precisamos fazer? Remover essa classe e incluir aquela outra, que é a do botão comum.
+
+Para isso, no corpo do if, vamos chamar botao.classList novamente. No classList, podemos usar a função remove() para remover uma classe.
+
+Assim, informamos que se tiver a classe container__botao-desabilitado, devemos removê-la. Por isso, vamos copiar novamente o nome da classe container__botao-desabilitado para colocá-la dentro do remove().
+
+Após remover, devemos adicionar a classe do botão comum, pois senão informar um estilo, fica um botão padrão sem estilização. Em outras palavras, precisamos adicionar a classe container__botao para ele ficar igual ao botão do sortear.
+
+Na próxima linha, vamos escrever botao.classList.add(), passando o container__botao para ser adicionado.
+
+```JavaScript
+function alterarStatusBotao() {
+        let botao = document.getElementById('btn-reiniciar');
+        if (botao.classList.contains('container__botao-desabilitado')) {
+                botao.classList.remove('container__botao-desabilitado');
+                botao.classList.add('container__botao');
+        } else {
+        }
+}
+```
+
+Se tem botão desabilitado, tira o desabilitado e coloca o comum. E no else é justamente o oposto. Se não tem o desabilitado, significa que tem o habilitado.
+
+Então, devemos fazer um remove() no container__botao e o add() no container__botao-desabilitado. Será o processo inverso.
+
+```JavaScript
+function alterarStatusBotao() {
+        let botao = document.getElementById('btn-reiniciar');
+        if (botao.classList.contains('container__botao-desabilitado')) {
+                botao.classList.remove('container__botao-desabilitado');
+                botao.classList.add('container__botao');
+        } else {
+                botao.classList.remove('container__botao');
+                botao.classList.add('container__botao-desabilitado');
+        }
+}
+```
+
+Vamos testar se a programação vai funcionar? Vamos acessar o sorteador no navegador.
+
+Vamos definir a quantidade de números como 5, indo de 1 a 20 . Após clicar em "Sortear", ele nos dá a resposta e libera o botão "Reiniciar" para ser clicado.
+
+Porém, não acontece nada ao clicar no "Reiniciar", pois ainda não programamos seu comportamento. É preciso programar o que o reiniciar vai fazer. Mas a parte de alterar status, já foi bem-sucedida.
+
+Adicionando comportamento no botão de reiniciar
+Rodrigo: Então, fizemos esse algoritmo, que é chamado, na verdade, no botão de sortear. Depois que faz o sorteio, chama essa função que troca o status e libera o botão de reiniciar.
+
+Agora, vamos precisar de uma nova função, que é a função que está sendo chamada pelo botão de reiniciar.
+
+Jacqueline: O botão reiniciar, cujo id é btn-reiniciar, chama uma função chamada reiniciar(). Também devemos programá-la no JavaScript.
+
+No final do código, vou criar uma nova function chamada reiniciar(). E qual é o objetivo dela? Limpar todos os campos. Basta pegar o value de todos os campos e colocar esse valor como vazio.
+
+Portanto, podemos copiar todas as referências que fizemos aos campos de quantidade, de e ate. Por exemplo, vamos copiar o document.getElementById('ate').value, colá-lo três vezes dentro das chaves da nova função e substituir o nome do campo.
+
+Esses três campos devem receber vazio, isto é, sinal de igual e aspas simples vazias.
+
+```JavaScript
+function reiniciar() {
+        document.getElementById('quantidade').value = '';
+        document.getElementById('de').value = '';
+        document.getElementById('ate').value = '';
+}
+```
+
+Rodrigo: Para limpar o valor que foi digitado dentro de um input no HTML, é só atribuir uma string vazia ao value dele.
+
+Ele tinha um valor que tinha sido digitado pela pessoa. Quando cair nessa função, ele vai pegar o valor e substituir por uma string vazia. Desse modo, a página vai ficar limpa.
+
+Jacqueline: Além disso, também precisamos redefinir o resultado. Para isso, faremos documento.getElementById('resultado'), passando innerHTML em vez de value.
+
+Ele vai receber aquele texto original que tinha no HTML, que é o "Números sorteados: nenhum até agora". Devemos copiar esse trecho da tag `<label>` do texto__paragrago e colá-lo após o sinal de igual.
+
+Por fim, precisamos chamar nosso método para alterar o status do botão. Uma vez que reiniciamos, o botão vai ficar inativo de novo, porque já vai estar tudo limpo.
+
+Dentro do reiniciar(), também vamos chamar o alteraStatusBotao().
+
+```JavaScript
+function reiniciar() {
+        document.getElementById('quantidade').value = '';
+        document.getElementById('de').value = '';
+        document.getElementById('ate').value = '';
+        document.getElementById('resultado').innerHTML = '<label class="texto__paragrafo">Números sorteados: nenhum até agora</label>';
+        alterarStatusBotao();
+}
+```
+
+Rodrigo: Até por isso que foi interessante colocar numa função essa lógica de alterar o status. Senão, teríamos que duplicar aquele código, tanto na função de sortear, quanto na de reiniciar.
+
+Jacqueline: Exatamente. Vamos agora fazer o sorteio. Novamente, queremos sortear 5 números, de 1 a 20. Após clicar em "Sortear", o botão de reiniciar ficou ativo.
+
+Ao reiniciar, os três campos ficaram limpos, o label ficou como "nenhum até agora" e o botão de reiniciar tornou a ficar inativo, porque não faz sentido reiniciar se ele está todo limpo.
+
+Rodrigo: Conseguimos finalizar o nosso projeto e implementar todas as funcionalidades!
+
+Próximos passos  
+Rodrigo: O objetivo dessa aula extra que gravamos posteriormente é reforçar conhecimentos de algoritmo, lógica, recuperação de elementos na página, adição de novas informações na página e a lógica de reiniciar a partir do projeto do sorteio de números.
+
+Após concluir os dois cursos da formação e mais essa aula extra, as pessoas vão ter uma base mais sólida. E a partir da aula 2, será mais fácil implementar individualmente os desafios que vamos propor.
+
+Nessa aula, fizemos a resolução juntos, mas, nas próximas, vamos apresentar um desafio e a ideia é que você tente fazê-lo sozinho(a), usando esses conhecimentos. Se tiver alguma dificuldade, você pode voltar para essa aula para reforçar os conhecimentos dos cursos anteriores.
+
+Jacqueline: Agora vamos partir para os desafios!
+
+#### Aula 1 - Faça como eu fiz: alterando o status do botão
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para alterar o status do botão Reiniciar.
+
+Já implementou o código necessário para alterar o status do botão “Reiniciar”? Se tiver alguma dúvida, basta clicar em Opinião do instrutor.
+
+Ver opinião do instrutor
+Opinião do instrutor
+
+Primeiramente, você precisará criar uma função com o nome alterarStatusBotao, que será chamada ao final da função sortear():
+
+```JavaScript
+function alterarStatusBotao() {
+
+}
+```
+
+Agora, dentro do bloco, será necessário declarar uma variável que irá corresponder ao botão “reiniciar”.
+
+> let botao = document.getElementById('btn-reiniciar');
+
+Feito isso, precisaremos criar um bloco if/else, que irá verificar qual a classe que está presente no elemento. Se estiver desabilitado, precisaremos remover e incluir a classe comum do botão. Caso contrário, removeremos a classe de botão comum e incluiremos a de desabilitado:
+
+Dentro do bloco if, teremos o seguinte código:
+
+```JavaScript
+ if (botao.classList.contains('container__botao-desabilitado')) {
+    botao.classList.remove('container__botao-desabilitado');
+    botao.classList.add('container__botao');
+  } 
+```
+
+Por fim, dentro do bloco else, você precisa desfazer o que foi feito no bloco if:
+
+```JavaScript
+else {
+    botao.classList.remove('container__botao');
+    botao.classList.add('container__botao-desabilitado');
+  }   
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se tudo está funcionando conforme o esperado.
+
+Confira o código final do desafio:
+
+```JavaScript
+function alteraStatusBotao() {
+  let botao = document.getElementById('btn-reiniciar');
+  if (botao.classList.contains('container__botao-desabilitado')) {
+    botao.classList.remove('container__botao-desabilitado');
+    botao.classList.add('container__botao');
+  } else {
+    botao.classList.remove('container__botao');
+    botao.classList.add('container__botao-desabilitado');
+  }   
+}
+```
+
+#### Aula 1 - Programando a função reiniciar()
+
+Suponha que você esteja trabalhando em um sistema de vendas, no qual o usuário informa o total de itens e o valor unitário. Com base em algumas regras, o sistema aplica um desconto de 5% sobre o valor total.
+
+As regras são as seguintes:
+
+Inclusão de 10 ou mais itens; e
+Valor unitário igual ou superior a R$ 100,00.
+O valor deverá ser exibido num alert e depois a função reiniciar() deverá ser chamada.
+
+Os seguintes códigos foram escritos para implementar essa funcionalidade e a funcionalidade de reiniciar os valores:
+
+```Javascript
+function calcular() {
+  let quantidade = parseInt(document.getElementById('quantidade').value);
+  let valor = parseFloat(document.getElementById('valor').value);
+  let total = quantidade * valor;
+  if (quantidade >= 10 || valor >= 100) {
+    total = total - (total / 100 * 5);
+  }
+  alert(`Valor total: ${total} `);
+}
+function reiniciar() {
+  quantidade.value = '';
+  valor.value = '';
+}
+```
+
+Entretanto, os campos não estão sendo limpos após o cálculo do valor total.
+
+Escolha TODAS as alternativas que indicam os problemas de lógica do código anterior:
+
+Alternativa correta  
+Necessário ajustar a função reiniciar(), pois as variáveis quantidade e valor foram declaradas dentro da função calcular().
+
+Como a função reiniciar() é uma função distinta, só poderíamos aproveitar a variável caso ela tivesse sido declarada globalmente, sem o uso do parseInt e parseFloat. Sendo assim, é necessário modificar a função reiniciar() para o seguinte código:
+
+```Javascript
+function reiniciar() {
+  document.getElementById('quantidade').value = '';
+  document.getElementById('valor').value = '';
+}
+```
+
+Uma outra alternativa seria declarar as variáveis globalmente, onde o código completo ficaria da seguinte forma:
+
+```Javascript
+let quantidade = document.getElementById('quantidade');
+let valor = document.getElementById('valor');
+
+function calcular() {
+  let total = parseInt(quantidade.value) * parseFloat(valor.value);
+  if (quantidade.value >= 10 || valor.value >= 100) {
+    total = total - (total / 100 * 5);
+  }
+  alert(`Valor total: ${total} `);
+  reiniciar();
+}
+function reiniciar() {
+  quantidade.value = '';
+  valor.value = '';
+}
+```
+
+Alternativa correta
+A função reiniciar() não está sendo chamada após a exibição do alert.
+
+Para que o campos campos sejam limpos imediatamente após a exibição do valor total, é necessário chamar a função reiniciar:
+
+> alert(`Valor total: ${total} `);  
+reiniciar();
+
+#### Aula 1 - Mão na massa: proteção na entrada de valores
+
+Ao efetuar mais testes em nossa aplicação Sorteador de Números, você observará que está sendo permitido colocar um valor no campo “Do número” maior que o valor informado no campo “Até o número”, o que não é recomendável. O ideal é emitir um alerta para que o usuário reveja se inseriu os dados corretamente.
+
+Agora é a sua vez de colocar a mão na massa! Implemente uma proteção dentro da função sortear para que esse alerta seja exibido.
+
+Se tiver alguma dúvida, basta clicar em Opinião do instrutor.
+
+Opinião do instrutor
+
+Para realizar essa verificação, podemos incluir o código imediatamente após recuperar os valores dos campos, nessa posição demonstrada abaixo, por exemplo:
+
+```JavaScript
+function sortear(){
+  let quantidade = parseInt(document.getElementById('quantidade').value);
+  let de = parseInt(document.getElementById('de').value);
+  let ate = parseInt(document.getElementById('ate').value);
+  //insira sua proteção AQUI
+  //código omitido 
+}
+```
+
+Para fazer a verificação, vamos precisar fazer um condicional, que deverá exibir um alerta e parar a aplicação caso o número informado no campo “Do número” seja superior ou igual ao campo “Até o número”. Para isso, podemos escrever o seguinte código e incluir a partir da linha citada acima:
+
+```JavaScript
+  if (de >= ate) {
+    alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
+    return;
+  }
+```
+
+Veja que utilizamos dentro do bloco if o comando return. Esse comando, usado dentro desse bloco e sem de fato retornar nada, serve para que a função sortear() seja interrompida nesse ponto, sem seguir para as linhas de baixo. Isso é muito útil quando você não quer que o código adicional seja executado dada alguma circunstância específica. Nesse caso, por exemplo, se o usuário informou erroneamente os valores, não faz sentido continuar com o sorteio.
+
+#### Aula 1 - Mão na massa: proteção no total de números sorteados
+
+Fizemos uma proteção em nosso loop for para que nunca sejam sorteados números repetidos dentro de um intervalo. Porém, o que acontece se o usuário escolher uma quantidade de números para sortear superior aos números de um determinado intervalo? Por exemplo, caso escolha para sortear 5 números de 10 a 13, conforme a imagem abaixo:
+
+alt text: Tela do projeto “Sorteador de Números”, exibindo na lateral esquerda as seguintes opções: “Quantidade de números”, com o input do número 5 no campo de texto; “Do número”, com o input do número 10 no campo de texto; e “Até o número”, com o input do número 13 no campo de texto. A tela também apresenta botões com a funcionalidade “Sortear” e “Reiniciar”, e logo abaixo, no canto inferior esquerdo, exibe o retorno das informações a serem obtidas no sorteio, onde se lê a mensagem “Números sorteados: nenhum até agora”. A composição de cores do layout segue uma identidade visual em diversos tons de azul, trazendo como ilustração de destaque o desenho de uma jovem negra, de cabelos cacheados, em vestimenta de astronauta, iluminada em tons de roxo.
+
+Isso vai gerar um loop infinito, pois a execução ficará presa o tempo inteiro na repetição while e o sorteio não será realizado. Para conferir essa informação, feche a página do navegador. Faça essa alteração no código, incluindo um alert dentro do bloco while; logo em seguida, abra novamente a página com o Live Server e veja os alerts acontecendo ao repetir o teste com os mesmos valores descritos na imagem acima:
+
+```JavaScript
+for (let i = 0; i < quantidade; i++) {
+    numero = obterNumeroAleatorio(de, ate);
+
+    while (sorteados.includes(numero)) {
+      numero = obterNumeroAleatorio(de, ate);
+      alert('Tentando obter número inédito');
+    }
+    sorteados.push(numero);
+  }
+```
+
+Veja que você vai ter uma sequência de alerts que não vão parar de ser exibidos, caracterizando ali o loop infinito. Feche novamente o navegador para interromper a execução.
+
+Como podemos proteger essa situação? Podemos verificar se a quantidade de números escolhidos no campo “Quantidade de números” é igual ou inferior ao intervalo de números entre os campos “Do número” e “Até o número”. Isso irá prevenir que esse erro aconteça.
+
+Agora, então, é a sua vez de colocar a mão na massa! Vamos implementar essa proteção?
+
+Se tiver alguma dúvida, basta clicar em Opinião do instrutor.
+
+Opinião do instrutor
+
+Para realizar essa proteção, podemos inserir o nosso código exatamente embaixo da proteção incluída na atividade anterior, pois precisamos já ter recuperado os valores informados nos três campos do HTML. Observe:
+
+```JavaScript
+function sortear(){
+  let quantidade = parseInt(document.getElementById('quantidade').value);
+  let de = parseInt(document.getElementById('de').value);
+  let ate = parseInt(document.getElementById('ate').value);
+  if (de >= ate) {
+    alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
+    return;
+  }
+  //insira seu código AQUI
+  //código omitido
+```
+
+Aqui vamos incluir um novo condicional para verificar a situação que desejamos evitar. Se positivo, iremos também interromper a função sortear(). Uma sugestão de implementação é a seguinte:
+
+```JavaScript
+if (quantidade > (ate - de + 1)) {
+    alert('Campo "Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+    return;
+  }
+```
+
+Aqui, em nosso exemplo, para escolhermos 5 números exclusivos, precisaríamos escolher o intervalo de 10 a 14, pois as possibilidades de sorteio seriam 10, 11, 12, 13 e 14. É por esse motivo que fazemos a verificação se a quantidade é maior que o cálculo (até - de + 1), pois se fosse igual ou inferior não apresentaria o erro de loop infinito.
+
+### Aula 1 - O que aprendemos?
+
+Nessa aula, você aprendeu como:
+
+- Analisar o código de uma página HTML para entender sua estrutura e planejar o código de sua funcionalidade;
+
+- Declarar variáveis no JavaScript para armazenar elementos recuperados da página;
+
+- Recuperar elementos da página com JavaScript, com o uso da função document.getElementById();
+
+- Recuperar valores digitados em campos de um formulário na página, via propriedade value;
+
+- Utilizar o recurso de Template String, do JavaScript, para concatenar valores de variáveis em String.
+
+- Utilizar a função parseInt, no JavaScript, para converter um valor do tipo String para um número inteiro;
+
+- Fazer uma estrutura de repetição utilizando for para gerar números aleatórios no sorteador;
+
+- Declarar uma variável do tipo array para representar uma lista;
+
+- Adicionar um elemento a um array com a função push;
+
+- Utilizar um código já desenvolvido por terceiros para realizar o sorteio de um número aleatório dentro de um intervalo.
+
+- Declarar um bloco condicional if/else para implementar a funcionalidade de alterar o status do botão Reiniciar.
+
+- Acessar a lista de classes que um elemento da página possui, via propriedade classList;
+
+- Verificar se um elemento da página possui uma determinada classe CSS, via função classList.contains();
+
+- Remover uma classe CSS de um elemento da página, via função classList.remove();
+
+- Adicionar uma classe CSS a um elemento da página, via função classList.add();
+
+- Modificar o código HTML de um elemento na página, via propriedade innerHTML.
+
+## Aula 2 - Projeto AluGames
+
+### Aula 2 -  - Vídeo 1
+### Aula 2 -  - Vídeo 2
+### Aula 2 -  - Vídeo 3
+### Aula 2 -  - Vídeo 4
+### Aula 2 -  - Vídeo 5
+### Aula 2 -  - Vídeo 6
+### Aula 2 -  - Vídeo 7
