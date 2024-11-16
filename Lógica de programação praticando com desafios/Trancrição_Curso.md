@@ -1206,9 +1206,495 @@ Nessa aula, você aprendeu como:
 
 ## Aula 2 - Projeto AluGames
 
-### Aula 2 -  - Vídeo 1
-### Aula 2 -  - Vídeo 2
-### Aula 2 -  - Vídeo 3
+### Aula 2 - Apresentação do projeto AluGames - Vídeo 1
+
+Transcrição  
+Jacqueline: Olá! Vamos praticar lógica de programação com JavaScript. Quero ver o que você tem de projeto interessante para trabalharmos neste curso.
+
+Rodrigo: Perfeito! Já fizemos o download do arquivo .zip que vamos disponibilizar como atividade no curso. Quando você descompactá-lo no computador, irá encontrar uma pasta chamada "desafios-iniciante-programacao". Dentro dela, existem quatro pastas com quatro projetos:
+
+"alugames"
+"amigo-secreto"
+"carrinho-compras"
+"ingresso"
+Em cada aula, vamos trabalhar em um projeto diferente. Nesta primeira aula, vamos focar no projeto AluGames. Começaremos importando-o no Visual Studio Code.
+
+Conhecendo o projeto
+Rodrigo: Esse é o primeiro projeto que vamos explorar, então precisamos entender qual será nosso desafio, certo?
+
+Jacqueline: Exatamente! Vamos examinar o arquivo index.html no navegador e visualizar o que o projeto "alugames" tem para nos desafiar.
+
+Rodrigo: Clicaremos com o botão direito sobre index.html e usaremos a opção "Open with Live Server" para executar o projeto. Ele será aberto no navegador e podemos observar a estrutura do projeto, que se assemelha ao sistema de uma loja que aluga jogos de tabuleiro, e nossa função será implementar a funcionalidade do aluguel desses jogos.
+
+Jacqueline: Esse projeto é interessante, pois nos remete a uma confraternização que tivemos na empresa, não é mesmo? Fomos para uma casa de jogos e para reservar um jogo para nosso time, tínhamos que clicar em "Alugar".
+
+Além disso, conseguíamos visualizar quais jogos estavam alugados e quais estavam disponíveis. Quando não queríamos mais jogar determinado jogo, tínhamos a opção de devolver e então o jogo ficava disponível para outra pessoa. É isso que vamos simular neste projeto.
+
+Rodrigo: Exatamente, iremos simular o aluguel de jogos.
+
+Nosso foco será na parte de lógica de programação e algoritmos, testando variáveis, controle de condicionais, loops, arrays, e tudo que aprendemos na formação de iniciação em programação.
+
+A ideia desse primeiro projeto é simples. Basicamente, temos uma lista de jogos com o botão "Alugar" quando o jogo estiver disponível e o botão "Devolver" se estiver alugado.
+
+Nosso objetivo é construir a funcionalidade: ao clicar no jogo que está disponível, o texto do botão muda para "Devolver" e a capa do jogo fica um pouco mais escura, indicando que ele está alugado, e ao clicar em "Devolver", o botão retorna para o texto "Alugar".
+
+Jacqueline: Isso mesmo! Agora, vamos ao código para efetivamente mostrar como usaremos a lógica de programação a nosso favor para implementar esse controle em nossos botões.
+
+Rodrigo: Analisando o Visual Studio Code, o projeto segue a mesma estrutura dos cursos de lógica de programação. Temos o arquivo index.html, página HTML que mostramos no navegador e cujo código já estará pronto, pois nosso foco é na lógica com JavaScript. Além disso, temos uma pasta para o CSS, com a parte visual, e outra para as imagens.
+
+No entanto, o que nos interessa é a pasta "js", que tem o arquivo app.js, onde você deverá implementar o desafio. O que observamos foi o desafio finalizado, mas no desafio que vamos disponibilizar para você, os botões não estarão funcionando, ou seja, quando clicados, não acontecerá nada.
+
+Você precisará examinar a estrutura do HTML, entender qual função está sendo chamada, e criar no arquivo app.js (já importado na página) todo o algoritmo para fazer o efeito. Ao clicar no jogo, deverá verificar se está alugado, trocar o texto do botão e mudar o visual do elemento.
+
+Então, a sua tarefa será implementar todo esse algoritmo.
+
+Jacqueline: Exatamente! A ideia é que você pegue este projeto e, antes de assistir ao próximo vídeo, tente implementar o seu desafio para consolidar seus conhecimentos de lógica de programação. Aos poucos, vamos resolver com você o desafio.
+
+Rodrigo: Isso mesmo. Tente implementar por conta própria. Caso encontre dificuldades em algum ponto, não se preocupe, pois nos próximos vídeos, eu e Jacque vamos implementar do zero, mostrando o passo a passo para você ter uma noção de como é iniciar o projeto.
+
+No entanto, é muito importante que você tente completar o desafio individualmente para consolidar esses conhecimentos e praticar a lógica de programação.
+
+### Aula 2 - Obtendo o jogo clicado - Vídeo 2
+
+Transcrição  
+Jacqueline: Como foi o desafio? Conseguiu superá-lo ou teve alguma dificuldade? Vamos começar a resolução e esperamos que você tenha conseguido, que esteja gostando de praticar a lógica, de implementar projetos reais, com um front-end atraente e programando a parte do back-end.
+
+Vamos começar, Rodrigo?
+
+Rodrigo: Vamos lá! Caso você não tenha conseguido completar ou tenha estagnado em alguma parte, não se preocupe. Mostraremos um exemplo de como solucionar esse primeiro desafio.
+
+Resolução do desafio da AluGames
+Rodrigo: Na tela, temos o site do AluGames, nosso primeiro projeto, aberto no navegador. Nesse momento, estamos com o projeto inicial com o qual você vai começar. Portanto, se clicarmos nos botões "Alugar" ou "Devolver", nada acontecerá. A ideia é implementarmos do zero.
+
+Com o Visual Studio Code aberto, temos o arquivo index.html que foi disponibilizado. O que precisamos está na pasta "js": o arquivo app.js, que está vazio. Nele, começaremos a escrever nosso código.
+
+Jacqueline: Qual é a primeira coisa que nós geralmente verificamos? No arquivo index.html, o botão dispara uma ação. Essa ação é representada no app.js por uma função. Então, precisamos criar uma função que precisa se chamar alterarStatus() para começar a interagir com esse botão.
+
+Rodrigo: Perfeito. Para implementar o código, como a Jacque mencionou, temos que observar como está no HTML. Na tag `<a>`, que representa os botões, existe essa função alterarStatus() pré-definida, a qual teremos que criar. Então, vamos começar por ela.
+
+Criando a função alterarStatus()
+No arquivo app.js, vamos criar uma função com function chamada alterarStatus(). Essa função recebe um parâmetro que é o id do jogo. Cada jogo na tela tem um identificador único. O primeiro é o 1, depois o 2, o 3, e precisamos desse número para saber qual jogo foi clicado.
+
+Criada a função, vamos abrir e fechar chaves. Entre elas, começaremos a escrever o código.
+
+app.js:
+
+> function alterarStatus(id) {  
+}
+
+Qual é o próximo passo, Jacque? Quando clicarmos no botão na tela e a função alterarStatus() for chamada, o que precisamos fazer?
+
+Jacqueline: Precisamos recuperar qual foi o jogo, qual é o nome dele, e interagir de fato com os elementos HTML para poder trabalhar a nossa lógica.
+
+Rodrigo: Perfeito. Então, vamos ao arquivo index.html. Analisando a estrutura da página, cada jogo está representado no código HTML pela tag <li>. Na página de exemplo, temos três jogos, ou seja, três tags `<li>`.
+
+index.html:
+
+```HTML
+<li class="dashboard__items__item" id="game-1">
+    <div class="dashboard__item__img">
+        <img src="img/monopoly.png" alt="Capa jogo Monopoly">
+    </div>
+    <p class="dashboard__item__name">Monopoly</p>
+    <a onclick="alterarStatus(1)" href="#" class="dashboard__item__button">Alugar</a>
+</li>
+<li class="dashboard__items__item" id="game-2">
+    <div class="dashboard__item__img">
+        <img src="img/ticket_to_ride.png" alt="Capa jogo Ticket to Ride">
+    </div>
+    <p class="dashboard__item__name">Ticket to Ride</p>
+    <a onclick="alterarStatus(2)" href="#" class="dashboard__item__button">Alugar</a>
+</li>
+<li class="dashboard__items__item" id="game-3">
+    <div class="dashboard__item__img dashboard__item__img--rented">
+        <img src="img/takenoko.png" alt="Capa jogo Takenoko">
+    </div>
+    <p class="dashboard__item__name">Takenoko</p>
+    <a onclick="alterarStatus(3)" href="#" class="dashboard__item__button dashboard__item__button--return">Devolver</a>
+</li>
+```
+
+A tag `<li>` tem um id, ou seja, um identificador único para cada jogo, como game-1, game-2, e game-3. Podemos recuperar esse elemento `<li>`, porque ele tem as informações que precisaremos manipular no código.
+
+Para fazer isso, vamos usar o recurso para recuperar um elemento pelo ID no JavaScript. Teremos que recuperar o elemento e guardá-lo, então vamos usar variáveis.
+
+Declarando a variável gameClicado
+No escopo da função alterarStatus(), criaremos uma variável com let chamada gameClicado, que receberá document.getElementById(). Vamos chamar essa função que recupera o elemento pelo ID e passar para ela entre aspas simples o id do elemento. Nesse caso, seria game-1.
+
+app.js:
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById('game-1');
+}
+```
+
+Jacqueline: Exato, porque no atributo onClick do arquivo HTML, é passado apenas o número (1) em vez do texto completo (game-1).
+
+Rodrigo: Então, no arquivo index.html, no onClick, é chamada a função alterarStatus() e passado entre parênteses o ID, o número do elemento. Nessa página está tudo estático, mas em um projeto real, isso seria montado de maneira dinâmica, usando a integração com o back-end.
+
+Dito isso, no arquivo app.js, o nome não pode permanecer como game-1, pois dessa forma ficará fixo e sempre referenciará o primeiro jogo. É necessário substituir o número 1 pelo ID correspondente, concorda, Jacque?
+
+Jacqueline: Exatamente, Rodrigo. Precisamos concatenar com o ID recebido para recuperar, de fato, qual jogo foi clicado.
+
+Rodrigo: Vamos utilizar a expressão do JavaScript que envolve o uso do símbolo de crase. Escreveremos game- entre crases e, em seguida, usaremos o sinal de dólar seguido de chaves (${}) para concatenar com a variável id.
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+}
+```
+
+Assim, será trazido "game-" seguido de um 1, 2, 3, conforme o jogo selecionado, sendo o id fornecido como parâmetro na função. Com isso, o jogo selecionado será efetivamente recuperado.
+
+Agora, o que precisamos fazer, Jacque?
+
+Jacqueline: Precisamos entender se o jogo está alugado, se está disponível. Em algum momento, também será necessário recuperar esta informação, certo?
+
+Rodrigo: Verdade! Se observarmos o arquivo index.html, notaremos que na estrutura, dentro da tag `<li>`, temos uma `<div>` com a imagem do jogo, um parágrafo (`<p>`) com o nome do jogo, e o botão propriamente dito (`<a>`), que é o botão de clique. Qual desses elementos precisaremos manipular?
+
+Declarando as variáveis imagem e botao
+Rodrigo: Olhando diretamente no código, o que deveremos recuperar é, na verdade, o botão representado pela tag `<a>`. Quando clicamos em "Alugar", o texto do botão precisa mudar. Então, precisamos recuperar a tag `<a>`. Além disso, precisamos recuperar o elemento `<div>`.
+
+Na página HTML, o último jogo da lista vem como alugado por padrão. Como podemos diferenciar se o jogo está alugado olhando apenas para o código HTML?
+
+Se observarmos, a `<div>` do último jogo tem uma classe CSS chamada dashboard__item__img--rented, sendo "alugado" a tradução de "rented". Os outros jogos não têm essa classe. Então, para marcar o jogo como alugado ou não, temos que colocar essa classe na `<div>`.
+
+Sendo assim, precisamos recuperar no arquivo JavaScript tanto a `<div>` quanto o botão.
+
+Jacqueline: Exato! A classe que identificamos no código HTML é responsável por tornar o jogo opaco, destacando que ele está alugado.
+
+Rodrigo: Essa estilização foi disponibilizada pelo time que desenvolveu o front-end, os códigos HTML e CSS, e nós vamos seguir o mesmo padrão utilizado.
+
+Retornando ao arquivo app.js, o próximo passo, agora que sabemos qual jogo foi clicado, é pegar a `<div>` e a tag `<a>` do jogo clicado. Vamos recuperar essas informações e guardá-las em variáveis da mesma forma no escopo da função alterarStatus().
+
+Primeiramente, vamos declarar a variável imagem que receberá o método gameClicado.querySelector(), para selecionar um elemento na página dentro de gameClicado e filtrar pelo `<li>`. Precisamos retornar ao arquivo index.html e identificar se existe algum ID para ser recuperado.
+
+A variável imagem será correspondente ao elemento `<div>`, que não tem id, mas tem a classe CSS dashboard__item__img. Vamos copiá-la, retornar ao código JavaScript, e colar entre os parênteses do método querySelector() usando um ponto (.) para indicar ser uma classe.
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+}
+```
+
+Com isso, pedimos para gameClicado procurar um elemento com classe dashboard__item__img, e assim recuperamos um elemento na página.
+
+Agora precisamos fazer o mesmo processo para o botão. Para isso, podemos duplicar a linha anterior e alterar o nome da variável para botao. Nesse caso, a classe será dashboard__item__button, presente na tag `<a>`.
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+}
+```
+
+Com isso, recuperamos todos os elementos necessários para manipular no JavaScript.
+
+Jacqueline: Exatamente. Já fornecemos muitas dicas e acreditamos que, com essas informações, seja possível avançar mais no desafio.
+
+Criando um alerta alert()
+Jacqueline: Nesse momento, poderíamos apenas pegar o nome e exibir um alerta para confirmar que estamos capturando corretamente o jogo em que clicamos. O que você acha, Rodrigo?
+
+Rodrigo: Perfeito! Então, vamos testar se gameCLicado é o que foi realmente clicado?
+
+No arquivo index.html, o nome do jogo está na tag <p>, que tem outra classe, a dashboard__item__name. Vamos copiá-la e colá-la temporariamente abaixo da variável botao. Em seguida, vamos duplicar a linha anterior e criar outra variável chamada nomeJogo, passando essa classe para o método querySelector().
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+}
+```
+
+Agora, recuperamos a `<div>` que contém a imagem, o botão e o nome do jogo. Para testar e verificar se estamos capturando corretamente o nome do jogo, vamos criar um alert().
+
+Neste alerta, vamos passar a variável nomeJogo. Como usamos o método querySelector() nesta variável, é retornada a tag HTML. Não queremos imprimir a tag HTML, mas sim o texto dentro da tag <p>. Para fazer isso, podemos usar as propriedades textContent ou innerHTML.
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+    
+    alert(nomeJogo.textContent);
+}
+```
+
+Podemos testar, correto, Jacque? Será que imprimimos um alerta com o nome do jogo clicado?
+
+Jacqueline: Exatamente, queremos conferir se aparecerá o nome "Monopoly" ao clicar.
+
+Rodrigo: De volta ao navegador, ao clicar sobre o botão "Alugar" abaixo do jogo "Monopoly", deverá aparecer um pop-up com o nome "Monopoly".
+
+Da mesma forma, ao clicar no segundo jogo, "Ticket to Ride", será retornado o nome dele no pop-up. O terceiro jogo está com o botão "Devolver", mas ao clicar nele, também será exibido o texto do jogo em que clicamos ("Takenoko").
+
+Conclusão  
+Rodrigo: Finalizamos o primeiro passo: já recuperamos os elementos e criamos um alerta para garantir que o elemento clicado foi o correto. Porém, ainda falta a parte principal, correto, Jacque?
+
+Jacqueline: Isso mesmo. Precisamos implementar a mesma lógica para alterar o nome do botão e determinar se a imagem estará opaca ou visível. Resolveremos isso em sequência.
+
+Esperamos que você, como pessoa desenvolvedora, esteja aproveitando, e que com essa primeira dica que fornecemos, você consiga avançar mais no desafio!
+
+#### Aula 2 - Faça como eu fiz: recuperando elementos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para recuperar o jogo que foi clicado na página.
+
+Opinião do instrutor
+
+Você precisará declarar uma função chamada alterarStatus, no arquivo app.js:
+
+> function alterarStatus(id) {  
+}
+
+Agora, dentro dessa função, será necessário declarar variáveis que representam as informações recuperadas da página:
+
+```JavaScript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+
+    alert(nomeJogo.textContent);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se o nome do jogo é exibido na tela após clicar no botão.
+
+### Aula 2 - Alterando status do jogo clicado - Vídeo 3
+
+Transcrição  
+Jacqueline: Já conseguimos perceber que, conforme clicamos no botão, ele recupera corretamente o nome do jogo. Portanto, a interação com o HTML foi executada corretamente. No entanto, precisamos agora implementar a lógica de alterar o botão para "Devolver" ou "Alugar", de acordo com a ação realizada no jogo.
+
+Rodrigo: Perfeito! A parte principal é essa funcionalidade.
+
+Alterando o status do jogo clicado
+Rodrigo: Vamos voltar para o Visual Studio Code e remover o alert() que inserimos apenas para testar se tudo estava funcionando conforme esperado. Também vamos apagar a variável nomeJogo, pois não precisamos pegar o nome do jogo, afinal, apenas a imagem e o botão serão modificados.
+
+Trecho a ser removido do arquivo app.js:
+
+> let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+>
+> alert(nomeJogo.textContent);
+
+Agora que já temos as variáveis gameClicado, imagem e botao, precisamos executar a seguinte lógica: se o jogo foi alugado, o botão muda para "Devolver", e se foi devolvido, o botão deve ser "Alugar" novamente.
+
+Adicionando um bloco condicional
+Jacqueline: Nesse caso, devemos usar condicionais. Certo, Rodrigo?
+
+Rodrigo: Certo. Portanto, precisaremos de um bloco if. No if, abrimos e fechamos parênteses, em seguida abrimos e fechamos chaves, e depois adicionamos o else.
+
+```JavaScript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+
+    if () {
+    
+    } else {
+    
+    }
+}
+```
+
+Entre os parênteses do bloco if, precisamos passar uma condição booleana, que possa ser verdadeira (true) ou falsa (false). Então surge a questão: como sabemos se o jogo foi alugado ou não? Qual condição devemos passar?
+
+Precisaremos verificar no HTML. Podemos avaliar se o jogo foi alugado ou não com base na classe do elemento `<div>`, correspondente à imagem no arquivo JavaScript.
+
+Se a classe dashboard__item__img--rented estiver presente, significa que o jogo foi alugado. Se não estiver, significa que o jogo está disponível.
+
+Então, Jacque, podemos fazer o if com base nessa classe CSS, certo?
+
+Jacqueline: Exatamente!
+
+Rodrigo: Portanto, vamos copiar a classe e retornar para o arquivo app.js. Nesse momento, essa classe está aplicada à variável imagem. Portanto, precisaremos usar if (imagem).
+
+Jacque, como podemos saber se um elemento HTML tem uma classe ou não no JavaScript? Há uma maneira de descobrir isso?
+
+Jacqueline: Com certeza, Rodrigo. Como podemos descobrir?
+
+Rodrigo: Todo elemento HTML tem uma propriedade chamada classList, que retorna a lista de classes que o elemento possui. Como sabemos, diferente do id, uma classe pode ser compartilhada entre várias tags e uma tag pode ter múltiplas classes. O id é único na página e cada elemento tem apenas um id.
+
+A propriedade classList, como o próprio nome indica, retorna todas as classes do elemento. No entanto, nosso interesse é apenas saber se existe uma classe específica.
+
+Sendo assim, logo após a propriedade classList em imagem.classList, podemos chamar o método contains(), que diz se o elemento, em sua lista de classes, contém determinada classe. Entre os parênteses e aspas simples, passamos o nome da classe que queremos verificar se existe.
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+
+} else {
+
+}
+```
+
+Com isso, caso a classe especificada exista no elemento imagem, o resultado será true.
+
+Jacqueline: É importante salientar que estamos trabalhando com muitos elementos, como getElementById(), querySelector(), classList, mas o mais importante é a lógica.
+
+Como obter um elemento, como obter uma classe, como recuperar um dado, é fácil pesquisar no Google e descobrir como fazer. Porém, a lógica sobre o que precisa ser feito para que o recurso funcione da forma que precisamos, é a parte a que devemos nos atentar e praticar.
+
+Rodrigo: Dessa forma, já recuperamos. Se entrar no if, significa que o elemento em que clicamos tem a classe dashboard__item__img--rented, e se possui essa classe, é porque o jogo está alugado. Estando alugado, precisamos retornar o botão para "Devolver".
+
+Esse será o raciocínio e agora precisamos implementar esse algoritmo, isto é, essa lógica. Se o elemento tem a classe dashboard__item__img--rented, precisamos removê-la do elemento.
+
+Com isso em mente, no escopo do bloco if, vamos chamar a variável imagem seguida da propriedade classList e de uma função para remover uma classe específica do elemento, chamada remove(), para a qual passaremos a classe que desejamos remover.
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+    imagem.classList.remove('dashboard__item__img--rented');
+} else {
+
+}
+```
+
+Feito isso, podemos copiar a linha que acabamos de criar e colar no bloco else, já que, em else, temos o contrário, ou seja, precisamos adicionar a classe ao invés de removê-la.
+
+Jacqueline: Provavelmente, a propriedade terá um método add(), por exemplo, para fazer a inserção dessa classe na lista.
+
+Rodrigo: Então, ao invés de remove(), teremos a função add() para adicionar uma classe ao elemento.
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+    imagem.classList.remove('dashboard__item__img--rented');
+} else {
+    imagem.classList.add('dashboard__item__img--rented');
+}
+```
+
+Com isso, conseguimos ter o efeito de: clicar; verificar se a classe está presente; se estiver, removê-la; e se não estiver, adicioná-la.
+
+Jacqueline: Vamos testar para conferir se funciona corretamente?
+
+Rodrigo: De volta ao navegador, o jogo "Monopoly", por exemplo, não tem a classe específica, então não está opaco. Ao clicar no botão "Alugar", ele deverá ficar opaco.
+
+Em seguida, se clicarmos de novo, será removida a classe. Dessa forma, temos o projeto funcionando e alternando entre remover e adicionar a classe, usando o código.
+
+Ajustando o botão
+Jacqueline: Demais! Agora só falta ajustar o texto do botão.
+
+Rodrigo: Isso mesmo. Além de alternar a classe do elemento, precisamos trocar o texto do botão. Lembrando que o botão também tem sua classe, pois quando o jogo está alugado, ele fica com uma cor preta em vez do azul. Então, será necessário fazer ambos os ajustes.
+
+Vamos voltar para o código. Dentro do próprio if, faremos uma situação e no else fazemos a situação contrária. Agora, não queremos mais modificar imagem, mas sim botao.
+
+Assim, chamaremos botao.. Para alterar o texto do elemento <a> no HTML, usamos a propriedade textContent.
+
+Se entramos no if, é porque o jogo está alugado, e ao clicar no botão, queremos deixá-lo disponível. Então, vamos atribuir ao texto o valor "Alugar" entre aspas simples.
+
+Em seguida, vamos copiar esse código e colar no else, porém, definindo o texto como "Devolver" entre aspas simples. Com isso, já conseguimos alterar o texto do botão.
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+    imagem.classList.remove('dashboard__item__img--rented');
+    botao.textContent = 'Alugar';
+} else {
+    imagem.classList.add('dashboard__item__img--rented');
+    botao.textContent = 'Devolver';
+}
+```
+
+Ainda faltam os CSS para fazer o efeito de mudança de cor. No arquivo index.html, a tag <a> do botão, quando está marcada como alugado, tem a classe dashboard__item__button--return. Vamos copiar essa classe, retornar ao código JavaScript, e fazer o mesmo processo.
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+    imagem.classList.remove('dashboard__item__img--rented');
+    botao.classList.remove('dashboard__item__button--return');
+    botao.textContent = 'Alugar';
+} else {
+    imagem.classList.add('dashboard__item__img--rented');
+    botao.classList.add('dashboard__item__button--return');
+    botao.textContent = 'Devolver';
+}
+```
+
+No bloco if, chamamos a variável botao seguida da propriedade classList e da função remove(), passando para ela a classe que desejamos remover do botão.
+
+É importante lembrar que estamos trabalhando com o botão, não a imagem.
+
+Para finalizar, copiamos a linha e colamos no bloco else, onde queremos adicionar (add()).
+
+Jacqueline: Com isso, temos o resultado simples de um bloco condicional if que vai executar algumas operações para devolver e outras para alugar. Vamos testar?
+
+Rodrigo: Com a tela aberta no navegador, vamos clicar em "Alugar". O botão deverá alterar o visual, bem como o texto do para "Devolver" e a cor de azul para preto. Ao clicar em "Devolver", ele volta ao estado anterior. Isso deve funcionar com qualquer um dos jogos.
+
+Conclusão  
+Rodrigo: Conseguimos finalizar nosso projeto!
+
+Jacqueline: Ficou muito legal! Esperamos que você também tenha conseguido concluir. Em breve, teremos muitos mais desafios.
+
+Rodrigo: Há outros projetos que iremos aprender para continuar treinando essa parte de lógica de programação.
+
+Jacqueline: Então, faça uma pausa, tome um café, e daqui a pouco faremos mais desafios!
+
+#### Aula 2 - Faça como eu fiz: alugando e devolvendo jogos
+
+Faça como eu fiz: alugando e devolvendo jogos
+Próxima Questão
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para alterar o status do jogo que foi clicado na página.
+
+Ver opinião do instrutor
+Opinião do instrutor
+
+Você precisará alterar a função alterarStatus, substituindo o alert por um bloco condicional que será baseado no status atual do jogo:
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+
+} else {
+
+}
+```
+
+Agora, dentro do bloco if, será necessário remover as classes da imagem e do botão, além de alterar o texto do botão:
+
+```JavaScript
+if (imagem.classList.contains('dashboard__item__img--rented')) {
+    imagem.classList.remove('dashboard__item__img--rented');
+    botao.classList.remove('dashboard__item__button--return');
+    botao.textContent = 'Alugar';
+}
+```
+
+Por fim, dentro do bloco else, você precisa desfazer o que foi feito no bloco if:
+
+```JavaScript
+else {
+    imagem.classList.add('dashboard__item__img--rented');
+    botao.classList.add('dashboard__item__button--return');
+    botao.textContent = 'Devolver';
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se tudo está funcionando conforme o esperado.
+
+Confira o código final do desafio:
+
+```JavaScript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+
+    if (imagem.classList.contains('dashboard__item__img--rented')) {
+        imagem.classList.remove('dashboard__item__img--rented');
+        botao.classList.remove('dashboard__item__button--return');
+        botao.textContent = 'Alugar';
+    } else {
+        imagem.classList.add('dashboard__item__img--rented');
+        botao.classList.add('dashboard__item__button--return');
+        botao.textContent = 'Devolver';
+    }
+}
+```
+
 ### Aula 2 -  - Vídeo 4
 ### Aula 2 -  - Vídeo 5
 ### Aula 2 -  - Vídeo 6
