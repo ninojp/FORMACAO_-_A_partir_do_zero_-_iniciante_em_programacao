@@ -1695,6 +1695,97 @@ function alterarStatus(id) {
 }
 ```
 
+### Aula 2 - Condicionais com if/else
+
+Suponha que você esteja trabalhando em um sistema de adoção de pets, na funcionalidade que calcula a probabilidade de adoção de um determinado pet.
+
+As seguintes regras devem ser seguidas nessa funcionalidade:
+
+A probabilidade deve ser calculada baseada em uma nota de 0 a 10;
+Se a nota for maior do que 7, a probabilidade deve ser alta;
+Se a nota for entre 5 e 7, a probabilidade deve ser média;
+Se a nota for menor do que 5, a probabilidade deve ser baixa.
+Todo pet deve iniciar com nota 10, devendo essa nota ser penalizada de acordo com o peso e a idade do pet, baseado nos seguintes critérios:
+
+Se o pet tiver mais do que 10kg de peso, a nota deve ser penalizada em 2 pontos. Caso o peso seja maior do que 20kg, a penalização deve ser de 4 pontos;
+Se o pet tiver 8 anos ou mais de idade, a nota deve ser penalizada em 2 pontos. Caso a idade seja igual ou maior do que 14 anos, a penalização deve ser de 4 pontos.
+Você escreveu o seguinte código para implementar essa funcionalidade:
+
+```JavaScript
+function calcularProbabilidadeAdocao() {
+    let peso = document.getElementById('peso').value;
+    let idade = document.getElementById('idade').value;
+    let nota = 10;
+    if (peso > 20) {
+        nota - 4;
+    } 
+    if (peso > 10) {
+        nota - 2;
+    }
+    if (idade >= 14) {
+        nota - 4;
+    }
+    if (idade >= 8) {
+        nota - 2;
+    }
+    return nota;
+}
+```
+
+Entretanto, o código não está calculando corretamente a probabilidade de adoção conforme as regras citadas anteriormente.
+
+Escolha TODAS as alternativas que indicam os problemas de lógica do código anterior:
+
+Os blocos condicionais que fazem a penalização estão incorretos.
+
+As penalizações do peso e da idade devem ser realizadas apenas uma vez, sendo então necessário utilizar um else if e não dois ifs sequenciais. O código deveria ser escrito assim:
+
+```JavaScript
+if (peso > 20) {
+    nota - 4;
+} else if (peso > 10) {
+    nota - 2;
+}
+if (idade >= 14) {
+    nota - 4;
+} else if (idade >= 8) {
+    nota - 2;
+}
+```
+
+Alternativa correta  
+As linhas de código dentro de cada bloco if, que penalizam a nota, estão incorretas.
+
+Dentro de cada if está sendo feito o cálculo da nova nota, entretanto esse novo valor não está sendo atribuído na variável nota. Por exemplo, esse if:
+
+```JavaScript
+if (peso > 20) {
+    nota - 4;
+}
+// Deveria ter sido escrito assim:
+if (peso > 20) {
+    nota = nota - 4;
+}
+```
+
+Repare que agora a variável nota está sendo modificada corretamente.
+
+### Aula 2 - Desafio: hora da prática
+
+Os desafios não obrigatórios a seguir objetivam a prática dos conceitos trabalhados nesta aula. Os desafios 1 e 2 estão diretamente relacionados ao projeto Alugames e os demais foram pensados para reforçar o conteúdo de Lógica.
+
+Vamos praticar?
+
+- No projeto Alugames, uma confirmação ao devolver um jogo, solicitando ao usuário que confirme a devolução antes que ela seja concluída. Isso pode ajudar a evitar devoluções acidentais.
+
+- No projeto Alugames, crie uma função para imprimir no console a informação sobre quantos jogos foram alugados.
+
+- Crie um programa que verifica se uma palavra ou frase é um palíndromo.
+
+- Crie um programa com uma função que receba três números como argumentos e os retorne em ordem crescente. Exiba os números ordenados.
+
+- Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
 ### Aula 2 -  - Vídeo 4
 ### Aula 2 -  - Vídeo 5
 ### Aula 2 -  - Vídeo 6
