@@ -1786,7 +1786,105 @@ Vamos praticar?
 
 - Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
 
-### Aula 2 -  - Vídeo 4
-### Aula 2 -  - Vídeo 5
-### Aula 2 -  - Vídeo 6
-### Aula 2 -  - Vídeo 7
+Opinião do instrutor
+
+Desafio 1: Adicione uma confirmação ao devolver um jogo, solicitando ao usuário que confirme a devolução antes que ela seja concluída. Isso pode ajudar a evitar devoluções acidentais.
+
+```Javascript
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+
+    if (imagem.classList.contains('dashboard__item__img--rented')) {
+        // Adiciona uma confirmação antes de devolver o jogo
+        if (confirm(`Você tem certeza que deseja devolver o jogo ${nomeJogo.textContent}?`)) {
+            imagem.classList.remove('dashboard__item__img--rented');
+            botao.classList.remove('dashboard__item__button--return');
+            botao.textContent = 'Alugar';
+        }
+    } else {
+        imagem.classList.add('dashboard__item__img--rented');
+        botao.classList.add('dashboard__item__button--return');
+        botao.textContent = 'Devolver';
+    }
+}
+```
+
+Desafio 2: Para imprimir na tela a informação sobre quantos jogos foram alugados, você pode modificar a função alterarStatus() para contar os jogos alugados e exibir essa informação no console. Aqui está um exemplo de como você pode fazer isso:
+
+```Javascript
+let jogosAlugados = 0;
+
+function contarEExibirJogosAlugados() {
+    console.log(`Total de jogos alugados: ${jogosAlugados}`);
+}
+function alterarStatus(id) {
+    let gameClicado = document.getElementById(`game-${id}`);
+    let imagem = gameClicado.querySelector('.dashboard__item__img');
+    let botao = gameClicado.querySelector('.dashboard__item__button');
+    let nomeJogo = gameClicado.querySelector('.dashboard__item__name');
+
+    if (imagem.classList.contains('dashboard__item__img--rented')) {
+        imagem.classList.remove('dashboard__item__img--rented');
+        botao.classList.remove('dashboard__item__button--return');
+        botao.textContent = 'Alugar';
+        jogosAlugados--;
+    } else {
+        imagem.classList.add('dashboard__item__img--rented');
+        botao.classList.add('dashboard__item__button--return');
+        botao.textContent = 'Devolver';
+        jogosAlugados++;
+    }
+    contarEExibirJogosAlugados();
+}
+// Inicializa a contagem considerando que os jogos já começam alugados
+document.addEventListener('DOMContentLoaded', function() {
+    jogosAlugados = document.querySelectorAll('.dashboard__item__img--rented').length;
+    contarEExibirJogosAlugados();
+});
+```
+
+Este exemplo adiciona um evento DOMContentLoaded que é acionado quando a página é carregada. Nesse momento, ele conta a quantidade inicial de jogos alugados. Certifique-se de ajustar o código conforme necessário para se adequar ao seu projeto.
+
+Desafio 3: Função que verifica se uma palavra é um palíndromo
+
+Confira a resolução no [Alura+: Funções no JavaScript que você precisa conhecer](https://cursos.alura.com.br/extra/alura-mais/funcoes-no-javascript-que-voce-precisa-conhecer-c1503)
+
+Desafio 4: Função para ordenar números em sequência
+
+```JavaScript
+function ordenarNumeros(a, b, c) {
+    const numerosOrdenados = [a, b, c].sort((x, y) => x - y);
+    console.log(`Números ordenados: ${numerosOrdenados.join(', ')}`);
+}
+// Exemplo de uso:
+ordenarNumeros(3, 1, 5); // Deve exibir "Números ordenados: 1, 3, 5"
+```
+
+### Aula 2 - O que aprendemos?
+
+Nessa aula, você aprendeu como:  
+
+- Analisar o código de uma página HTML para entender sua estrutura e planejar o código de sua funcionalidade;
+
+- Recuperar elementos da página com JavaScript, com o uso das funções document.querySelector() e document.getElementById();
+
+- Declarar variáveis no JavaScript para armazenar elementos recuperados da página;
+
+- Acessar a lista de classes que um elemento da página possui, via propriedade classList;
+
+- Verificar se um elemento da página possui uma determinada classe CSS, via função classList.contains();
+
+- Remover uma classe CSS de um elemento da página, via função classList.remove();
+
+- Adicionar uma classe CSS a um elemento da página, via função classList.add();
+
+- Alterar o texto de um elemento da página, via propriedade textContent;
+
+- Declarar um bloco condicional if/else, para implementar a funcionalidade de alterar o status de um jogo.
+
+## Aula 3 - 
+
+### Aula 3 -  - Vídeo 1
