@@ -1885,6 +1885,690 @@ Nessa aula, você aprendeu como:
 
 - Declarar um bloco condicional if/else, para implementar a funcionalidade de alterar o status de um jogo.
 
-## Aula 3 - 
+## Aula 3 - Projeto Carrinho de Compras
 
-### Aula 3 -  - Vídeo 1
+### Aula 3 - Apresentação do projeto Carrinho de Compras - Vídeo 1
+
+Transcrição  
+Rodrigo: Na segunda aula, embarcaremos em um novo projeto, explorando outros exemplos para aprimorar nosso conhecimento em outros temas relacionados à lógica de programação.
+
+Novo desafio  
+Rodrigo: Qual será nosso próximo desafio, Jacque?
+
+Jacqueline: Nosso segundo desafio será criar um Carrinho de compras, algo muito comum no nosso dia a dia, principalmente em relação às compras online.
+
+Já estamos com o HTML aberto, para visualizá-lo, clicamos com o botão direito e depois em "Open with Live Server". Feito isso, a página abre no navegador.
+
+Na lateral direita, identificamos que já temos um item no carrinho, um celular. Para adicionar outro item, clicamos na combobox, na lateral esquerda da página.
+
+Feito isso, abre uma lista com produtos. Selecionamos Óculos VR e clicamos no botão "Adicionar". Ao fazer isso, o produto aparece no carrinho, que também disponibiliza o valor total dos produtos.
+
+Como é muito comum que as pessoas adicionem e depois limpe os itens do carrinho, criaremos esse botão para as informações serem resetadas, ou seja, os itens removidos e o valor zerado. Esse é nosso desafio!
+
+Rodrigo: Esse desafio é um pouco mais complexo que o anterior, afinal, teremos que construir um formulário, ler o produto selecionado na combobox, extrair o nome, preço, quantidade, fazer um cálculo de soma e também criar um botão de limpar. Porém, tudo isso é possível com nosso conhecimento em lógica de programação.
+
+Para isso, continuaremos usando variáveis, condicionais, funções, entre outras coisas.
+
+Disponibilizamos o projeto inicial para você, lembrando que nenhum dos botões estará funcionando, você precisará implementar isso por conta própria.
+
+Caso você tenha dificuldade, na sequência, a Jaque implementará o passo a passo e apresentará uma das formas de resolver esse desafio.
+
+Jacqueline: Exatamente! Boa sorte no desafio. Te esperamos no vídeo seguinte com a solução.
+
+### Aula 3 - Obtendo o produto adicionado - Vídeo 2
+
+Transcrição  
+Rodrigo: O desafio dessa aula é um pouco mais avançado. Caso você não tenha conseguido, não se preocupe, faremos um passo a passo.
+
+Inclusive, é importante lembrar que a resolução que apresentaremos nas próximas aulas não é um gabarito oficial, afinal, seu código não precisa ficar exatamente igual. Existem formas diferentes de solucionar esse desafio.
+
+Jacqueline: Exatamente, Rodrigo. Desenvolvimento é um trabalho de criatividade, certo? Cada pessoa desenhará sua solução da forma que achar melhor.
+
+Rodrigo: Sendo assim, as variáveis, momes das funções, provavelmente estarão diferentes, mas o importante é que funcione.
+
+Começando o desenvolvimento do código
+Jacqueline: Precisamos começar analisando o HTML. Na primeira versão do projeto nenhum botão funciona mais, nem o de adicionar item, nem o de limpar. É exatamente esse código que disponibilizamos para você.
+
+No arquivo app.js construiremos o código, porém, antes disso, precisamos entender a estrutura do index.html. Geralmente começamos pelo botão e suas funcionalidades.
+
+Rodrigo: Sendo assim, precisamos criar as funções adicionar e limpar que os botões estão chamando, mas que ainda não existem no arquivo JavaScript.
+
+app.js
+
+Jacqueline: Exatamente. Então, no app.js, vamos escrever function adicionar() {}, que por enquanto não receberá nenhum parâmetro. Abaixo, também criamos a function limpar() {}.
+
+```JavaScript
+function adicionar() {
+
+}
+
+function limpar() {
+
+}
+```
+
+Quando há muitas coisas para serem feitas, uma boa opção é fazer comentários no código, como se fosse um roteiro. Nesse projeto, por exemplo, precisamos pegar valores, calcular subtotal, adicionar no carrinho, os comentários vão ajudar a deixar tudo mais organizado e objetivo.
+
+O que precisamos fazer primeiro na função adicionar(), Rodrigo?
+
+Rodrigo: Essa função é chamada quando a pessoa clica no botão, então a primeira coisa que deve ser feita é recuperar os valores do formulário, ou seja, o produto escolhido e a quantidade digitada no campo de texto.
+
+Jacqueline: Então, para adicionar um comentário, na linha abaixo da função adicionamos // e o texto recuperar valores nome do produto, quantidade e valor.
+
+Rodrigo: O próximo passo acho que seria calcular o preço, ou seja, multiplicar o valor unitário vezes a quantidade que a pessoa digitou.
+
+Jacqueline: Então, na linha seguinte, escrevemos o segundo comentário //calcular o preço, nosso subtotal.
+
+Rodrigo: Na sequência, devemos adicionar o produto no carrinho, pois além de definir qual item foi escolhido também precisamos do subtotal do item.
+
+Jacqueline: Exato! Por isso, adicionamos o comentário //adicionar no carrinho. A partir disso precisamos atualizar o total de todas as compras que faremos. Certo? Adicionamos o comentário //atualizar o valor total.
+
+```JavaScript
+function adicionar() {
+//recuperar valores nome do produto, quantidade e valor 
+//calcular o preço, o nosso subtotal 
+//adicionar no carrinho 
+//atualizar o valor total
+
+}
+
+function limpar() {
+
+}
+```
+
+Rodrigo: Ótimo, Jacque! Esse é um passo a passo do código que vamos criar.
+
+Jacqueline: Começaremos pelo primeiro item, que é recuperar valores, nome do produto, quantidade e valor.
+
+Para isso, precisaremos consultar o HTML novamente para sabermos como recuperar esses dados.
+
+index.html
+
+Jacqueline: Nesse arquivo, analisaremos onde estão os produtos. Repare que, na linha 25, os produtos estão listados com o ID, portanto é assim que podemos recuperá-los. Para isso, usaremos o método getElementById, que é muito conhecido . Na linha abaixo, notamos que em value, o produto já possui um nome e o valor juntos. Portanto, precisaremos fazer um tratamento para separá-los e assim calcular o subtotal que precisamos, seguido do total.
+
+app.js
+
+Jacqueline: Voltamos para o arquivo app.js. Criaremos uma variável utilizando o let chamada nomeProduto igual à document.getElementById(). Como parâmetro, em aspas simples, passamos produto.
+
+Vamos recuperar também a quantidade. Se acessarmos novamente o index.html, notamos que também há o id quantidade. Então, quando id tem um nome parecido com o que precisamos, facilita muito nesse processo de recuperação.
+
+Sendo assim, na linha abaixo, escrevemos let quantidade igual à document..getElementById(). Nos parênteses, dentro de aspas simples, passamos quantidade.
+
+```JavaScript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor 
+    let nomeProduto = document.getElementById('produto'); 
+    let quantidade = document.getElementById('quantidade');
+```
+
+Rodrigo: Desta forma recuperamos o produto escolhido e a quantidade. Acho que já podemos fazer um teste para verificar se está funcionando.
+
+Jacqueline: Vamos! Na linha abaixo, passamos alert(nomeProduto.value) e na seguinte alert(quantidade.value).
+
+```JavaScript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor 
+    let nomeProduto = document.getElementById('produto'); 
+    let quantidade = document.getElementById('quantidade');
+    alert(nomeProduto)
+    alert(quantidade)
+```
+
+Rodrigo: Lembrando que as variáveis estão armazenando o retorno do document.getElementById, que retorna a tag HTML. É por isso que usamos o value, para obter o valor escolhido.
+
+Jacqueline: Feito isso, acessamos o carrinho no navegador. Clicamos no combobox Produto, selecionamos o celular e depois clicamos em "Adicionar".
+
+Ao fazer isso, o alert indica a mensagem completa:
+
+Celular - R$ 1400
+
+Ao clicarmos no botão "Ok", aparece uma janela vazia, pois não definimos nenhuma quantidade.
+
+Então, na lateral esquerda, no campo Qtde., definimos 1 e clicamos novamente em "Adicionar". Aparece o primeiro alert, novamente e ao clicar em "Ok" aparece a quantidade, nesse caso 1.
+
+Rodrigo: Funcionou certinho! A dica é fazer o código aos poucos e testar sempre.
+
+Assim, concluímos a primeira etapa. Recuperamos os elementos do formulário e fizemos um alerta. Na sequência, continuaremos desenvolvendo, pois teremos que adicionar no carrinho e realizar outros cálculos, que são outras etapas.
+
+Jacqueline: Exatamente, até porque no nosso desafio, temos uma única tag para o nome do produto e para o valor e precisamos separá-las. Descobriremos como fazer isso em breve.
+
+#### Aula 3 - Faça como eu fiz: Função para adicionar produto
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para recuperar o produto que foi selecionado no formulário.
+
+Ver opinião do instrutor
+Opinião do instrutor
+
+Você precisará declarar as funções adicionar e limpar, no arquivo app.js:
+
+```Javascript
+function adicionar() {
+
+}
+function limpar() {
+
+}
+```
+
+Agora, dentro da função adicionar, será necessário declarar variáveis que representam o produto selecionado e a quantidade digitada no formulário, além de exibir seus valores com a função alert:
+
+```Javascript
+function adicionar() {
+    let nomeProduto = document.getElementById('produto');
+    let quantidade = document.getElementById('quantidade');
+
+    alert(nomeProduto.value);
+    alert(quantidade.value);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se as informações estão sendo exibidas corretamente.
+
+### Aula 3 - Calculando o valor do produto - Vídeo 3
+
+Transcrição  
+Rodrigo: Concluímos o primeiro passo, recuperamos os valores do formulário, fizemos um alert e verificamos que está funcionando, conseguimos extrair o produto e a quantidade selecionada. Agora, vamos para os próximos passos.
+
+Avançando no Desafio
+Jacqueline: Inclusive, um dos desafios é pegar um campo com o ID de produto e dividir isso em duas variáveis, afinal, precisamos do nome do produto e do valor unitário separados.
+
+Analisando novamente o HTML, notamos que o nosso value da linha 32 tem o nome do produto, um hífen e o valor. Precisaremos tratar isso.
+
+Então, no app.js, mudamos o nome da primeira variável de nomeProduto para produto. Depois, no fim dessa mesma linha, passamos .value.
+
+Feito isso, na linha abaixo criamos a varável let nomeProduto e let valorUnitario. Agora, precisamos extrair o valor do campo de produto.
+
+Para isso, faremos um recurso chamado Split que separa strings em arrays. Embora pareça redundante, o que faremos exatamente é separar usando um separador.
+
+Após let nomeProduto adicionamos o sinal de igual e passamos produto.split(). Em seguida, precisamos definir quem é o separador, ou seja, o que vamos remover. Então, nos parênteses e dentro de aspas simples, escrevemos -, ou seja, o hífen.
+
+Queremos separar o nome do produto do valor usando o hífen como delimitador.
+
+Nesse caso, o hífen vai dividir a informação em duas partes. Temos uma informação antes do hífen e uma informação após o hífen. Queremos a informação antes, que é a primeira posição. Portanto, definiremos que é a posição zero.
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+
+//Código omitido
+```
+
+Rodrigo: Exatamente. Resumindo, o Split é uma função do JavaScript que divide um texto com base no caractere passado como delimitador, retornando um array. Sendo assim, o tamanho do array dependerá de quantas vezes esse caractere aparece.
+
+No nosso caso, sabemos que o hífen aparece apenas uma vez. Assim, temos duas posições, a posição zero, que é o que vem antes do hífen, e a posição um, que contém a cifra e o preço do produto após o hífen.
+
+Jacqueline: Agora, faremos o mesmo para o valor unitário. Nesse caso, além de separar os valores, queremos que o valor não tenha o cifrão.
+
+Rodrigo: Isso é muito comum, às vezes temos uma string e precisamos manipulá-la, remover uma parte ou substituir um valor por outro. Portanto, muitas vezes precisamos realizar essas operações em um texto.
+
+Se usarmos a mesma instrução de split('-') na posição 1, teríamos como retorno o R$. Como queremos apenas o número, podemos passar produto.split('R$'). Como nesse caso queremos o valor que está após o cifrão, definimos, entre colchetes, a posição 1.
+
+Jacqueline: Testaremos então! Para isso, no primeiro alert apagamos o .value. Depois, logo abaixo, acrescentamos outro alert(valorUnitario).
+
+O código fica da seguinte forma:
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario produto.split('R$')[1];
+    let quantidade = document.getElementById('quantidade'); 
+    alert(nomeProduto);
+    alert(valorUnitario);
+    alert(quantidade.value);
+
+//Código omitido
+```
+
+Agora, vamos verificar se recuperamos os dados exatamente como precisávamos. No navegador, selecionamos o produto Celular, definimos a Quantidade como "1" e clicamos no botão "Adicionar".
+
+Feito isso, aparece uma janela informando o nome do produto "Celular". Ao clicar em "Ok" visualizamos o valor do produto sem o cifrão "1400". Ao clicar novamente em "Ok" temos a quantidade "1". Assim, conseguimos recuperar os três valores corretamente.
+
+Agora, precisamos calcular um subtotal, pois se quiséssemos dois celulares o valor exibido teria que ser a soma dos dois, R$2.800. Então, na linha 10, abaixo do último alert, criamos a variável let preco igual à quantidade.value * valorUnitario. Para verificarmos se o subtotal ficou correto, passamos na linha abaixo o alert(preco).
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario = produto.split('R$')[1]; 
+    let quantidade = document.getElementById('quantidade'); 
+    alert(nomeProduto);
+    alert(valorUnitario);
+    alert(quantidade.value);
+    let preco = quantidade.value * valorUnitario;
+    alert(preco);
+    
+//Código omitido
+```
+
+Voltamos no navegador, selecionamos o item celular, definimos a Quantidade como "2" e clicamos em "Adicionar". Feito isso, aparece a primeira janela com o nome do item, seguido pelo preço, a quantidade e a soma total dos produtos.
+
+Segunda tarefa cumprida com sucesso!
+
+Rodrigo: Isso mesmo. Conseguimos os valores e fizemos o tratamento no nome utilizando o Split, uma função muito útil para quebrar os valores em pequenos trechos. Por fim, fizemos o cálculo e imprimimos na tela.
+
+O passo seguinte é adicionar o produto na lista do carrinho. É isso que aprenderemos no vídeo seguinte. Até lá!
+
+#### Aula 3 - Faça como eu fiz: realizando cálculos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para separar o nome do preço do produto, além de calcular o seu valor de acordo com a quantidade.
+
+Opinião do instrutor
+
+Você precisará declarar novas variáveis na função adicionar, para representar o nome do produto e o seu preço, utilizando a função split para fazer a separação dessas informações:
+
+```Javascript
+let produto = document.getElementById('produto').value;
+let nomeProduto = produto.split('-')[0];
+let valorUnitario = produto.split('R$')[1];
+let quantidade = document.getElementById('quantidade');
+
+alert(nomeProduto);
+alert(quantidade.value);
+```
+
+Agora, você precisa calcular o preço do produto, de acordo com a quantidade, e armazená-lo em outra variável:
+
+```Javascript
+let preco = quantidade.value * valorUnitario;
+alert(preco);
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se as informações estão sendo exibidas corretamente.
+
+### Aula 3 - Adicionando produto no carrinho - Vídeo 4
+
+Transcrição  
+Rodrigo: Parabéns por concluir mais uma etapa do projeto!
+
+Agora, vamos para o terceiro passo, o qual é um pouco mais complexo, já que envolve a manipulação da página HTML. Precisamos pegar o produto escolhido e adicioná-lo na lista de produtos na página.
+
+Jacqueline: Antes de prosseguir, removeremos todos os alerts da função adicionar(), afinal, já fizemos os testes necessários. Aproveitamos também para subir o comentário //calcular o preço, nosso subtotal na linha acima de let preco.
+
+Quando concluirmos esse código, podemos optar por apagar os comentários.
+
+Adicionando Produtos ao carrinho de compras
+index.html
+
+Agora daremos continuidade. Para adicionar produtos ao carrinho, precisamos verificar no HTML onde estão sendo exibidos os produtos no carrinho.
+
+Na linha 56 encontramos um H2 chamado Produtos no carrinho. Logo abaixo, temos um section class com o id lista-produtos. Repare que, sempre que abrimos o site, já tem um produto adicionado no carrinho, o celular de R$1.400.
+
+É justamente isso que visualizamos no código. Há um span class, com 1x o produto celular, seguido do valor. Isso indica que, para cada item que adicionarmos, precisamos gerar um bloco de texto semelhante na lista de produtos.
+
+Rodrigo: Cada item no carrinho é representado pela tag section. Portanto, essa seção inteira representa um produto adicionado ao carrinho.
+
+É isso que precisaremos fazer no JavaScript, pegar o produto escolhido e criar uma nova seção para adicioná-la na seção principal, na qual o id é lista-produtos.
+
+Jacqueline: Sendo assim, para facilitar, copiamos o trecho de código da section class="carrinho__produtos__produto", que vai da linha 60 até a 62. Feito isso, voltamos para o app.js.
+
+app.js
+
+Na linha 9, criamos uma let carrinho igual à document.getElementById(). Nos parênteses e dentro de aspas simples, passamos lista-produtos.
+
+Rodrigo: Modificaremos o HTML interno desse elemento, adicionando uma nova tag HTML section conforme comentamos anteriormente. Porém, para facilitar, podemo utilizar o recurso do template string do JavaScript.
+
+Jacqueline: Exatamente, então, para cada produto, passaremos carrinho.innerHTML. Adicionamos o sinal de igual, abrimos crases e colamos o trecho de código que copiamos.
+
+Feito isso, fazemos a alteração necessária no código. Por exemplo, o 1x se refere a quantidade. Como já temos a variável quantidade na linha 6, apagamos e passamos ${quantidade}.
+
+Rodrigo: Faremos o mesmo para o nome do produto e o subtotal. Assim, o código fica da seguinte forma:
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario produto.split('R$ ')[1]; =
+    let quantidade = document.getElementById('quantidade'); 
+        //calcular o preço, o nosso subtotal
+    let preco = quantidade.value * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+```
+
+Rodrigo: Lembrando que isso dependerá do HTML. Eventualmente, você, como pessoa desenvolvedora, precisará alterar o JavaScript se quiser manipular a página. Pegar as mesmas tags e adaptar para tornar o site dinâmico, substituindo os valores fixos pelos valores que recuperamos nos passos anteriores.
+
+Jacqueline: Agora, vamos verificar se o item foi adicionado no carrinho. Abrimos o navegador, selecionamos o produto Fone de ouvido e definimos a quantidade como 2. Ao clicar no botão "Adicionar" dá erro no carrinho.
+
+Rodrigo: Repare que o erro é referente a quantidade.
+
+Jacqueline: Repare que, quando puxamos a variável quantidade do document.getEelementById, não usamos .value, como fizemos no produto. Então, em todos os locais que usamos quantidade, precisamos repetir o .value.
+
+Para facilitar, podemos apagar o .value do restante do código e passar somente no fim da variável let quantidade. Dessa forma:
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario produto.split('R$ ')[1]; =
+    let quantidade = document.getElementById('quantidade').value; 
+        //calcular o preço, o nosso subtotal
+    let preco = quantidade * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    carrinho.innerHTML = `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+```
+
+Salvamos o código, agora testaremos novamente. Com o produto fone de ouvido selecionado, definimos a quantidade 12 e clicamos em "Adicionar". Feito isso aparece no carrinho a quantidade e o valor total R$ 1.200.
+
+Se adicionarmos mais produtos, nesse caso 19 Oculus VR, repare que ao clicar em "Adicionar" o produto anterior some do carrinho.
+
+Sendo assim, precisamos informar que essa lista precisa ter tudo o que já tinha mais os novos itens, ou seja, precisa concatenar. Então, na linha 10, após o sinal de igual, passamos carrinho.innerHTML +.
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario produto.split('R$ ')[1]; =
+    let quantidade = document.getElementById('quantidade').value; 
+        //calcular o preço, o nosso subtotal
+    let preco = quantidade * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    //adicionar no carrinho
+        carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+```
+
+Primeiro adicionamos 12 fones de ouvido e depois 18, feito isso notamos que os produtos estão sendo adicionados corretamente no carrinho com os subtotais corretos.
+
+Rodrigo: Perfeito! Na sequência calcularemos o valor total, fazer a limpeza da quantidade e por fim criar o botão de limpar.
+
+Jacqueline: Esperamos que você esteja conseguindo fazer essas implementações e gostando do desafio. Até o vídeo seguinte!
+
+#### Aula 3 - Faça como eu fiz: comprando produtos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para adicionar o produto no carrinho.
+
+Opinião do instrutor
+
+Você precisará declarar uma nova variável, na função adicionar, para representar o carrinho de compras da página:
+
+let carrinho = document.getElementById('lista-produtos');
+Copiar código
+Agora, precisa concatenar no html desse carrinho o novo produto adicionado, utilizando as mesmas tags html que representam um produto no carrinho:
+
+```Javascript
+carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se o produto está sendo adicionado corretamente no carrinho.
+
+### Aula 3 - Calculando valor total do carrinho - Vídeo 5
+
+Transcrição  
+Rodrigo: Agora vamos para a etapa final do nosso projeto, criar o cálculo total dos produtos do carrinho.
+
+Jacqueline: Para isso, é necessário acumular os valores de cada produto adicionado. Por exemplo, se tivermos um fone de ouvido e cinco óculos no carrinho, precisamos somar todos esses valores. Então, precisaremos de um variável que faça isso.
+
+Porém, não podemos criar essa variável na função adicionar, pois se ao clicarmos no botão "Adicionar" essa função for chamada e zerar o total, não vai funcional. Sendo assim, o ideal é que essa variável fique fora dessa função.
+
+Calculando o total dos produtos no carrinho de compras
+Jacqueline: Então, na primeira linha de código, passamos let totalGeral igual à 0. A cada adição de um novo produto no carrinho, esse valor será adicionado ao totalGeral.
+
+Então, na linha 17, após totalGeral adicionamos o sinal de igual e passamos totalGeral + preco, ou seja, o que calculamos como subtotal na linha 10, que é a multiplicação da quantidade pelo valor unitário do produto.
+
+Tendo o totalGeral calculado, precisamos atualizar o valor total exibido na página. Para isso, precisamos encontrar o elemento HTML que apresenta o valor total.
+
+index.html
+
+Na página HTML temos o elemento carrinho__total com o id valor-total, seguido do valor.
+
+Rodrigo: Esse é o elemento que precisamos manipular para atualizar o valor total dos produtos do carrinho.
+
+app.js
+
+Jacqueline: Voltamos para o arquivo app.js. Na linha abaixo de totalGeral, passamos let campoTotal igual à document.getElementById(). Nos parênteses e dentro de aspas simples, passamos valor-total.
+
+Agora, precisamos atualizar o valor desse campo com o valor da variável totalGeral. Para isso, na linha abaixo, passamos campoTotal.textContent, adicionamos o sinal de igual, abrimos crases e passamos R$ ${totalGeral}.
+
+```Javascript
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario = produto.split('R$')[1];
+    let quantidade = document.getElementById('quantidade').value; 
+    //calcular o preço, o nosso subtotal
+    let preco = quantidade * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    //adicionar no carrinho
+    carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+    //atualizar o valor total
+    totalGeral = totalGeral + preco;
+    let campoTotal = document.getElementById('valor-total'); 
+    campoTotal.textContent = R$ ${totalGeral}``;
+}
+function limpar() {
+
+}
+```
+
+Feito isso, vamos testar a aplicação. Voltamos na página, selecionamos 1 fone de ouvido no carrinho. Depois, adicionamos 1 microfone. Deu certo, o valor total está correto.
+
+Porém, repare que ainda temos o item celular, que aparece automaticamente no carrinho, assim que abrimos a página. Precisamos remover esse produto padrão.
+
+Rodrigo: Portanto, assim como inicializamos o valor total como zero, é necessário inicializar o carrinho vazio, sem nenhum produto predefinido.
+
+Jacquline: Já recuperamos a tag lista-produtos na linha 11. Agora, o que precisamos fazer é adicioná-la na linha 2 do código. Para isso, copiamos e colamos esse trecho de código e passamos .innerHTML igual a '', ou seja, vazio. Portanto, ao acessar a página, não deve ter nenhum item.
+
+```Javascript
+let totalGeral = 0; 
+document.getElementById('lista-produtos').innerHTML = '';
+
+//Código omitido
+```
+
+Rodrigo: Lembrando que isso deve estar fora da função, caso contrário, sempre que clicarmos no botão "Adicionar" o carrinho será zerado.
+
+Jacqueline: Vamos testar novamente. Ao abrir a página, repare que o produto não está no carrinho, porém o valor total não está zerado. Isso significa que precisaremos inicializar a tag do total com zero.
+
+Faremos o mesmo procedimento anterior. Na linha 19, copiamos o trecho de código document.getElementById('valor-total') e colamos na linha 3 do código, seguido de .textoContent = 'R$ 0'.
+
+```Javascript
+let totalGeral = 0;
+document.getElementById('lista-produtos').innerHTML = '';
+document.getElementById('valor-total').textoContent = 'R$ 0';
+
+//Código omitido
+```
+
+Acessamos a página e notamos que deu certo, não aparece nenhum item no carinho e o valor aparece zerado. Em seguida, adicionamos 2 fones de ouvido, seguido de 3 celulares. Ao fazer isso os produtos parecem no carrinho, assim como as quantidades e a soma total do carrinho.
+
+Perceba que, o campo quantidade sempre fica autopreenchido com o valor que definimos anteriormente. Também podemos limpá-lo após adicionar um item.
+
+Rodrigo: Isso mesmo, apenas a quantidade, não é para limpar o carrinho.
+
+Jacqueline: Então, faremos essa implementação antes de criarmos o botão limpar. Na linha 22, escrevemos quantidade igual à 0.
+
+Rodrigo: Mas, observe que na linha 10, pegamos o valor do campo do HTML. Então, precisamos repetir o document.getElementById.
+
+Jacqueline: Exatamente, então, na linha 22, apagamos quantidade e passamos document.get.ElementById(''quantidade).value = 0.
+
+```Javascript
+//Código omitido
+
+//atualizar o valor total
+totalGeral = totalGeral + preco;
+let campoTotal = document.getElementById('valor-total'); 
+campoTotal.textContent = `R$ ${totalGeral}`;
+document.getElementById('quantidade').value = 0;
+```
+
+Rodrigo: Essa ação fica dentro da função, pois queremos executá-la a cada clique no botão Adicionar.
+
+Jacqueline: Para testar, adicionamos um fone de ouvido. Feito isso, o campo Quantidade é zerado. Deu certo!
+
+Rodrigo: Agora, falta criarmos o botão Limpar.
+
+Jacqueline: Esse botão precisa limpar o carrinho, o total e o total geral que acumula valores, ou seja, resetar as variáveis para zero ou vazio.
+
+Analisando o código, repare que já fizemos isso. Antes da função adicionar(), zeramos a variável totalGeral na linha 1, abaixo, zeramos o carrinho e o total. Nossa função zerar precisará fazer o mesmo.
+
+Rodrigo: Então podemos copiar as três primeiras linhas de código e passar na função que estava vazia.
+
+Jacqueline: Exatamente! Então copiamos e dentro das chaves da função limpar(), colamos.
+
+Rodrigo: Um detalhe importante é que, como a primeira linha da função limpar está usando o keyword let, estamos redefinindo a variável, então temos que remover essa palavra. Portanto, atribuir zero no total, mas a declaração da variável nas primeiras linhas do código permanecerá.
+
+Jacqueline: Isso mesmo, feito isso o código fica da seguinte forma:
+
+```Javascript
+//Código omitido
+}
+function limpar() {
+    totalGeral = 0;
+    document.getElementById('lista-produtos').innerHTML = '';
+    document.getElementById('valor-total').textContent = 'R$ 0';
+}
+```
+
+Feito isso, na primeira linha de código, apagamos o valor 0 e deixamos apenas let totalGeral. Em seguida, apagamos as duas linhas document e substituímos pela função limpar().
+
+```Javascript
+let totalGeral;
+limpar();
+function adicionar() {
+    //recuperar valores nome do produto, quantidade e valor
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario = produto.split('R$')[1];
+    let quantidade = document.getElementById('quantidade').value; 
+    //calcular o preço, o nosso subtotal
+    let preco = quantidade * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    //adicionar no carrinho
+    carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+    //atualizar o valor total
+    totalGeral = totalGeral + preco;
+    let campoTotal = document.getElementById('valor-total'); 
+    campoTotal.textContent =  `R$ ${totalGeral}`;
+    document.get.ElementById('quantidade').value = 0;
+}
+
+function limpar() {
+    let totalGeral 0; =
+    document.getElementById('lista-produtos').innerHTML = '';
+    document.getElementById('valor-total').textContent = 'R$ 0';
+}
+```
+
+Ao acessar a página o carrinho aparece zerado, assim como o valor total. Adicionamos 2 celulares e depois 1 Oculus Vr. Feito isso, os produtos aparecem no carrinho com a soma dos valores. Em seguida, clicamos no botão "Limpar" e o carrinho é zerado. Tudo certo!
+
+Rodrigo: Concluímos mais um desafio! Essas implementações foram mais trabalhosas, pois envolveram vários passos como pegar o campo, fazer o tratamento, adicionar na lista, calcular o valor total e limpar o carrinho.
+
+Esse foi um exemplo de como utilizar conceitos de programação declarando variáveis e chamando funções, tanto locais como globais. Assim, reforçamos nosso conhecimento em lógica de programação.
+
+Jacqueline: Lembrando de seguir esse processo de criação de código, sempre testando as implementações e fazendo as correções necessárias.
+
+Rodrigo: Na sequência faremos um terceiro desafio que será um novo projeto com outras possibilidades para consolidar os conhecimentos em lógica de programação.
+
+#### Aula 3 - Faça como eu fiz: finalizando a compra e limpando o carrinho
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para atualizar o valor total do carrinho, e também o código para limpar o carrinho.
+
+Opinião do instrutor
+
+Você precisará declarar uma nova variável para representar o valor total do carrinho, sendo que essa variável deve ser declarada no início do arquivo app.js, ou seja, fora das funções:
+
+> let totalGeral;
+
+Agora, na função adicionar, será necessário calcular e atualizar o novo valor total, além de zerar a quantidade:
+
+```Javascript
+totalGeral = totalGeral + preco;
+let campoTotal = document.getElementById('valor-total');
+campoTotal.textContent = `R$ ${totalGeral}`;
+document.getElementById('quantidade').value = 0;
+```
+
+Em sequência, você precisa escrever o código da função limpar, que será responsável por zerar o carrinho e o valor total da compra:
+
+```Javascript
+function limpar() {
+    totalGeral = 0;
+    document.getElementById('lista-produtos').innerHTML = '';
+    document.getElementById('valor-total').textContent = 'R$0';
+}
+```
+
+Por fim, você precisa chamar a função limpar no início do arquivo app.js, após a declaração da variável totalGeral:
+
+```Javascript
+limpar();
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se todas as funcionalidades estão funcionando conforme o esperado.
+
+Confira o código final do arquivo app.js:
+
+```Javascript
+let totalGeral;
+limpar();
+function adicionar() {
+    let produto = document.getElementById('produto').value;
+    let nomeProduto = produto.split('-')[0];
+    let valorUnitario = produto.split('R$')[1];
+    let quantidade = document.getElementById('quantidade').value;
+    let preco = quantidade * valorUnitario;
+    let carrinho = document.getElementById('lista-produtos');
+    carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+    <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R${preco}</span>
+  </section>`;
+
+    totalGeral = totalGeral + preco;
+    let campoTotal = document.getElementById('valor-total');
+    campoTotal.textContent = `R$ ${totalGeral}`;
+    document.getElementById('quantidade').value = 0;
+}
+function limpar() {
+    totalGeral = 0;
+    document.getElementById('lista-produtos').innerHTML = '';
+    document.getElementById('valor-total').textContent = 'R$0';
+}
+```
+
+#### Aula 3 - Variáveis e cálculos
+
+Suponha que você está desenvolvendo um programa para calcular o custo total de uma viagem de carro com base em diferentes fatores. Você deseja que os usuários informem a distância da viagem (em quilômetros), a eficiência do carro (em quilômetros por litro), o preço da gasolina por litro e a velocidade média durante a viagem (em quilômetros por hora). Com essas informações, você calculará o custo total da viagem.
+
+Agora, você precisa criar uma função que recebe esses valores como entrada e retorna o custo total da viagem. Você escreveu o seguinte código para representar uma função que realiza o cálculo:
+
+```Javascript
+function calcularCustoViagem(distancia, eficiencia, precoGasolina, velocidadeMedia) {
+    // codigo do calculo aqui
+}
+```
+
+Escolha a alternativa que apresenta o código correto da função completa para cálculo do custo total da viagem:
+
+```Javascript
+function calcularCustoViagem(distancia, eficiencia, precoGasolina, velocidadeMedia) {
+    let tempoViagem = distancia / velocidadeMedia;
+    let consumoCombustivel = distancia / eficiencia;
+    let custoTotal = consumoCombustivel * precoGasolina;
+    return custoTotal;
+}
+```
+
+Esse código calcula corretamente o custo total da viagem, usando variáveis apropriadas para cada parte do cálculo.
+
+### Aula 3 -  - Vídeo 6
+### Aula 3 -  - Vídeo 7
