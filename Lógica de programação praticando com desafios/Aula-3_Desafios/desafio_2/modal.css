@@ -1,0 +1,28 @@
+#dialogExibiFicha {
+    position: absolute;
+    top: 500px;
+    left: 500px;
+    z-index: 110;
+    /* background-image: url("./imgs/code.png");
+    background-size: contain;
+    background-position: top; */
+    background: linear-gradient(#01080E 100%,
+            #041832 46.67%,
+            #041832 33.33%,
+            #1354A5 20%);
+    border-radius: 0.5rem;
+    border: 1px solid #1875E8;
+    /* opacity: .6; */
+    color: #fff;
+    font-size: 20pt;
+    padding: 3rem;
+    /* max-width: 400px;
+    max-height: 600px; */
+}
+#dialogExibiFicha::backdrop {
+    background: linear-gradient(#01080E 100%,
+    #041832 46.67%,
+    #041832 33.33%,
+    #1354A5 20%);
+    opacity: .87;
+}

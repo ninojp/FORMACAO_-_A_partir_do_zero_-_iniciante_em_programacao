@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* FAMILIAS DE FONTES
+<weight>: Use a value from 100 to 900
+font-family: "Doto", sans-serif;
+font-optical-sizing: auto;
+
+font-family: "Protest Revolution", serif;
+font-weight: 400;
+
+<weight>: Use a value from 400 to 700
+font-family: "Caveat", serif;
+font-optical-sizing: auto;
+*/
+body {
+    color: #fff;
+    /* height: 100vh; */
+    height: 100vmax;
+    background: linear-gradient(#01080E 100%, #041832 46.67%, #041832 33.33%, #1354A5 20%);
+}
+
+body::before {
+    background-image: url("./imgs/hexágono-de-fibra-3d.jpg");
+    background-repeat: repeat;
+    background-position: center;
+    background-size: auto;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100vmax;
+    opacity: 0.15;
+}
+
+.divEffectBin {
+    width: 100vmax;
+    height: 100vmax;
+    background-image: url("./imgs/code.png");
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: top;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    padding: 2rem;
+    background: linear-gradient(#01080E 100%,
+            #041832 46.67%,
+            #041832 33.33%,
+            #1354A5 20%);
+}
+
+header h1 {
+    font-size: 38pt;
+    font-family: "Protest Revolution", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+header p {
+    font-size: 16pt;
+    font-family: "Protest Revolution", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.sectionFormDivsInputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 4rem;
+}
+
+.formCadastroClass {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid #1875E8;
+    /* background: linear-gradient(#1354A5 0%, #041832 33.33%, #041832 66.67%, #01080E 100%); */
+    background: linear-gradient(#01080E 100%,
+            #041832 46.67%,
+            #041832 33.33%,
+            #1354A5 20%);
+    /* opacity: 0.9; */
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 28pt;
+    font-family: "Protest Revolution", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+label {
+    font-size: 18pt;
+    font-family: "Bokor", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.DivInputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 47%;
+    background: linear-gradient(#1354A5 0%, #041832 33.33%, #041832 66.67%, #01080E 100%);
+    /* background-color: #041832; */
+    border-radius: 0.5rem;
+    min-height: 40px;
+    padding: 1rem;
+    z-index: 100;
+    border: .1px solid #1354A5;
+    box-shadow: 1px 1px 1px #000;
+    /* background-color: transparent; */
+}
+
+.DivInputs input {
+    width: 24.75rem;
+    height: 2.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #cbcbcb;
+    background-color: #1355a50c;
+    /* color:#01080E; */
+    /* color:#1875E8; */
+    color: #cbcbcb;
+    font-family: "Bokor", system-ui;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 200;
+    line-height: 110%;
+
+    /* background: url('./assets/arrow-down.svg') no-repeat right 1rem top 50%; */
+}
+
+.DivInputs input::placeholder {
+    /* appearance: textfield; */
+    color: #cbcbcb;
+}
+

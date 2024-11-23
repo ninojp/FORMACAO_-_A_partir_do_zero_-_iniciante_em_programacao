@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio 2 da Aula 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Doto:wght@100..900&family=Protest+Revolution&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./formulario.css">
+    <link rel="stylesheet" href="./modal.css">
+    <script src="./formulario.js" defer></script>
+</head>
+
+<body>
+    <div class="divEffectBin">
+        <header>
+            <h1>Desafio Nº 2 da Aula 3</h1>
+            <p>Crie um formulário simples com campos de entrada e utilize JavaScript para recuperar os valores digitados
+                nos
+                campos usando a propriedade value. Exiba os valores no console e na tela.</p>
+        </header>
+        <main>
+            <section class="sectionFormDivsInputs">
+                <form action="" name="formCadastro" class="formCadastroClass">
+                    <h2>Formulário de Cadastro</h2>
+                    <div class="DivInputs">
+                        <label for="primeiroNome">Digite seu Primeiro Nome:</label>
+                        <input type="text" name="primeiroNome" id="primeiroNome" placeholder="Primeiro Nome">
+                    </div>
+                    <div class="DivInputs">
+                        <label for="segundoNome">Digite seu Segundo Nome:</label>
+                        <input type="text" name="segundoNome" id="segundoNome" placeholder="Segundo Nome">
+                    </div>
+                    <div class="DivInputs">
+                        <label for="inputIdade">Digite sua Idade:</label>
+                        <input type="number" name="inputIdade" id="inputIdade" placeholder="Sua Idade">
+                    </div>
+                    <div class="DivInputs">
+                        <label for="seuEmail">Digite seu E-Mail:</label>
+                        <input type="mail" name="seuEmail" id="seuEmail" placeholder="Seu E-mail">
+                    </div>
+                    <div class="DivInputs">
+                        <label for="dataNascimento">Selecione Sua Data de Nascimento:</label>
+                        <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Seu E-mail">
+                    </div>
+                    <div class="DivInputs">
+                        <label for="fotoPerfil">Selecione Sua Imagem de Perfil:</label>
+                        <input type="file" name="fotoPerfil" id="fotoPerfil">
+                    </div>
+                    <div class="DivInputs">
+                        <button id="btnFormSubmit" type="submit">Exibir Ficha completa</button>
+                    </div>
+                </form>
+            </section>
+            <dialog id="dialogExibiFicha">
+                <p id="pNomeCompleto">Nome Completo:</p>
+                <p id="pIdade">Idade Atual:</p>
+                <p id="pEmail">E-Mail:</p>
+                <p id="pDataNasci">Data de Nascimento</p>
+                <p id="pImagemPerfil">Imagem</p>
+                <menu>
+                    <button id="cancel" type="reset">Fechar</button>
+                </menu>
+            </dialog>
+        </main>
+    </div>
+</body>
+</html>
