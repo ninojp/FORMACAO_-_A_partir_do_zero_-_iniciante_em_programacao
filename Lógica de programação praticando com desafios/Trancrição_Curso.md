@@ -2721,13 +2721,650 @@ Nessa aula, você aprendeu como:
 
 - Utilizar o recurso de Template String do JavaScript, para concatenar valores de variáveis em String.
 
-## Aula 4 - 
+## Aula 4 - Projeto Ingresso Online
 
-### Aula 4 -  - Vídeo 1
-### Aula 4 -  - Vídeo 2
-### Aula 4 -  - Vídeo 3
-### Aula 4 -  - Vídeo 4
-### Aula 4 -  - Vídeo 5
-### Aula 4 -  - Vídeo 6
-### Aula 4 -  - Vídeo 7
-### Aula 4 -  - Vídeo 8
+### Aula 4 - Apresentação do projeto Ingresso Online - Vídeo 1
+
+Transcrição  
+Jacqueline: Temos mais desafios para praticar lógica. O que vamos apresentar agora?
+
+Rodrigo: Agora vamos trabalhar no projeto de Compras de ingressos. Importamos esse terceiro projeto no Visual Studio Code e vamos seguir com o mesmo processo: examinar o projeto rodando para entender qual é a proposta do desafio.
+
+Então, vamos clicar com o botão direito no arquivo index.html (no Explorador de arquivos, na aba esquerda da tela), escolher a opção de rodar o live server ("Open With Live Server"). O projeto será aberto no navegador.
+
+Está aqui o nosso terceiro desafio! Trata-se de uma simulação da funcionalidade de compra de ingressos do site fictício E-ticket.
+
+![alt text](image.png)
+
+página de compra de ingressos do site e-ticket. sobre um fundo preto e azul-marinho, uma área de título "Compre seu ingresso" emoldurada por uma linha verde neon. abaixo do título, os campos "Escolha o tipo", com uma lista suspensa de opções, o campo "Quantidade" com um campo para inserir texto e o botão "Comprar". Abaixo disso, um quadro de título "quantidade disponível" indicando "Pista - 100", "Cadeira superior - 200" e "Cadeira inferior - 400". ao lado, um ícone azul de ticket de ingresso.
+
+E como funciona o projeto?
+
+Nós temos um formulário com dois campos que a pessoa terá que preencher. Ela escolhe qual é o tipo de ingresso, seja cadeira inferior, cadeira superior ou pista, vai digitar uma quantidade e clicar no botão de comprar.
+
+Embaixo, temos as informações das quantidades disponíveis por tipo de ingresso. Se comprarmos, por exemplo, 50 unidades do ingresso do tipo pista, esse painel deve decrementar 50 unidades do tipo Pista e exibir apenas com 50 ingressos disponíveis, pois o total disponível atual é de 100 unidades.
+
+Quando preenchemos o formulário e clicamos no botão de comprar, perceba que a quantidade realmente diminui. Se tentarmos comprar as 50 unidades restantes, a quantidade de ingressos pista é atualizada para zero.
+
+Nesse momento, o site não deveria permitir eu comprar mais um ingresso do tipo pista. Ao clicar no botão para comprar, é exibido um alerta em forma de pop-up: Quantidade indisponível para pista!
+
+Essa é a proposta do desafio! No entanto, vamos entregar o projeto sem essa funcionalidade, porque é seu trabalho tentar implementá-la utilizando os conhecimentos de lógica de programação.
+
+Jacqueline: A situação de tentar comprar algum produto num site e ele ficar indisponível é muito comum. Se você tentou comprar ingressos para o show da Taylor Swift, certamente apenas viu na sua tela o alerta de "ingressos indisponíveis" e sofreu!
+
+Nós vamos implementar essa funcionalidade agora, no site da E-ticket. Nos encontramos no próximo vídeo!
+
+### Aula 4 - Obtendo ingresso escolhido - Vídeo 2
+
+Transcrição  
+Jacqueline: Vamos verificar se nossas pessoas estudantes conseguiram realizar o desafio. Estou curiosa para saber se a implementação da funcionalidade de selecionar o tipo de ingresso e subtrair a quantidade de ingressos disponíveis foi uma boa experiência. Vamos realizar esse código em conjunto?
+
+Rodrigo: Se você não conseguiu, não há problema! Nós apresentaremos uma solução possível, passo a passo.
+
+Então, vamos para o Visual Studio Code. Abriremos o arquivo app.js, que está em branco, sem qualquer implementação. Precisamos analisar novamente a página HTML e entender sua estrutura. Então, vamos abrir o arquivo index.html.
+
+Nela, a partir da linha 23, temos um formulário com dois campos: um para o tipo de ingresso e outro para a quantidade. Além disso, há um botão que submete essa requisição.
+
+Observando esse botão, nota-se a propriedade onclick. Ela chama a função comprar() do JavaScript, que no momento não existe.
+
+index.html
+
+> `<button onclick="comprar()" type="button">Comprar</button>`
+
+Vamos começar por essa função.
+
+Vamos abrir o arquivo app.js e, aqui, criaremos a função comprar() da seguinte maneira:
+
+```Javascript
+function comprar() {
+
+}
+```
+
+Essa função não recebe nenhum parâmetro, como observamos no HTML.
+
+Agora, precisamos realizar um processo similar ao anterior: recuperar os elementos na página para obter as informações que foram digitadas nos campos.
+
+Jacqueline: Isso é crucial, porque é a partir do tipo de ingresso e da quantidade escolhidos que toda a nossa lógica será desenvolvida.
+
+Rodrigo: O primeiro passo é recuperar essas informações e guardá-las em variáveis. Vamos criar uma variável tipo para recuperar o elemento na página utilizando document.getElementById().
+
+Passamos o ID do elemento como parâmetro desse método. Para saber o ID do elemento, preciamos conferir o arquivo HTM. O campo do tipo é construído pela tag select, que desenha aquela combo box (menu suspenso de opções), cujo ID é 'tipo-ingresso'. Então:
+
+> let tipo = document.getElementById('tipo-ingresso');
+
+De forma similar, o campo da quantidade é uma tag input, um campo de texto, que tem como ID 'qtd'. Então, também precisamos guardar essa informação em uma variável:
+
+> let qtd = document.getElementById('qtd');
+
+Com isso, provavelmente conseguimos recuperar as duas informações.
+
+Vamos também fazer um alerta para confirmar se as opções escolhidas, tanto no campo tipo quanto na quantidade, estão sendo enviadas corretamente para o JavaScript. Pegaremos o valor (value) enviado pela pessoa para cada tag HMTL:
+
+```Javascript
+alert(tipo.value);
+alert(qtd.value);
+```
+
+Podemos testar.
+
+Jacqueline: Lembrando que é sempre importante fazer isso. Não adianta já começar a programar toda a lógica sem conferir se o básico necessário foi feito corretamente.
+
+É preferível realizar por etapas, testando gradualmente, como estamos recomendando. Caso contrário, se houver algum erro após a escrita do código inteiro, encontrá-lo será mais complexo.
+
+Vamos abrir o navegador na página de compra de ingressos. Vamos escolher, por exemplo, "pista", e digitar, por exemplo, 15 unidades.
+
+Clicaremos no botão de comprar, e observe o que acontece: aparece um pop-up com a mensagem "pista". Ao que parece, recuperamos corretamente o tipo. Outro pop-up com o texto "15" também apareceu, que foi o que digitamos no campo de quantidade.
+
+Concluímos o primeiro passo: conseguimos recuperar as informações do formulário. Agora, precisamos criar um algoritmo para decrementar a quantidade disponível de ingressos quando eles são comprados.
+
+Jacqueline: Também precisamos identificar as quantidades disponíveis. Temos muitas tarefas para fazer aqui! Vamos continuar o nosso código logo em seguida.
+
+#### Aula 4 - Faça como eu fiz: recuperando elementos do formulário
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para recuperar o ingresso que foi selecionado no formulário.
+
+Opinião do instrutor
+
+Você precisará declarar a função comprar, no arquivo app.js:
+
+```Javascript
+function comprar() {
+
+}
+```
+
+Agora, dentro dessa função, você precisa declarar variáveis que representam o tipo de ingresso selecionado e a quantidade digitada no formulário, além de exibir seus valores com a função alert:
+
+```Javascript
+function comprar() {
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = document.getElementById('qtd');
+    alert(tipo.value);
+    alert(qtd.value);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se as informações estão sendo exibidas corretamente.
+
+### Aula 4 - Realizando compra para tipo pista - Vídeo 3
+
+Transcrição  
+Jacqueline: Nosso alerta foi acionado corretamente, já estamos exibindo corretamente o tipo de ingresso e a quantidade desejada. Agora queremos verificar se a quantidade desejada está disponível para venda e realmente efetuar a compra. Vamos implementar essa lógica!
+
+Rodrigo: Vamos excluir esses dois alertas do arquivo JavaScrip, pois já sabemos que o tipo e a quantidade estão sendo obtidos corretamente.
+
+Neste código, teremos que usar condicionais novamente, porque a lógica para verificar a quantidade disponível e decrementá-la após a compra é baseada no tipo escolhido no formulário.
+
+Então, vamos inserir um if () que será baseado no valor do tipo, que será verificado no parâmetro desse if. Então, if(tipo.value == 'pista'){} significa que a pessoa selecionou 'pista' no combo box da página.
+
+Agora, podemos colocar a lógica aqui dentro do if() ou, para evitar um código gigante, podemos dividir em funções.
+
+Jacqueline: Isso melhora a legibilidade do nosso código e, se precisarmos realizar a manutenção para um tipo específico, por exemplo, conseguimos fazê-lo diretamente na função.
+
+Rodrigo: Então, se a condição desse if for satisfeita, vamos chamar uma função comprarPista(). E precisamos levar como parâmetro dela a quantidade digitada no formulário, ou seja, o qtd.value.
+
+app.js
+
+```Javascript
+function comprar() {
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = document.getElementById('qtd').value;
+    if (tipo.value == 'Pista') {
+        comprarPista(qtd.value);
+        }
+}
+```
+
+Agora, precisamos criar a função comprarPista(), que recebe uma quantidade qtd como parâmetro.
+
+A lógica de compra de ingressos da pista ficará apenas dentro dessa função comprarPista(), para que a função comprar() principal não fique extensa.
+
+O que precisamos fazer nessa função? Se a pessoa escolheu 'pista', qual seria o algoritmo que precisamos implementar aqui?
+
+Jacqueline: O primeiro passo seria recuperar a quantidade disponível de ingressos 'pista'. Vamos obter essa informação do HTML.
+
+Rodrigo: Então, voltando ao site, temos a quantidade atual disponível de ingressos por tipo no painel inferior da página de compra. Então, precisamos recuperar esse número 100, quantidade disponível dos ingressos do tipo Pista.
+
+Para isso, precisamos verificar no HTML qual é a tag, se tem um ID, onde está esse número 100 na página.
+
+Então, voltando ao código do index.html, na parte inferior existe uma seção com as quantidades disponíveis. É uma lista, com a tag ul, e cada tipo de ingresso tem uma tag li. Dentro da tag li tem o texto com o tipo e uma tag span que está delimitando a quantidade. Cada tag dessas tem um ID, que é o que precisamos recuperar no JavaScript.
+
+index.html
+
+```html
+<section>
+        <h2>Quantidade disponível</h2>
+        <ul class="lista">
+                <li>Pista<span id="qtd-pista">100</span></li>
+                <li>Cadeira superior<span id="qtd-superior">200</span></li>
+                <li>Cadeira inferior<span id="qtd-inferior">400</span></li>
+
+        </ul>
+        <img src="./assets/Ingresso.svg" alt="">
+</section>
+```
+
+O ID que queremos é o qtd-pista. Então, no app.js, teremos que criar a variável qtdPista recebendo document.getElementById('qtd-pista').
+
+app.js
+
+```Javascript
+function comprarPista(qtd) {
+    let qtdPista = document.getElementById('qtd-pista')
+}
+```
+
+Conseguimos recuperar a quantidade. Agora, precisamos verificar se a quantidade digitada no formulário é menor ou igual à quantidade disponível na pista.
+
+Jacqueline: Se for superior, teremos que exibir aquela mensagem de que não temos a quantidade desejada disponível.
+
+Vamos precisar fazer um condicional aqui. Então, if(){}. A ideia aqui é verificar se a quantidade digitada é maior do que a quantidade disponível de ingressos 'pista'. Ou seja, if(qtd > qtdPista){};.
+
+Isso significa que a pessoa está tentando comprar mais ingressos do que temos disponíveis. Então, vamos exibir um alerta com a mensagem "Quantidade indisponível para tipo pista":
+
+Então:
+
+```Javascript
+function comprarPista(qtd) {
+    let qtdPista = document.getElementById('qtd-pista');
+    if (qtd > qtdPista) {
+        alert('Quantidade indisponível para tipo pista');
+        }
+}
+```
+
+Desta forma, se a pessoa tentar comprar mil ingressos, mas temos apenas cem disponíveis, ela receberá essa mensagem de indisponibilidade.
+
+Por outro lado, se cair no else, é porque temos a quantidade desejada disponível. Agora, qual será a lógica nesse caso?
+
+Jacqueline: Primeiramente, precisamos informar que a compra foi realizada com sucesso. Além disso, a quantidade disponível precisa ser subtraída conforme as compras são feitas. Por exemplo, se inicialmente tivermos 100 itens disponíveis, ao realizar a compra de uma unidade, ficaremos com 99.
+
+Rodrigo: Vamos copiar o alert() para adicionar uma notificação após o else, com o texto "Compra realizada com sucesso".
+
+Mas, antes de exibir a mensagem, é necessário atualizar a quantidade disponível do tipo de ingresso na página.
+
+A quantidade disponível, que já recuperamos anteriormente e armazenamos na variável qtdPista, precisa ser decrementada pela quantidade comprada e atualizada na página. Para isso, a qtdPista deve receber o valor atual menos a quantidade que a pessoa comprou. Ou seja: qtdPista - qtd.
+
+No entanto, apenas calculamos e ainda não atualizamos a página. O elemento HTML da quantidade é uma tag li/span, então ela não tem uma propriedade value pois não é um campo de formulário.
+
+Então, para essa atualização, devemos utilizar a propriedade textContent para modificar o texto do elemento.
+
+Além disso, a variável qtdPista está recebendo document.getElementById('qtd-pista'), a tag HTML. Mas, na hora de realizar a comparação no if, precisamos usar qtdPista.textContent, pois queremos comparar com o texto e não com a tag.
+
+```Javascript
+function comprarPista(qtd) {
+    let qtdPista = document.getElementById('qtd-pista');
+    if (qtd > qtdPista.textContent) {
+        alert('Quantidade indisponível para tipo pista');
+    } else {
+        qtdPista = qtdPista - qtd;
+        qtdPista.textContent = qtdPista;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Jacqueline: Vamos testar para garantir que esteja tudo funcionando corretamente.
+
+Rodrigo: Na página, vamos selecionar a opção Pista (que, por padrão, tem 100 unidades) no campo do tipo de ingresso e tentar reservar 50 unidades de ingresso. Ao clicar no botão para comprar, não acontece nada.
+
+Jacqueline: Teremos que revisar nosso código. Erros são comuns e vão sendo corrigidos progressivamente.
+
+Rodrigo: Uma observação importante sobre nosso código é que, na função comprar(), recuperamos a quantidade digitada no formulário através de qtd.value. Mas, no JavaScript, quando recuperamos elementos da página, a informação retorna sempre como string (texto). Porém, em nosso caso, a quantidade não é um texto, é um número.
+
+Portanto, precisamos converter esse valor para um número. Para isso, vamos usar a função parseInt() do JavaScript, que conhecemos nos cursos anteriores de lógica.
+
+Na linha que declara a variável qtd, vamos envolver toda a recuperação do elemento HTML com a função parseInt(), também adicionando um .value:
+
+> let qtd = document.getElementById('qtd').value;
+
+Vamos receber um erro no parâmetro qtd.value na chamada da função compraPista(), porque não precisamos mais usar o .value, já que qtd já tem seu valor convertido:
+
+```Javascript
+if (tipo.value == 'Pista') {
+        comprarPista(qtd);
+}
+```
+
+Desta forma, o document.getElementById.('qtd').value captura o texto digitado como texto e converte para um número inteiro.
+
+Na função comprarPista, o parâmetro qtd já é retornado como um número inteiro. No entanto, a qtdPista, que está recuperando a quantidade disponível da página, deve passar pelo mesmo processo e ser convertida para um número inteiro.
+
+Lembrando que a propriedade value não é utilizada neste caso, porque não é um campo do formulário. Então, usamos textContent:
+
+```Javascript
+function comprarPista(qtd) {
+    let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+    if (qtd > qtdPista.textContent) {
+        alert('Quantidade indisponível para tipo pista');
+    } else {
+        qtdPista = qtdPista - qtd;
+        qtdPista.textContent = qtdPista;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Outro detalhe a considerar: a condição if(tipo.value == 'Pista') está verificando se o valor do tipo escolhido é igual a "Pista". Porém, de onde extraímos o "Pista"?
+
+Vamos analisar no HTML. Quando escolhemos o tipo do ingresso, encontramos a tag select. No entanto, a opção selecionada é representada pela tag option. E o texto que aparece no navegador é "Pista".
+
+Mas quando chamamos o value, ele não pega o texto que aparece ali, mas o valor do atributo "pista", com o 'p' minúsculo. Letras maiúsculas e minúsculas são diferentes.
+
+Jacqueline: Uma armadilha enorme, apenas para aumentar o desafio para você!
+
+Rodrigo: Portanto, vamos mudar esse valor na verificação:
+
+```Javascript
+if (tipo.value == 'pista') {
+        comprarPista(qtd);
+}
+```
+
+Agora, no else de comprarPista(), o cálculo precisa ser alterado, já que estamos convertendo para um número.
+
+Jacqueline: Nosso if também precisa ser corrigido, porque agora o textContent já está definido. Portanto, nosso qtdPista já está com o valor inteiro. Já podemos fazer a comparação aqui.
+
+Rodrigo: Portanto, removemos o textContent na verificação do if de comprarPista(). No else, o qtdPista recebe qtdPista menos a quantidade inserida. Depois, declaramos qtdPista.textContent como qtdPista.
+
+No entanto, esta linha não vai mais funcionar. Então, teremos que recuperar o elemento da página novamente e alimentar de outra maneira.
+
+Portanto, nessa linha, recuperamos novamente o elemento, aplicamos textContent e tudo isso recebe qtdPista:
+
+```Javascript
+function comprarPista(qtd) {
+    let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+    if (qtd > qtdPista) {
+        alert('Quantidade indisponível para tipo pista');
+    } else {
+        qtdPista = qtdPista - qtd;
+        document.getElementById('qtd-pista').textContent = qtdPista;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Jacqueline: Agora tem potencial para dar tudo certo. Vamos testar.
+
+Rodrigo: Voltamos ao navegador, escolheremos ingressos do tipo pista aqui e tentaremos comprar 50 unidades.
+
+Recebemos o pop-up com a mensagem "Compra realizada com sucesso"! Além disso, a quantidade disponível do ingresso Pista foi diminuída de 100 para 50 no painel. Portanto, funcionou!
+
+Jacqueline: Então, para a pista, está tudo certo. Todo mundo na pista pode comprar. Agora, temos que fazer o mesmo para o restante! Vamos continuar na sequência
+
+#### Aula 4 - Faça como eu fiz: lógica para comprar um tipo ingresso
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para realizar a compra para o ingresso do tipo pista.
+
+Ver opinião do instrutor
+Opinião do instrutor
+
+Você precisará declarar uma nova função, no arquivo app.js, chamada comprarPista:
+
+```javascript
+function comprarPista(qtd) {
+
+}
+```
+
+Agora, dentro dessa nova função, você precisa recuperar a quantidade de ingressos disponíveis para o tipo pista, utilizando a função parseInt para converter o valor de texto para número:
+
+> let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+
+Na sequência, será necessário declarar um bloco condicional que será responsável por checar se a quantidade digitada é maior do que a quantidade disponível:
+
+```javascript
+if (qtd > qtdPista) {
+
+} else {
+
+}
+```
+
+Agora, dentro do if, você deve exibir um alerta indicando que a quantidade digitada está indisponível, e dentro do else deve decrementar a quantidade digitada, além de alertar que a compra foi realizada com sucesso:
+
+```javascript
+if (qtd > qtdPista) {
+    alert('Quantidade indisponível para tipo pista');
+} else {
+    qtdPista = qtdPista - qtd;
+    document.getElementById('qtd-pista').textContent = qtdPista;
+    alert('Compra realizada com sucesso!');
+}
+```
+
+Por fim, na função comprar(), você deve chamar a função comprarPista() caso o tipo de ingresso selecionado tenha sido do tipo pista:
+
+```javascript
+if (tipo.value == 'pista') {
+    comprarPista(qtd);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se a compra de ingressos do tipo pista está sendo realizada.
+
+### Aula 4 - Realizando compra para outros tipos - Vídeo 4
+
+Transcrição  
+Jacqueline: Resolvemos mais uma parte do desafio. Conseguimos realizar a compra para a pista, mas queremos também comprar os outros tipos de ingressos!
+
+Rodrigo: A lógica será bem parecida, pois o algoritmo é o mesmo. Precisamos recuperar a quantidade, verificar se está disponível. Logo, vamos apenas copiar e colar o que fizemos antes, adaptando o código.
+
+Dentro da função comprar(), temos o if da pista. Agora, precisamos fazer os outros ifs, para os tipos superior e inferior do nosso HTML.
+
+Portanto, caso não seja pista, dar else. Se foi superior, então precisamos verificar se o tipo.value é igual a superior.
+
+Desta forma, se não foi pista e for superior, vamos chamar uma função semelhante à comprarPista(). Então, podemos copiar e colar, adaptando para comprarSuperior().
+
+Um último else: se não for nenhum dos dois (pista ou superior), a pessoa selecionou inferior. Portanto, vamos copiar, colar e substituir o texto da função para comprarInferior.
+
+Nossa função comprar() ficou assim:
+
+app.js
+
+```Javascript
+function comprar() {
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = parseInt(document.getElementById('qtd').value);
+
+    if (tipo.value == 'pista') {
+        comprarPista(qtd);
+    } else if (tipo.value == 'superior') {
+        comprarSuperior(qtd);
+    } else {
+        comprarInferior(qtd);
+    }
+}
+```
+
+Agora, precisamos criar essas duas novas funções.
+
+Jacqueline: Você pode estar pensando que vamos criar três funções muito similares e que isso talvez seja desnecessário, mas não é o momento para se preocupar com isso. O importante é fazer a lógica, as adaptações, observar tudo funcionando.
+
+Cada tipo de ingresso poderia ter uma regra diferente, por exemplo, ser possível comprar somente dois por CPF no tipo pista. Sempre existem alterações.
+
+Não se preocupe em estar copiando e colando nesse primeiro momento. Com a prática e o conhecimento, você vai refatorando e criando funções mais enxutas.
+
+Rodrigo: Então, vamos copiar a função comprarPista() inteira, colá-la logo abaixo e renomear para comprarSuperior(). Agora vamos adaptar o código.
+
+A variável qtdPista vai se transformar em qtdSuperior. Então, precisaremos substituir todas as ocorrências de pista por superior. Precisamos garantir que estamos atualizando todos os lugares corretos quando copiamos e colamos o código.
+
+index.html
+
+```Javascript
+function comprarSuperior(qtd) {
+    let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
+    if (qtd > qtdSuperior) {
+        alert('Quantidade indisponível para tipo superior');
+    } else {
+        qtdSuperior = qtdSuperior - qtd;
+        document.getElementById('qtd-superior').textContent = qtdSuperior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Reforçamos: cuidado ao copiar e colar o código. É necessário colar e adaptar. Se não, você ficará com o código duplicado e ele não vai funcionar. Portanto, precisamos estar muito atentos e fazer tudo com calma nesta parte.
+
+Agora, vamos copiar a função comprarSuperior(), colar abaixo e renomear para comprarInferior(). Vamos repetir todo o processo novamente, renomeando tudo o que for superior para inferior.
+
+```Javascript
+function comprarInferior(qtd) {
+    let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
+    if (qtd > qtdInferior) {
+        alert('Quantidade indisponível para tipo inferior');
+    } else {
+        qtdInferior = qtdInferior - qtd;
+        document.getElementById('qtd-inferior').textContent = qtdInferior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Jacqueline: Agora, vamos comprar um tipo de cada ingresso agora para garantir que está funcionando. A princípio fizemos tudo corretamente, mas é possível termos deixado passar algum erro.
+
+Rodrigo: Vamos voltar ao navegador. Temos 400 unidades de Cadeira inferior. Vamos comprar 200 logo, metade é só nossa! Clicamos em "Comprar", e a compra é realizada com sucesso. O valor foi decrementado do painel de quantidade disponível. Perfeito.
+
+Se tentarmos comprar 300 unidades de ingressos de cadeira inferior, ele não deveria permitir. Afinal, cambistas não são bem-vindos nesta aplicação! Recebemos a mensagem que diz "Quantidade indisponível para tipo inferior". Muito bem!
+
+Agora, o tipo cadeira superior tem 200 unidades. Vamos comprar 199, deixando um para não sermos egoístas! Após clicar em "Comprar", decrementou a quantidade do painel e sobrou uma unidade de ingresso cadeira inferior. Se tentarmos comprar 2 agora, ele nos alerta: "Quantidade indisponível para superior". Ótimo!
+
+O tipo pista já estava funcionando, mas vamos testar para conferir se não "quebramos" nada. Vamos comprar todos os 100 ingressos na pista, resultando em zero.
+
+A lógica funcionou para os três tipos de ingresso!
+
+Jacqueline: Esperamos que você tenha gostado desse desafio. Ainda temos mais desafios pela frente!
+
+A ideia é praticar constantemente, condicionar as variáveis, que é essencialmente o que precisamos para resolver qualquer desafio.
+
+Rodrigo: Precisamos pensar na lógica: qual valor eu recupero, qual comparação eu faço, precisa ou não realizar um loop, um condicional, somar, subtrair, ajustar a página... Toda a parte do raciocínio lógico é necessária para estruturar esse código.
+
+Em sequência, nós vamos prosseguir com um novo projeto.
+
+#### Aula 4 - Faça como eu fiz: outros tipos de ingressos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para realizar a compra dos outros tipos de ingressos.
+
+Opinião do instrutor
+
+Você precisará criar duas novas funções, chamadas comprarSuperior e comprarInferior, que serão similares à função comprarPista:
+
+```JavaScript
+function comprarSuperior(qtd) {
+    let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
+    if (qtd > qtdSuperior) {
+        alert('Quantidade indisponível para tipo superior');
+    } else {
+        qtdSuperior = qtdSuperior - qtd;
+        document.getElementById('qtd-superior').textContent = qtdSuperior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+
+function comprarInferior(qtd) {
+    let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
+    if (qtd > qtdInferior) {
+        alert('Quantidade indisponível para tipo inferior');
+    } else {
+        qtdInferior = qtdInferior - qtd;
+        document.getElementById('qtd-inferior').textContent = qtdInferior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+Atenção! Caso copie e cole o código da função comprarPista, lembre-se de renomear todas as variáveis nas novas funções, para que o código funcione corretamente.
+
+Agora, na função comprar, altere o bloco condicional para verificar os outros tipos de ingressos e chamar a função de acordo com o tipo escolhido:
+
+```JavaScript
+if (tipo.value == 'pista') {
+    comprarPista(qtd);
+} else if (tipo.value == 'superior') {
+    comprarSuperior(qtd);
+} else {
+    comprarInferior(qtd);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se a compra está funcionando corretamente para todos os tipos de ingressos.
+
+Confira o código final do arquivo app.js:
+
+```JavaScript
+function comprar() {
+    let tipo = document.getElementById('tipo-ingresso');
+    let qtd = document.getElementById('qtd').value;
+    if (tipo.value == 'pista') {
+        comprarPista(qtd);
+    } else if (tipo.value == 'superior') {
+        comprarSuperior(qtd);
+    } else {
+        comprarInferior(qtd);
+    }
+}
+function comprarPista(qtd) {
+    let qtdPista = parseInt(document.getElementById('qtd-pista').textContent);
+    if (qtd > qtdPista) {
+        alert('Quantidade indisponível para tipo pista');
+    } else {
+        qtdPista = qtdPista - qtd;
+        document.getElementById('qtd-pista').textContent = qtdPista;
+        alert('Compra realizada com sucesso!');
+    }
+}
+function comprarSuperior(qtd) {
+    let qtdSuperior = parseInt(document.getElementById('qtd-superior').textContent);
+    if (qtd > qtdSuperior) {
+        alert('Quantidade indisponível para tipo superior');
+    } else {
+        qtdSuperior = qtdSuperior - qtd;
+        document.getElementById('qtd-superior').textContent = qtdSuperior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+function comprarInferior(qtd) {
+    let qtdInferior = parseInt(document.getElementById('qtd-inferior').textContent);
+    if (qtd > qtdInferior) {
+        alert('Quantidade indisponível para tipo inferior');
+    } else {
+        qtdInferior = qtdInferior - qtd;
+        document.getElementById('qtd-inferior').textContent = qtdInferior;
+        alert('Compra realizada com sucesso!');
+    }
+}
+```
+
+#### Aula 4 - Loops com while
+
+Suponha que você está desenvolvendo um programa para uma loja de jogos e precisa calcular o desconto total que um cliente receberá em sua compra, de acordo com as seguintes regras:
+
+- A loja oferece desconto progressivo com base na quantidade de jogos comprados;
+- Cada jogo custa R$50 sem desconto;
+- Se o cliente comprar 5 ou mais jogos, ele receberá um desconto de 10% em cada jogo;
+- Se o cliente comprar 10 ou mais jogos, ele receberá um desconto de 20% em cada jogo;
+- Você deseja usar um loop while para calcular o desconto total, dado o número de jogos comprados, e escreveu o seguinte código:
+
+```JavaScript
+function calcularDescontoTotal(quantidadeDeJogos) {
+    let desconto = 0;
+    let i = 0;
+    while (i < quantidadeDeJogos) {
+        if (quantidadeDeJogos >= 5) {
+            desconto += 0.1 * 50;
+        } else if (quantidadeDeJogos >= 10) {
+            desconto += 0.2 * 50;
+        }
+        i++;
+    }
+
+    return desconto;
+}
+```
+
+No entanto, você percebeu que há problemas de lógica no código escrito e ele não está funcionando conforme as regras descritas anteriormente.
+
+Escolha a alternativa que indica o problema de lógica no código anterior:
+
+Selecione uma alternativa
+
+O primeiro bloco if foi escrito de maneira incorreta, fazendo com que o segundo if nunca seja executado.
+
+Exatamente! O primeiro if deveria ser executado apenas quando a quantidade de jogos for maior do que 5 e também menor do que 10:
+
+> if (quantidadeDeJogos >= 5 && quantidadeDeJogos < 10) {codigo omitido...}
+
+### Aula 4 - Desafio: hora da prática
+
+Nesta sequência de desafios não obrigatórios você irá desenvolver a lógica a partir dos conceitos trabalhados em aula. O desafio 1 está relacionado ao projeto Ingresso Online e os demais foram pensados para reforçar o conteúdo de Lógica.
+
+- Adicione uma verificação para garantir que a quantidade inserida pelo usuário seja um número positivo. Se o valor não for válido, exiba uma mensagem de erro adequada.
+
+- Crie uma função que aceite uma string como parâmetro, utilize a função parseInt para converter essa string em um número inteiro e retorne o resultado.
+
+- Escreva um programa de calculadora simples com funções separadas para adição, subtração, multiplicação e divisão. Utilize um bloco condicional para determinar qual função executar com base em uma variável que representa a operação desejada.
+
+- Implemente uma função que aceite um número como parâmetro e utilize um bloco condicional para determinar se o número é par ou ímpar.
+
+- Crie uma função que converta a temperatura de Celsius para Fahrenheit e vice-versa. Utilize uma variável para indicar a escala desejada e um bloco condicional para determinar qual conversão realizar
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
+### Aula 4 - O que aprendemos?
+
+Nessa aula, você aprendeu como:
+
+- Utilizar a função parseInt no JavaScript, para converter um valor do tipo String para um número inteiro;
+
+- Escrever o código de funcionalidades em funções separadas;
+
+- Utilizar um bloco condicional para determinar qual função deve ser chamada, de acordo com o valor armazenado em uma variável.
+
+## Aula 5 - Projeto Amigo Secreto
+
+### Aula 5 -  - Vídeo 1
+### Aula 5 -  - Vídeo 2
+### Aula 5 -  - Vídeo 3
+### Aula 5 -  - Vídeo 4
+### Aula 5 -  - Vídeo 5
