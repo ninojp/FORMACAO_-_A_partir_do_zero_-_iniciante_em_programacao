@@ -3840,7 +3840,198 @@ Rodrigo: A lógica também deu certo, porque o último elemento foi o D, ele tir
 
 Jacqueline: Isso mesmo, pois ele atualmente não está reiniciando nada. E é isso que nós faremos em seguida.
 
-### Aula 5 -  - Vídeo 5
-### Aula 5 -  - Vídeo 5
-### Aula 5 -  - Vídeo 5
-### Aula 5 -  - Vídeo 5
+#### Aula 5 - Faça como eu fiz: lógica para realização do sorteio
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para realizar o sorteio do amigo secreto.
+
+Opinião do instrutor
+
+Você precisará alterar a função sortear, declarando uma variável para armazenar a lista de participantes e realizando o sorteio, após a chamada à função sortear:
+
+```JavaScript
+let sorteio = document.getElementById('lista-sorteio');
+for (let i = 0; i < amigos.length; i++) {
+    if (i == amigos.length - 1) {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] +' --> ' +amigos[0] + '<br/>';
+    } else {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] +' --> ' +amigos[i + 1] + '<br/>';
+    }
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se o sorteio está sendo realizado corretamente.
+
+### Aula 5 - Reiniciando o sorteio - Vídeo 5
+
+Transcrição  
+Rodrigo: Visto que conseguimos realizar o sorteio de amigo secreto, e tudo está já está funcionando bem, ou seja, está embaralhando a lista e escolhendo de maneira aleatória, ainda falta uma última funcionalidade. No caso, falta o botão de Reiniciar, que permitirá que tudo seja reiniciado para que possamos realizar um novo sorteio.
+
+Jacqueline: Exato! Portanto, precisamos reiniciar nossas listas como vazias. Para fazer isso, precisamos voltar para o index.html e descobrir o nome da função que será chamada no onclick.
+
+Analisando o index.html, observamos que ele espera uma função com o nome reiniciar() ao clicarmos no botão. Portanto, vamos criá-la no app.js, ao final do código, ou seja, após a embaralha().
+
+Nesse caso, o que precisamos reiniciar? Olhando para a página Amigo Secreto, precisamos reiniciar a lista "Amigos incluídos" e a lista "Sorteio".
+
+Então, vamos apagar essas duas listas e nosso array onde adicionamos informações. O nome que representa nosso array amigos. Portanto, em reiniciar(), precisamos codar o mesmo que temos na linha 1 do código: amigos = [], ou seja, um array vazio. Essa será a primeira instrução que faremos.
+
+```JavaScript
+//código omitido
+function reiniciar() {
+    amigos = [];
+}
+```
+
+Atenção: Ao copiar o código da primeira linha não copie a palavra let, porque não queremos criar uma nova variável, queremos usar aquela que já foi definida na primeira linha do código. Sendo assim, copie apena amigos = [].
+
+O próximo item que precisamos reiniciar é a lista de pessoas incluídas. Essa lista é representada com document.getElementById('lista_amigos'). Então copiaremos essa linha de código, colaremos na função reiniciar e, ao final, usamos o .innerHTML para definir como vazio: document.getElementById('lista_amigos').innerHTML = '';.
+
+Rodrigo: Nesse caso, como é um elemento de texto da página, usamos o innerHTML, que estava cheio de tags, passamos a atribuir como uma string vazia. Assim, ele vai limpar aquele elemento da página.
+
+Jacqueline: O mesmo procedimento será feito para nossa lista-sorteio.
+
+```JavaScript
+//código omitido
+function reiniciar() {
+    amigos = [];
+    document.getElementById('lista-amigos').innerHTML = '';
+    document.getElementById('lista-sorteio').innerHTML = '';
+}
+```
+
+Falta mais alguma coisa, Rodrigo, ou reiniciamos tudo o que era necessário?
+
+Rodrigo: Acredito que seja isso. Nós limpamos as duas listas, o array. A princípio, a funcionalidade de reiniciar o sorteio está completa. Vamos testar?
+
+Jacqueline: Vamos. Voltei para a página Amigo Secreto e vou colocar as nossas amigas letras, A, B, C e D. Quando clicamos em "Adicionar", o campo de nome já fica limpo.
+
+Clicamos em "Sortear" e apareceu a lista do sorteio. Quando clicamos em "Reiniciar", vemos que a lista de pessoas incluídas e o sorteio desaparecem. No geral, parece que nosso processo está completo.
+
+Rodrigo: Sim, terminamos com sucesso. Implementamos essas três funcionalidades de adicionar uma pessoa, fazer o sorteio e reiniciar. Com isso, fechamos nosso quarto projeto para treinar essa parte de lógica de programação. Mas ainda existem melhorias que podemos aplicar a esse projeto, certo, Jacque?
+
+Jacqueline: Tem sim. Por exemplo, se eu começar a falar dos nomes que adicionamos, percebemos que podemos adicionar o mesmo nome várias vezes, o que não é ideal.
+
+Eu consigo adicionar a letra "A" inúmeras vezes. Como conseguiria diferenciar? Se temos vários amigos chamados João, como vou saber qual João sorteou quem? Precisaríamos do sobrenome. Então, não posso deixar um valor repetido.
+
+Rodrigo: Precisamos fazer uma verificação na nossa lista para descobrir se um nome já foi incluído. E se o nome já existe, não podemos adicionar novamente o mesmo nome. Se houver duas pessoas com o mesmo nome, teremos que encontrar alguma forma de distinguir quem é quem. Essa é uma das validações que nós podemos adicionar.
+
+Jacqueline: Existe outra situação que eu percebi. Se continuarmos clicando no botão "Adicionar" sem incluir nenhum nome, ele está inserindo vírgulas na lista, ou seja, adicionando valores vazios.
+
+Rodrigo: Também precisamos verificar se a pessoa digitou alguma coisa na caixa de texto. Ela não podemos simplesmente clicar em "Adicionar" sem ter digitado um nome.
+
+Jacqueline: Exato! Caso contrário, ao clicarmos em "Sortear", fica tudo errado. Não é do jeito que queremos.
+
+Rodrigo: Por fim, vamos adicionar apenas um nome para um teste, porque, se tivermos apenas uma pessoa ou duas, não faz sentido sortear, porque uma vai tirar a outra. Precisamos ter pelo menos quatro pessoas para ter um sorteio interessante, onde ninguém consiga descobrir quem tirou quem.
+
+Jacqueline: Exato. Quando adicionamos apenas a letra "A" em "Amigos incluídos" e clicamos em "Sortear", o resultado é " A → A", ou seja, o "A" tirou a si, o que não faz sentido. É muito bom definir um número mínimo de participantes.
+
+Rodrigo: Todas essas são validações que podemos fazer para complementar esse projeto e deixá-lo sem essas falhas. Mas aprenderemos isso na próxima aula, onde detalharemos como implementar cada uma dessas validações.
+
+Jacqueline: Exato, mas já fica o desafio para você. Tente realizar e na próxima aula nós resolveremos juntos.
+
+#### Aula 5 - Faça como eu fiz: função para resetar o sorteio
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para reiniciar o sorteio.
+
+Opinião do instrutor
+
+Você precisará criar uma nova função chamada reiniciar, que será responsável por limpar o array e também as listas de participantes e do sorteio:
+
+```Javascript
+function reiniciar() {
+    amigos = [];
+    document.getElementById('lista-amigos').innerHTML = '';
+    document.getElementById('lista-sorteio').innerHTML = '';
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se o botão de reiniciar está funcionando corretamente.
+
+Confira o código final do arquivo app.js:
+
+```Javascript
+let amigos = [];
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+    amigos.push(amigo.value);
+    if (lista.textContent == '') {
+        lista.textContent = amigo.value;
+    } else {
+        lista.textContent = lista.textContent + ', ' + amigo.value;
+    }
+    amigo.value = '';
+}
+function sortear() {
+    embaralhar(amigos);
+    let sorteio = document.getElementById('lista-sorteio');
+    for (let i = 0; i < amigos.length; i++) {
+        if (i == amigos.length - 1) {
+            sorteio.innerHTML = sorteio.innerHTML + amigos[i] +' --> ' +amigos[0] + '<br/>';
+        } else {
+            sorteio.innerHTML = sorteio.innerHTML + amigos[i] +' --> ' +amigos[i + 1] + '<br/>';
+        }
+    }
+}
+function embaralhar(lista) {
+    for (let indice = lista.length; indice; indice--) {
+        const indiceAleatorio = Math.floor(Math.random() * indice);
+        [lista[indice - 1], lista[indiceAleatorio]] = [lista[indiceAleatorio], lista[indice - 1]];
+    }
+}
+function reiniciar() {
+    amigos = [];
+    document.getElementById('lista-amigos').innerHTML = '';
+    document.getElementById('lista-sorteio').innerHTML = '';
+}
+```
+
+### Aula 5 - Loops com for
+
+Seu amigo Paulo, que está estudando programação, escreveu o seguinte código que exibe os números que são múltiplos de 5, entre 1 e 100:
+
+```JavaScript
+for (let numero = 1; numero <= 100; numero++) {
+    if (numero / 5) {
+        console.log(numero);
+    }
+}
+```
+
+Mas ele afirma que o código não está funcionando corretamente e pediu a sua ajuda para encontrar o problema. Qual o problema do código anterior?
+
+A verificação do número ser múltiplo de 5, no bloco if, está incorreta.
+
+O código dentro dos parênteses do if está fazendo uma divisão por 5, ao invés de checar se o resto da divisão é zero. O código correto para verificar se o número é múltiplo de 5 é: numero % 5 == 0.
+
+### Aula 5 - Desafio: hora da prática
+
+Preparamos uma sequência de desafios não obrigatórios excelente para você praticar ainda mais os conceitos trabalhados em aula. O desafio 1 está relacionado ao projeto Amigo Secreto e os demais foram pensados para reforçar o conteúdo de Lógica.
+
+- Criar uma funcionalidade no Projeto Amigo Secreto que permita ao usuário clicar em um amigo na lista e removê-lo. Atualizar a visualização da lista após a remoção.
+
+- Adicione os números 1,2,3 em uma variável chamada minhaLista e armazene os números 4, 5 e 6 separadamente em outra variável. Use o método concat() para combinar as sequências de valores em uma nova lista chamadanovaLista. Imprima novaLista no console.
+
+- Remova o último elemento de novaLista. Imprima novaLista após a remoção.
+
+- Utilize o algoritmo de Fisher-Yates (também conhecido como Knuth Shuffle) para embaralhar os elementos em novaLista. Pesquise e adapte o código para realizar o embaralhamento.
+
+- Crie uma função chamada removerDuplicatas que aceita um array como parâmetro e retorna um novo array sem elementos duplicados. Teste a função com novaLista e imprima o array resultante.
+
+### Aula 5 - O que aprendemos?
+
+Nessa aula, você aprendeu como:
+
+- Declarar uma variável do tipo array para representar uma lista;
+
+- Adicionar um elemento a um array com a função push;
+
+- Utilizar um código já desenvolvido por terceiros, para realizar o embaralhamento de elementos em um array.
+
+## Aula 6 - Desafios Complementares
+
+### Aula 6 - Validando o nome do amigo - Vídeo 1
+
+### Aula 6 -  - Vídeo 2
+### Aula 6 -  - Vídeo 3
+### Aula 6 -  - Vídeo 4
+### Aula 6 -  - Vídeo 5
