@@ -3363,8 +3363,484 @@ Nessa aula, você aprendeu como:
 
 ## Aula 5 - Projeto Amigo Secreto
 
-### Aula 5 -  - Vídeo 1
-### Aula 5 -  - Vídeo 2
-### Aula 5 -  - Vídeo 3
-### Aula 5 -  - Vídeo 4
+### Aula 5 - Apresentação do projeto Amigo Secreto - Vídeo 1
+
+Transcrição
+Rodrigo: Finalizamos mais um projeto e agora temos um novo desafio, que corresponde ao período de final de ano, natal e presentes: o famoso amigo secreto.
+
+Jacqueline: Exatamente! Vamos conferir nosso projeto. Temos um sorteio de amigos secretos!
+
+![alt text](image-1.png)
+
+Página web do sorteador de amigo secreto. A página tem um fundo preto com uma faixa verde-água horizontal virada para cima. Centralizado, tem um quadrado preto com várias informações, contornada por um brilho azul e com a altura correspondente à altura da página. Ao lado direito do quadrado, tem uma luz azul ao fundo e, à frente dela, um desenho 3D de uma mão em concha virada para cima e um presente flutuando. Na parte superior da página tem o título "Amigo Secreto", com "Amigo" escrito em letras brancas e "Secreto" escrito em letras azuis. Abaixo dele tem um campo input com a instrução "Digite o nome de um amigo" escrito em letras azuis. Dentro do input tem a dica "Nome do amigo". Abaixo da caixa de input, tem dois botões: à esquerda tem um botão azul escrito "Adicionar" em branco e à direita tem um botão branco escrito "Sortear" em azul. Ao lado do "Sortear" tem um outro botão sem fundo escrito "Reiniciar" na cor verde-água. Abaixo dos botões tem o subtítulo "Amigos incluídos" seguido de um espaço vazio e, à direita dessa lista vazia, está escrito "Sorteio" em verde-água.
+
+Vou incluir os nomes: Jaque, Rodrigo, Suellen e Vini. Para isso, após cada nome que escrevo na caixa do input, eu clico em adicionar. São quatros pessoas e os nomes apareceram abaixo do "Amigos incluídos", separados por vírgulas.
+
+Quando clicamos no botão "Sortear", abaixo do título "Sorteio", na parte inferior da tela, aparece como ficou o sorteio.
+
+Sorteio
+
+Suellen → Rodrigo
+
+Rodrigo → Vini
+
+Vini → Jacque
+
+Jacque → Suellen
+
+Suelen tirou Rodrigo, Rodrigo tirou Vini e assim sucessivamente. Essa é a ideia: incluirmos uma lista com diversos nomes de amigos e, quando clicarmos em "Sortear", ele gera, aleatoriamente, essa lista de quem irá tirar quem. E quando clicarmos em "Reiniciar", tudo será redefinido e poderemos começar um novo sorteio.
+
+Rodrigo: Portanto, outro projeto com formulário novas informações. Dessa vez, tem essa dificuldade adicional de obter os dados da lista e embaralhar para que pessoas sejam sorteadas de maneira aleatória.
+
+Então, tenta fazer esse desafio. Essa parte será um pouco complicada e, se não conseguir, não tem problema. A seguir, mostraremos o passo a passo de como implementar uma possível solução para esse desafio.
+
+### Aula 5 - Adicionando amigo na lista - Vídeo 2
+
+Transcrição  
+Rodrigo: Bom, Jacque, já apresentamos o projeto. Então vamos seguir o mesmo procedimento, começando por identificar quais são os elementos da página HTML e escrever o código JavaScript para implementar o passo a passo desta solução.
+
+Jacqueline: Exato. Voltando à página do Amigo Secreto, o que é necessário fazer? Vamos digitar o nome de um amigo e ele precisará ser incluído nessa lista de amigos.
+
+Creio que este é o primeiro passo, porque, sem esta lista de amigos, nós não conseguimos fazer as próximas etapas. Portanto, vamos começar por isso.
+
+Rodrigo: Então vamos abrir o index.html no VS Code e acessar o botão "Adicionar".
+
+Jacqueline: Na classe form__label, por volta da linha 29, temos a instrução Digite o nome de um amigo e, abaixo dele, um campo input onde digitamos nome da pessoa. Depois temos uma div com a classe form__buttons, onde temos os botões adicionar(), sortear() e reiniciar(). Precisaremos programar a inclusão do nome na lista de amigos em nossa função adicionar().
+
+Para isso, no menu da esquerda, acessaremos o "js > app.js", que está vazio assim como o de vocês também estará. Começaremos a criar o código desde o início. Para isso, na primeira linha codaremos function adicionar() {}.
+
+Dentro desta função, precisamos recuperar o nome do amigo. Portanto, dentro das chaves, criaremos uma variável chamada amigo e usaremos o método document.getElementById(), passando o nome-amigo como parâmetro.
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+}
+```
+
+Em seguida, precisamos da lista onde adicionaremos o nome de todos os amigos que vão participar do amigo secreto conosco. Olhando a página do projeto, notamos que a lista tem o título "Amigos incluídos", então vamos voltar ao HTML para localizá-lo.
+
+Aproximadamente na linha 42 do nosso HTML, onde temos a classe friends__title, encontramos o título Amigos incluídos. Logo abaixo temos a div friends__container que tem o id da lista, que é o id="lista-amigos". Será nesta lista de amigos que vamos incluir o nome do amigo.
+
+De volta ao nosso app.js, criaremos uma variável lista, e recuperaremos os dados com document.getElementById('lista-amigos').
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+}
+```
+
+Rodrigo: O id do elemento deve corresponder ao que está na página HTML. Você já entendeu isso, precisa estar igual, senão, não vai recuperar nada.
+
+Jacqueline: O que precisamos fazer agora? Uma vez que o nome do amigo for digitado, temos que adicioná-lo à lista. Portanto, no nosso lista, precisamos colocar o que foi adicionado no amigo.
+
+Para isso, codamos lista.getContent = amigo.value. Então usamos o método textContent aplicado à lista para ela receber o que foi digitado em amigo.
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+    lista.textContent = amigo.value;
+```
+
+Vamos verificar se está funcionando, Rodrigo? Podemos voltar à página Amigo Secreto no nosso navegador e escrever um nome no campo de input. No caso, escreverei "Jacque". Clicando no botão "Adicionar", percebemos que o nome já vai para a lista.
+
+Poderíamos limpar o campo de input, porque é legal ele permanecer preenchido, mas tudo bem. Vamos adicionar outro nome, no caso, "Rodrigo". E o que aconteceu? "Rodrigo" substituiu "Jaque", então precisamos fazer uma condicional. Se a lista estiver vazia, inclua o nome, senão, precisamos concatenar com um espaço e uma vírgula.
+
+Rodrigo: Então, usaremos a ideia de concatenação para não substituir o valor original.
+
+Jacqueline: Voltando para a função adicionar() no app.js, faremos um if:
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+
+    if (lista.textContent == '') {
+        lista.textContent = amigo.value;
+    } else {
+        lista.textContent = lista.textContent + ', ' + amigo.value;
+    }
+}
+```
+
+Se o lista.textContent estiver vazio, colocamos o nome do amigo. Senão, adicionamos uma vírgula para separar os nomes e adicionamos outro nome. Vamos verificar se tudo está funcionando corretamente.
+
+Rodrigo: Quando entramos no if, é a primeira vez que o nome está sendo incluído, então só colocamos o nome da pessoa. Se já tem uma pessoa, não entramos no if, então só incluímos a vírgula e o nome do próximo amigo.
+
+Jacqueline: Perfeito, vamos fazer um teste para verificar se está tudo certo. Agora simulamos a inclusão dos nomes "Jacqueline" e, em seguida, "Rodrigo". Funcionou corretamente. Perceba que, a partir da segunda pessoa, o nome sempre aparecerá com a vírgula de forma correta, separado por vírgulas. Vamos adicionar a "Suellen" para testar também, e continua funcionando.
+
+Rodrigo: Primeiro passo concluído. Conseguimos ler o nome que foi digitado no campo e adicioná-lo na lista, utilizando uma condicional. Se for o nome da primeira pessoa, incluímos somente o nome. Se não for a primeira pessoa, adicionamos uma vírgula e concatenamos com o próximo nome.
+
+Imagino que o próximo passo será a funcionalidade do botão "Sortear". Essa função será usada para realizar o sorteio de "quem tirou quem".
+
+Jacqueline: Isso! Mas, antes de finalizarmos, adicionaremos uma funcionalidade para limpar o campo, depois de adicionarmos um nome. Uma vez que já incluímos um nome na lista, podemos limpar o campo amigo.value e deixá-lo vazio, codando amigo.value = '' ao final da condicional.
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+
+    if (lista.textContent == '') {
+        lista.textContent = amigo.value;
+    } else {
+        lista.textContent = lista.textContent + ', ' + amigo.value;
+    }
+
+    amigo.value = '';
+}
+```
+
+Rodrigo: Da mesma forma que fizemos em outros projetos, quando queríamos limpar o carrinho, por exemplo, sempre utilizamos essa abordagem.
+
+Jacqueline: Voltaremos para a página do Amigo Secreto no navegador para testarmos. Quando escrevemos o nome, por exemplo, "Jacqueline", e clicamos no botão "Adicionar", o campo limpa automaticamente, permitindo incluir o próximo nome.
+
+Rodrigo: Tudo certo até aqui. Na sequência, aprenderemos a construir a lógica do botão "Sortear".
+
+#### Aula 5 -  Faça como eu fiz: função para incluir o amigo
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para adicionar um amigo na lista de participantes.
+
+Opinião do instrutor
+
+Você precisará declarar a função adicionar, no arquivo app.js:
+
+```javascript
+function adicionar() {
+
+}
+```
+
+Agora, dentro dessa função, será necessário declarar variáveis que representam o nome do amigo digitado no formulário e a lista de amigos participantes:
+
+```javascript
+let amigo = document.getElementById('nome-amigo');
+let lista = document.getElementById('lista-amigos');
+```
+
+Na sequência, você precisa adicionar o amigo na lista, verificando com um bloco condicional se a lista de participantes está vazia ou não, para saber se precisa adicionar uma vírgula após o nome do amigo:
+
+```javascript
+if (lista.textContent == '') {
+    lista.textContent = amigo.value;
+} else {
+    lista.textContent = lista.textContent + ', ' + amigo.value;
+}
+```
+
+Por fim, limpe o nome do amigo adicionado do formulário:
+
+> amigo.value = '';
+
+Pronto! Abra a página do projeto no navegador e verifique se é possível incluir amigos na lista de participantes.
+
+### Aula 5 - Embaralhando o array de amigos - Vídeo 3
+
+Transcrição  
+Rodrigo: Ótimo, Jaqueline, primeiro passo concluído. Conseguimos adicionar os amigos que participarão do Amigo Secreto, e agora vem a parte do sorteio, certo?
+
+Jacqueline: Exatamente, que é a parte principal da nossa aplicação. Voltando para o index.html, procuraremos pelo button onclick que chama a função sortear(). Esta é a função que precisamos implementar agora.
+
+Acessando o app.js novamente, abaixo da função adicionar() começaremos a codar a function sortear() {}.
+
+Rodrigo: Será outra função, pois é outro botão em que vamos clicar na tela. Cada um dos botões chama sua própria função.
+
+Jacqueline: Na sortear() precisaremos recuperar a lista de pessoas adicionadas para realizar o sorteio. Esta lista de pessoas está, atualmente, dentro do lista.textContent, que faz parte do else da função adicionar()
+
+Rodrigo: Este textContent é um texto que contém todos os nomes separados por vírgulas, então precisaremos usar o método split para quebrar esse texto por vírgula. Mas acho que isso pode ser um pouco trabalhoso, não acha, Jacque?
+
+Jacqueline: Exatamente, e nós poderíamos fazer de uma forma muito mais simples, criando um array para armazenar cada amigo participante. Assim, poderemos embaralhar os nomes e realizar o sorteio.
+
+Rodrigo: Portanto, a ideia é criar um array para armazenar as pessoas adicionadas. Não criaremos esse array "do zero" toda vez que clicarmos no botão de "Adicionar", então precisamos declarar em uma variável fora das funções, certo?
+
+Jacqueline: Exatamente. Então criaremos essa array na primeira linha do código, antes da função adicionar(). Chamaremos de amigos, e iniciaremos a declaração dessa variável como array vazio: let amigos = [];.
+
+Rodrigo: Como esse array está vazio, entendo que na função de adicionar(), além de adicionar na tela, tem que incluir esse nome no array, certo?
+
+Jacqueline: Sim. Então, acima do if() da função adicionar(), que acrescenta o nome na lista, na linha 6, adicionamos um item ao array codando amigos.push(). O push() receberá o amigo.value.
+
+```JavaScript
+let amigos = [];
+
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    let lista = document.getElementById('lista-amigos');
+
+    amigos.push(amigo.value);
+
+    if (lista.textContent == '') {
+        lista.textContent = amigo.value;
+    } else {
+        lista.textContent = lista.textContent + ', ' + amigo.value;
+    }
+
+    amigo.value = '';
+}
+```
+
+Rodrigo: Com isso, o array será preenchido com esse amigo que acabou de ser adicionado na tela.
+
+Jacqueline: Fazendo isso, quando clicarmos no botão "Sortear", o nosso array já vai estar com o nome de todas as pessoas participantes do amigo secreto.
+
+Rodrigo: Com isso, não precisaremos pegar a lista do HTML e fazer todo aquele trabalho na string. Podemos sortear diretamente do array, onde temos somente os nomes, sem vírgula, sem espaço e sem nenhum outro caractere.
+
+No entanto, essa array adiciona os elementos na ordem que incluirmos. Contudo, o sorteio precisa ser aleatório, então precisamos escrever um código que embaralha o array.
+
+Jacqueline: Isso mesmo, Rodrigo. Se simplesmente percorrêssemos o array, colocando uma pessoa para tirar a segunda e a segunda para tirar a terceira, não seria divertido.
+
+Para embaralhar o array, deixaremos como referência um artigo que mostra exatamente como podemos fazer isso usando um algoritmo, que é o algoritmo de Fisher-Yates. Portanto, acessaremos o artigo de referência: ["Como embaralhar arrays com o algoritmo Fisher-Yates"](http://cangaceirojavascript.com.br/como-embaralhar-arrays-algoritmo-fisher-yates/). Ele foi escrito pelo Flávio Almeida, um colaborador da Alura que já possui alguns cursos conosco.
+
+Aqui o código completo:
+
+```JavaScript
+let amigos = [];
+
+function adicionar() {
+  amigos.push(amigo.value);
+  // restante do código
+}
+
+function sortear() {
+  // código para embaralhar o array 'amigos'
+}
+```
+
+Rodrigo: A ideia não é reinventar a roda. Se precisamos embaralhar um array, já existem códigos prontos que fazem isso. Assim, em vez de termos que criar algo do zero, podemos usar uma solução pronta, pesquisada na internet.
+
+Recomendamos sites como este, que contém instruções claras de como embaralhar um array. Basicamente, copiamos o código e adaptamos de acordo com nossas variáveis.
+
+Jacqueline: No artigo, é explicado o passo a passo de como é feito. Então, copiaremos a função pronta embaralha(), que está pronta na seção "Arrays e atribuição via destructuring", ao final do artigo. Esta função realiza um for() que percorre o array e embaralha.
+
+Função de embaralhamento criada no artigo
+
+```JavaScript
+function embaralha(lista) {
+    for (let indice = lista.length; indice; indice--) {
+        const indiceAleatorio = Math.floor(Math.random() * indice);
+        // atribuição via destructuring
+        [lista[indice - 1], lista[indiceAleatorio]] = 
+            [lista[indiceAleatorio], lista[indice - 1]];
+    }
+}
+```
+
+Copiaremos essa função e iremos incluí-la no nosso arquivo app.js. Para isso, abaixo da função sortear(), colaremos a função embaralha(). Note, Rodrigo, que a função embaralha() espera um array, que nesse caso é uma lista.
+
+Sendo assim, para utilizarmos a embaralha(), precisamos chamá-la passando o nome de uma lista. Nesse contexto, passamos nosso array, que foi nomeado amigos.
+
+```JavaScript
+// código omitido
+function sortear() {
+    embaralha(amigos);
+}
+//código omitido
+```
+
+Rodrigo: Ficou bom assim, pois a parte de embaralhar está isolada em uma função específica, com um código já direcionado a embaralhar o array.
+
+Jacqueline: Agora precisamos pegar esse array embaralhado e estabelecer quem vai presentear quem. Portanto, precisamos construir uma lógica.
+
+Rodrigo: A lógica é a seguinte: o array tem os elementos na ordem que adicionamos, mas, ao chamarmos a função embaralha(), a ordem será completamente alterada, deixando a ordenação é aleatória.
+
+Portanto, podemos fazer a lógica para sortear, pegando o elemento que está na posição 0, este tira o 1, o elemento 1, tira o 2, o elemento 2, tira o 3, e assim por diante. Como o array foi embaralhado, não saberemos exatamente quem tirou quem.
+
+Jacqueline: Para executarmos isso, usamos novamente uma estrutura de repetição, correto.
+
+Rodrigo: Com ela, nós percorremos todo o array, da primeira posição até a última, e, então, aplicamos essa lógica de que o elemento atual tira o próximo.
+
+Jacqueline: Parece melhor que nós executemos isso em sequência, não é, Rodrigo?
+
+Rodrigo: Vamos observar a lógica desse algoritmo de um elemento sortear o próximo e faremos isso com calma na sequência.
+
+#### Aula 5 - Faça como eu fiz: lógica para embaralhar a lista de amigos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para embaralhar a lista de participantes.
+
+Opinião do instrutor
+
+Você precisará declarar uma variável para armazenar os participantes, sendo que essa variável será do tipo array e deve ser declarada fora da função adicionar, ou seja, no início do arquivo app.js:
+
+> let amigos = [];
+
+Agora, na função adicionar, precisa incluir no array o amigo adicionado, antes do bloco condicional:
+
+> amigos.push(amigo.value);
+
+Na sequência, precisa criar a função embaralhar, que será responsável por embaralhar o array com a utilização do algoritmo Fisher-Yates:
+
+```JavaScript
+function embaralhar(lista) {
+    for (let indice = lista.length; indice; indice--) {
+        const indiceAleatorio = Math.floor(Math.random() * indice);
+        [lista[indice - 1], lista[indiceAleatorio]] = [lista[indiceAleatorio], lista[indice - 1]];
+    }
+}
+```
+
+Por fim, crie a função sortear, que deve chamar a função embaralhar:
+
+```JavaScript
+function sortear() {
+    embaralhar(amigos);
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se os amigos continuam sendo adicionados à lista de participantes.
+
+### Aula 5 - Realizando o sorteio - Vídeo 4
+
+Transcrição  
+Rodrigo: Ótimo, Jacque, já embaralhamos o array, então agora os elementos não estão mais na mesma ordem em que foram adicionados. Podemos usar a lógica de percorrer esse array e fazer com que um elemento tire sempre o próximo. No caso, o último tira o primeiro que está dentro do nosso array, que é a variável amigos.
+
+Jacqueline: Primeiro, vamos construir nossa estrutura de repetição. Poderíamos usar um while(), mas usaremos um for(). É bem parecido com o que utilizamos na embaralha(), com a diferença que, desta vez, vamos incrementar o índice.
+
+Então, criaremos um for() onde, dentro dos parâmetros, vamos declarar uma variável i, por exemplo, que começa com zero: let i = 0. Precisamos percorrer até a última posição do nosso array, que será representado por amigos.length.
+
+No entanto, como o array começa com o índice 0, o último índice, que representamos por i será um número menor que a quantidade de elementos. Por exemplo, uma lista de 10 itens tem índices de 0 a 9. Representamos isso com i < amigos.length. Por fim, aumentamos o i em 1 enquanto ele for menor que o tamanho da lista, usando i++.
+
+> for (let i = 0; i < amigos.length; i++) {}
+
+Com essa estrutura, podemos criar o esquema de um amigo sortear o próximo.
+
+Rodrigo: Esse loop, usando o for(), percorrerá todo o array, desde o primeiro elemento, na posição 0, até o último, que seria o tamanho do array menos 1. Agora podemos fazer a lógica de pegar a pessoa na posição i, e fazer com que ela tire a pessoa em i + 1, ou seja, a próxima.
+
+Jacqueline: Precisamos verificar no código HTML onde vamos colocar essa informação, para associar corretamente com as posições do array. Portanto, abrindo o index.html, encontramos um elemento com o ID lista-amigos e outo com o ID lista-sorteio. Então, precisaremos recuperar o lista-amigos, que é onde fica todos os nomes adicionados, e lançar a ordem no lista-sorteio.
+
+Sendo assim, voltamos para o arquivo app.js, onde criaremos a variável sorteio dentro da função sortear(), antes do loop. E obteremos o elemento lista-sorteio da mesma forma que estamos acostumados, com getElementById().
+
+```JavaScript
+//código omitido
+function sortear() {
+    embaralha(amigos);
+    let sorteio = document.getElementById('lista-sorteio');
+    for (let i = 0; i < amigos.length; i++) {
+    }
+}
+//código omitido
+```
+
+Rodrigo: A lista-sorteio é a lista que, no HTML, exibe o resultado do sorteio.
+
+Jacqueline: Exato. Agora, para inserirmos um valor nessa lista, temos que definir, dentro do for(), o que sortieo.innerHTML vai receber. No caso, ele receberá o nome do primeiro nome da lista e uma associação de quem ele sorteou, que é o nome seguinte, ou seja, o elemento na posição i + 1.
+
+```JavaScript
+//código omitido
+for (let i = 0; i < amigos.length; i++) {
+    sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[i + 1] + '<br>';
+}
+//código omitido
+```
+
+Então usamos uma seta (-->), indicando quem aquela pessoa sorteou. Esse elemento sorteado é o que está na próxima posição do array (i + 1). E para evitar que tudo fique em uma única linha, incluímos a tag HTML de quebra de linha (`<br>`) ao final. Isso permitirá que a lista seja visualizada de maneira organizada.
+
+E, como já aprendemos anteriormente, sempre temos que concatenar com o conteúdo que já está presente, para evitar sobreposições, ou seja, impedir que ele exclua a linha anterior ao adicionar uma linha nova. Portanto, antes do sorteio, concatenamos o próprio sorteio.innerHTML. Acredito que já podemos testar.
+
+Rodrigo: Vamos testar se essa parte vai funcionar. Voltaremos para página do Amigo Secreto e realizaremos o sorteio.
+
+Jacqueline: Na página do Amigo Secreto, acrescentarei os nomes:
+
+Jacque
+Rodrigo
+Vini
+
+Após adicionar os nomes à lista e clicar em "Sortear". O resultado apareceu na lista "Sorteio" e percebemos que a Jacque tirou Rodrigo, o Rodrigo tirou Vini, mas o Vini tirou "undefined" (indefinido).
+
+Rodrigo: Ocorreu aquele problema. Estamos pegando o próximo elemento, mas o último elemento não tem um próximo. Portanto, esse último tem que pegar o primeiro da lista.
+
+Jacqueline: Então, precisamos implementar essa lógica também no nosso botão de "Sortear". Para isso, dentro do nosso for, precisamos fazer um if(). Sendo assim, voltaremos para o app.js no VS Code. Como será esse nosso "if", Rodrigo?
+
+Rodrigo: Temos que verificar se o i, que representa o índice, já chegou ao final, ou seja, já chegou no amigos.length.
+
+Jacqueline: Então faremos um if() que verifica se o nosso i é igual ao amigos.length, ou seja if(i == amigos.length).
+
+Rodrigo: Se isso for verdadeiro, significa que o índice que está controlando o loop já chegou ao final do array.
+
+Jacqueline: Então, vamos abrir e fechar as chaves ({}) para implementar o código de quando ele é o último. Em seguida, criaremos um else que vai conter o código que criamos anteriormente, e será executado quando o último elemento não for o último.
+
+```JavaScript
+//código omitido
+function sortear() {
+    embaralha(amigos);
+    let sorteio = document.getElementById('lista-sorteio');
+    for (let i = 0; i < amigos.length; i++) {
+        if (i == amigos.length) {
+        } else {
+            sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[i + 1] + '<br>';
+        }
+    }
+}
+//código omitido
+```
+
+Podemos colar esse código dentro do if() também, porque faremos um código semelhante. A diferença é que, no caso do if(), o meu amigos[i] vai sortear o amigos[0], não é?
+
+Rodrigo: Sim, será o amigos[0], porque é o primeiro elemento. Ninguém tira essa pessoa, mas com esse código a última pessoa irá sorteá-la.
+
+```JavaScript
+//código omitido
+for (let i = 0; i < amigos.length; i++) {
+    if (i == amigos.length) {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[0] + '<br>';
+    } else {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[i + 1] + '<br>';
+        }
+}
+//código omitido
+```
+
+Vamos testar se esse if fez o tratamento correto.
+
+Jacqueline: Voltando para página do Amigo Secreto, eu vou colocar letras apenas, para agilizarmos. Então, vou enviar A, depois B, C e D. Clico no botão "Sortear", mas novamente o último elemento da lista sorteou "indefinido".
+
+Sorteio
+
+B → D
+
+D → C
+
+C → A
+
+A → undefined
+
+Então, algo está faltando no código e precisamos analisar.
+
+Rodrigo: Esse é um erro comum que devemos ter cuidado. Quando fazemos um loop que vai percorrer um array, tem essa questão. Se tem dez elementos, é da posição zero a nove. Então, precisamos lembrar de não pegar o último, e sim o último menos um.
+
+Jacqueline: Isso mesmo. Então, quando codamos o if(), nossa condição devemos comparar o i com amigos.length - 1, ou seja, if (i == amigos.length - 1) Tínhamos esquecido do -1 no final.
+
+```JavaScript
+//código omitido
+for (let i = 0; i < amigos.length; i++) {
+    if (i == amigos.length - 1) {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[0] + '<br>';
+    } else {
+        sorteio.innerHTML = sorteio.innerHTML + amigos[i] + ' --> ' + amigos[i + 1] + '<br>';
+        }
+}
+//código omitido
+```
+
+Rodrigo: Então lembre-se desse detalhe. O array começa pela posição zero, então o índice é o tamanho dele menos um. Há essa armadilha que torna esse erro comum em loopings.
+
+Jacqueline: Então, vamos testar novamente para verificar se ficou correta a parte do sorteio. Novamente, no Amigo Secreto, vou incluir apenas as letras A, B, C e D. Quando eu sortear, agora sim funcionou.
+
+Sorteio
+
+C → B
+
+B → A
+
+A → D
+
+D → C
+
+Então, tanto a parte de embaralhar, quanto a parte de sortear e exibir na lista estão funcionando corretamente.
+
+Rodrigo: A lógica também deu certo, porque o último elemento foi o D, ele tirou o primeiro elemento, que foi o C. Portanto, quanto não tem um próximo nome no array, conseguirmos fazer ele sortear o primeiro elemento. Agora, falta apenas programarmos o botão de reiniciar, não é mesmo, Jaque?
+
+Jacqueline: Isso mesmo, pois ele atualmente não está reiniciando nada. E é isso que nós faremos em seguida.
+
+### Aula 5 -  - Vídeo 5
+### Aula 5 -  - Vídeo 5
+### Aula 5 -  - Vídeo 5
 ### Aula 5 -  - Vídeo 5
