@@ -4031,7 +4031,282 @@ Nessa aula, você aprendeu como:
 
 ### Aula 6 - Validando o nome do amigo - Vídeo 1
 
-### Aula 6 -  - Vídeo 2
-### Aula 6 -  - Vídeo 3
+Transcrição  
+Jacqueline: Chegou o momento de implementarmos os desafios propostos, não é mesmo? Acredito que podemos começar com aquele de não permitir a adição de um campo vazio, que estava gerando uma vírgula sem que inseríssemos qualquer nome. Concorda?
+
+Rodrigo: Ótimo! Estou com o projeto aqui aberto. O objetivo é, caso não seja digitado nada no campo de texto e o botão "adicionar" seja pressionado, impedir que os nomes sejam adicionados. Portanto, precisamos realizar essa validação no código para impedir que pessoa adicione um nome sem conteúdo.
+
+Vamos lá. Voltaremos ao Visual Studio Code. A estratégia seria que, logo no início da função adicionar(), fizéssemos essa validação, verificando se algo foi digitado no campo amigo.
+
+Se nada tiver sido inserido, podemos exibir um alerta para avisar a pessoa. Mas primeiro, é necessário recuperar o nome digitado no campo. Logo após recuperá-lo, usamos uma instrução if. Como é uma verificação, a estratégia é usar um condicional.
+
+Então, se a variável amigo, que armazena o valor inserido no campo, estiver vazia (indicado por aspas vazias), exibimos um alerta solicitando que a pessoa informe o nome do amigo.
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo!');
+    }
+```
+
+Vamos testar suas alterações. No navegador, se eu inserir, por exemplo, "Ana" e clicar em "adicionar", o nome é adicionado normalmente. Porém, se eu não digitar nada e pressionar o botão "adicionar", o alerta é exibido, como esperado, com uma mensagem na parte superior da tela dizendo "Informe o nome do amigo!".
+
+Mas ainda há um problema: mesmo com o alerta, o nome vazio ainda esta sendo adicionado.
+
+Jacqueline: Isso acontece porque não informamos na função que ela deve ser interrompida nessa condição, e a execução do código prossegue.
+
+Rodrigo: Portanto, além de mostrar o alerta, precisamos interromper a execução do programa. Assim, além de entrar no if e mostrar o alerta, precisamos encerrar a aplicação. Mas como fazemos isso?
+
+Jacqueline: Até poderíamos colocar todo o restante em um else, mas podemos usar a palavra-chave return para interromper a aplicação.
+
+Rodrigo: Isso resulta na saída da função assim que ela for executada, e todo o código que vem a seguir não será processado.
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo!');
+        return;
+    }
+```
+
+Vamos testar novamente no site. Ao tentar adicionar um nome sem preencher o campo de texto, o alerta é exibido e o nome vazio não é adicionado à lista.
+
+Com isso, completamos o primeiro desafio: fazer uma validação para verificar se um nome foi inserido.
+
+Jacqueline: Continuaremos com a solução do próximo desafio em breve, certo, Rodrigo?
+
+Rodrigo: Perfeito. Esse foi o primeiro exemplo, bastante simples. Verificamos se está vazio. No entanto, existem outras validações que abordaremos nos próximos vídeos.
+
+### Aula 6 - Faça como eu fiz: validando campos do formulário
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para validar o nome do amigo no formulário.
+
+Opinião do instrutor
+
+Você precisará alterar o código da função adicionar, adicionando um condicional para checar o nome digitado no formulário:
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo!');
+        return;
+    }
+    //resto do código continua inalterado
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se não é mais possível adicionar um amigo sem informar seu nome.
+
+### Aula 6 - Validando o número de participantes - Vídeo 2
+
+Transcrição  
+Jacqueline: Rodrigo, vamos prosseguir resolvendo nossos desafios. Havia um deles em que uma pessoa conseguia clicar no botão de sorteio e sorteava a si mesma, o que não faz sentido.
+
+Portanto, seria interessante limitar a opção de clicar no botão de sorteio, ou permitir a existência do sorteio apenas se tiverem no mínimo quatro participantes. O que você acha?
+
+Rodrigo: Isso ocorre porque não faz sentido ter apenas um, dois ou três participantes, uma vez que não haveria graça no amigo secreto, as pessoas saberiam quem sorteou quem.
+
+A ideia seria fazer uma validação semelhante à anterior, porém, agora, em vez de verificar se o nome foi digitado, queremos verificar a quantidade de amigos que temos na nossa array, a variável amigos.
+
+Só realizamos o sorteio se esse array tiver pelo menos quatro itens adicionados. Vamos fazer essa validação, mas agora não é no botão de adicionar, é no botão de sortear que, quando clicado, chama a função sortear.
+
+Aqui pode ser na primeira linha do código, antes de embaralhar, a primeira coisa a ser feita é essa validação que também é uma condicional. Portanto, if(se) algo, um alert será exibido, semelhante ao que fizemos anteriormente.
+
+Nesse caso, a mensagem exibida seria "Adicione pelo menos quatro amigos". Também quero interromper a execução do código, então vou usar o return para que o programa não faça o sorteio nem embaralhe a lista.
+
+Agora, precisamos apenas definir a condição do if. Como sabemos se há pelo menos quatro pessoas?
+
+Jacqueline: Nós usamos isso ao fazer o for. Por isso, podemos determinar o tamanho do nosso array usando a propriedade .length. Então, verificamos se o amigos.length é maior ou igual a 4. É importante que use a sua criatividade para ver como prefere desenvolver a sua linha de código.
+
+```javascript
+function sortear() {
+    if (amigos.length < 4) {
+        alert("Adicione pelo menos 4 amigos");
+        return;
+}
+```
+
+Rodrigo: Então, a variável amigos é um array, e todo array possui a propriedade length que indica o tamanho, o número de elementos.
+
+Neste caso, eu quero saber o número real de elementos, então não há necessidade do "-1". Assim, se o tamanho for menor que quatro, o alerta será exibido e o sorteio será interrompido.
+
+Vamos testar? Vou incluir a Ana, o Rodrigo e a Jaque. Temos três pessoas, por isso, o sorteio não deveria ser realizado. Clicarei no botão de sortear e o alerta "Adicione pelo menos 4 amigos" será exibido.
+
+Após clicar em "ok", o return funciona, a execução será interrompida e o sorteio não será realizado. Agora vou incluir Caio, e clicar em adicionar. Agora temos pelo menos quatro pessoas, o sorteio deveria ser realizado. Cliquei no sortear e funcionou.
+
+Com isso, conseguimos resolver o segundo desafio que é realizar outra validação, mas agora em relação à quantidade de elementos, à quantidade de amigos que foram incluídos na nossa variável amigos. Funcionou perfeitamente, não é mesmo, Jaque?
+
+Jacqueline: Isso acontece muito em nossa rotina como pessoas desenvolvedoras. Muitas vezes nós lançamos uma aplicação e, ao longo do tempo, conforme as pessoas a utilizam, surgem novas funcionalidades, novas validações e coisas para implementarmos.
+
+Temos que revisitar essas funções e implementar esses desafios. E nem acabamos ainda, temos mais desafios a serem resolvidos, certo, Rodrigo?
+
+Rodrigo: Na sequência, vamos concluir o último desafio. Já estamos validando o nome da pessoa e o número de amigos, que deve ser de pelo menos quatro. Mas o desafio final é: Qual é, Jaque?
+
+Jacqueline: Não podemos permitir nomes repetidos. Se duas pessoas tiverem o mesmo nome, precisamos encontrar uma maneira de diferenciá-las, forçando a segunda pessoa a usar o sobrenome, não é verdade, Rodrigo?
+
+Rodrigo: De fato, não podemos ter duas pessoas com o mesmo nome, senão não saberemos quem tirou quem, certo? Cria uma confusão. Então, na sequência, veremos como implementar essa outra validação.
+
+### Aula 6 - Faça como eu fiz: validações em listas
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para validar o número mínimo de participantes.
+
+Ver opinião do instrutor
+Opinião do instrutor
+
+Você precisará alterar o código da função sortear, adicionando um condicional para checar o número mínimo de participantes:
+
+```javascript
+function sortear() {
+     if (amigos.length < 4) {
+        alert('Adicione pelo menos 4 amigos!');
+        return;
+    }
+    embaralhar(amigos);
+    //resto do código continua inalterado
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se não é mais possível realizar o sorteio com menos de 4 pessoas.
+
+### Aula 6 - Validando amigo já adicionado - Vídeo 3
+
+Transcrição  
+Jacqueline: Chegou a hora de implementarmos mais uma funcionalidade para aprimorar o nosso aplicativo de Amigo Secreto.
+
+Como discutimos, precisamos discernir se já temos na lista de amigos uma pessoa com um nome especificado. Caso contrário, não será possível saber quem foi sorteado e poderá ocorrer de alguém receber dois presentes. Esta situação certamente provocaria confusão em uma celebração de fim de ano, não é mesmo?
+
+Rodrigo: Assim, se eu digitar "Ana", adicionando-a à lista, a ideia é que eu não possa adicionar "Ana" novamente para evitar confusões, já que não saberíamos qual das "Anas" sorteou quem.
+
+Jacqueline: Vamos então ver no código, Rodrigo, como podemos evitar que um nome seja adicionado mais de uma vez.
+
+Rodrigo: Perfeito, a implementação não será na funcionalidade de sortear, mas na de adicionar. Já temos validação para nome em branco na função de adicionar, então, após essa validação, teremos que fazer outra validação.
+
+Novamente, será necessária mais uma condicional e faremos o mesmo processo: vamos colocar um alerta e um return. Vou até copiar essa linha de cima e colá-la, mas a mensagem do alerta será diferente. Nesse caso, vou colocar "Nome já adicionado!" como aviso.
+
+Agora, na condicional, preciso saber se esse nome já está no array. Deve haver uma função ou uma propriedade no array para verificar se um determinado elemento já existe.
+
+Jacqueline: Então, precisamos verificar, Rodrigo, se o array já tem incluído o nome que estamos tentando adicionar. O nome do nosso método é bem semelhante a isso, vamos usar o método includes aqui.
+
+Rodrigo: Perfeito, o array já tem esse método para verificarmos se um elemento já existe dentro desse array. Então, vou pegar a variável amigos.includes, como se estivesse fazendo uma pergunta: "Array amigos.includes, já está incluso aí dentro o amigo.value?", que é o que a pessoa digitou no campo do formulário.
+
+Se isso for verdadeiro, é porque já tem esse nome no array, acionará o alerta e o return impedindo que o nome seja duplicado. Acho que é isso, não é, Jaque?
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo!');
+        return;
+    }
+    if (amigos.includes(amigo.value)) {
+        alert('Nome já adicionado!');
+        return;
+    }
+```
+
+Jaqueline: Acho que é isso sim, vamos testar, Rodrigo?
+
+Rodrigo: Vamos lá. Voltando ao programa, vou adicionar "Ana", vou adicionar "Maria", ele permitiu, vou tentar adicionar "Ana" novamente e ele deveria gerar um alerta. E apareceu o alerta com a mensagem "Nome já adicionado" e ele não incluiu o nome na lista de amigos.
+
+Então funcionou com essa condicional, usando a função includes que é nativa do array. Já consigo verificar se um determinado elemento já está incluído dentro daquele array.
+
+Então implementamos as duas validações na hora de adicionar e a terceira validação na hora de realizar o sorteio, que é apenas quando tivermos pelo menos quatro amigos incluídos. Conseguimos então cumprir nossos três desafios, não é, Jaque?
+
+Jaque: Exatamente, Rodrigo. Note como, por meio de algumas linhas de código e testando o nosso próprio código, conseguimos aprimorar a nossa aplicação.
+
+Essa é a importância de testar o próprio código que estamos desenvolvendo porque a partir daí surgem diversas oportunidades de melhorias, coisas que podemos verificar ou otimizar e, posteriormente, até refatorar.
+
+Podemos olhar o código e pensar: "Poderíamos melhorar esse código de alguma forma", e retornar ao código para aprimorá-lo. Assim, é sempre importante realizar muitos testes e sempre tentar melhorar o código que estamos escrevendo.
+
+Rodrigo: Perfeito, simulamos todas essas situações, o caminho feliz, ou seja, se eu for adicionando as pessoas e fizer o sorteio. Mas também temos esses outros caminhos alternativos, como não incluir o nome ou duplicar um nome.
+
+São possibilidades que devemos considerar e isso só é possível com testes. Eventualmente, haverá uma situação em que, no seu código, não foi realizada a validação específica.
+
+Nesses desafios, a ideia era pensar em validações para garantir que o programa funcionasse da melhor maneira possível, conforme esperamos. Com isso, concluímos nossos desafios, não é, Jaque?
+
+Jacqueline: Isso mesmo, e agora o próximo desafio é que você analise todos os projetos que desenvolveu conosco ao longo desse curso e identifique também oportunidades de melhorias. Revise seu código, faça testes, implemente novas validações. Foi muito bom praticar!
+
+Rodrigo: Sim, é muito importante para quem está começando com lógica de programação, fazer esses pequenos projetos como desafios para validar seus conhecimentos. Checar se você compreendeu os conceitos de variáveis, tipos, condicionais, loop, array, funções, conforme implementamos aqui.
+
+Só com a prática, muita prática, você vai se familiarizando mais, pegando o jeito, conseguindo fazer os projetos de programação de forma mais rápida e fácil.
+
+Então, esperamos que vocês tenham gostado, tenham conseguido e, se não conseguiram fazer sozinhos, nós deixamos em todos os desafios o passo a passo como referência.
+
+O código que fizemos não é a única solução definitiva, é uma possibilidade e você pode ter feito o código de forma completamente diferente. Desde que funcione conforme o esperado, está valendo.
+
+#### Aula 6 - Faça como eu fiz: lógica para validar elementos repetidos
+
+Agora é com você! Faça o mesmo procedimento que foi demonstrado no vídeo anterior, escrevendo o código para validar se uma pessoa já foi incluída na lista de participantes.
+
+Opinião do instrutor
+
+Você precisará alterar o código da função adicionar, incluindo um condicional para checar se a pessoa já foi adicionada na lista de participantes:
+
+```Javascript
+function adicionar() {
+    let amigo = document.getElementById('nome-amigo');
+    if (amigo.value == '') {
+        alert('Informe o nome do amigo!');
+        return;
+    }
+    if (amigos.includes(amigo.value)) {
+        alert('Nome já adicionado!');
+        return;
+    }
+    //resto do código continua inalterado
+}
+```
+
+Pronto! Abra a página do projeto no navegador e verifique se não é mais possível adicionar a mesma pessoa mais de uma vez na lista de participantes.
+
+### Aula 6 - Nomes em maiúsculo ou minúsculo
+
+No projeto do amigo secreto foi feita uma validação para não permitir que uma mesma pessoa seja adicionada mais de uma vez na lista de participantes. Entretanto, o código não diferencia letras maiúsculas de minúsculas.
+
+Ou seja, podemos incluir os nomes ANA e ana, pois a validação de duplicidade não vai detectar essa diferença.
+
+Escolha a alternativa que indica uma maneira de impedir que essa situação ocorra no projeto:
+
+Resposta: Converter o nome digitado para maiúsculo antes de guardar no array e de realizar a validação.
+
+Isso vai garantir que nomes em diferentes formas de capitalização (maiúsculas e minúsculas) sejam tratados como iguais, evitando assim que a mesma pessoa seja adicionada mais de uma vez na lista de participantes, independentemente da capitalização digitada.
+
+#### Aula 6 - Projeto final do curso
+
+Caso queira, você pode [baixar o projeto final do curso](https://github.com/alura-cursos/3411-praticando-logica/archive/refs/heads/main.zip).
+
+### Aula 6 - Desafio: hora de praticar
+
+Reforce o aprendizado com os exercícios não obrigatórios a seguir:
+
+Desafios: hora da prática
+
+- Crie uma função que valide se um número é positivo, negativo ou zero.
+
+- Implemente uma função que verifique se uma pessoa é maior de idade.
+
+- Desenvolva uma função que valide se uma string é vazia ou não.
+
+- Crie uma função que determine se um ano é bissexto
+
+- Implemente uma função que calcule a média de dois números, interrompendo a execução se algum dos números não for válido.
+
+- Desenvolva uma função que receba um array como parâmetro e retorne o seu tamanho.
+
+- Crie um array e utilize a função includes para verificar se um elemento específico está presente
+
+Implemente uma função que receba um array e um elemento, e retorne se o elemento está presente no array.
+
+Crie um array de strings e utilize includes para verificar se uma determinada string está presente.
+
+Desenvolva uma função que receba um array de objetos representando estudantes de um curso e um objeto que representa um estudante procurado. Depois retorne se o objeto está presente no array.
+
+Crie uma função que receba um array de números e retorne a soma dos elementos pares e o produto dos elementos ímpares.
+
+Caso precise de ajuda, opções de solução das atividades estarão disponíveis na seção “Opinião da pessoa instrutora”.
+
 ### Aula 6 -  - Vídeo 4
 ### Aula 6 -  - Vídeo 5

@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+    #0d4386 0%, 
+    #041832 33.33%, 
+    #021021 66.67%,
+    #01080E 100%
+    );
+    color: #fff;
+}
+.divCampoBusca{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 4rem;
+}

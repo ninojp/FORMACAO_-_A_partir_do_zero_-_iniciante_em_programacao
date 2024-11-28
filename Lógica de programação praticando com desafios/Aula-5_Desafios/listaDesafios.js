@@ -1,5 +1,13 @@
 'use strict';
 
+// Exercício
+// for (let numero = 1; numero <= 100; numero++) {
+//     // if (numero / 5) {
+//     if (numero % 5 == 0) {
+//         console.log(numero);
+//     }
+// }
+
 /* Adicione os números 1,2,3 em uma variável chamada minhaLista e armazene os números 4, 5 e 6 
 separadamente em outra variável. Use o método concat() para combinar as sequências de valores
 em uma nova lista chamada novaLista. Imprima novaLista no console. */

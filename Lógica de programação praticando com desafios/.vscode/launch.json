@@ -5,15 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "exercicio_aula_3",
-            "port": 9229,
-            "request": "attach",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node"
+            "name": "Aula_5",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://127.0.0.1:5500/Aula-5_Desafios/amigo-secreto/index.html",
+            "webRoot": "${workspaceFolder}"
         },
-
         {
             "type": "chrome",
             "request": "launch",

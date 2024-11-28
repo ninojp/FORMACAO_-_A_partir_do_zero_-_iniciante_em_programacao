@@ -5,22 +5,28 @@ let listaAmigosInseridos = [];
 function adicionar() {
     const amigoInserido = document.getElementById('nome-amigo');
     if (amigoInserido.value == '') {
-        console.log(amigoInserido.value);
-        
         alert('O Campo "Nome Amigo" precisa ser preenchido');
-    }else {
-        listaAmigosInseridos.forEach((inserido) => {
-            if (inserido == amigoInserido.value) {
-                alert('Essa pessoa já está na lista');
-            };
-        });
-        listaAmigosInseridos.push(' '+amigoInserido.value);
-        let exibAmigosInseridos = document.getElementById('lista-amigos');
-        exibAmigosInseridos.textContent = listaAmigosInseridos;
-        document.getElementById('nome-amigo').value = '';
-        // console.log(listaAmigosInseridos, typeof listaAmigosInseridos);
-        atualizarLista();
-        atualizarSorteio();
+        return;
+    } else {
+        if (listaAmigosInseridos.includes(amigoInserido.value)) {
+            alert('Essa pessoa já está na lista');
+            return;
+            //Eu fiz assim
+            // listaAmigosInseridos.forEach((inserido) => {
+            //     if (inserido == amigoInserido.value) {
+            //         alert('Essa pessoa já está na lista');
+            //         return;
+            //     }
+            // });
+        } else {
+            listaAmigosInseridos.push(amigoInserido.value);
+            let exibAmigosInseridos = document.getElementById('lista-amigos');
+            exibAmigosInseridos.textContent = listaAmigosInseridos;
+            document.getElementById('nome-amigo').value = '';
+            // console.log(listaAmigosInseridos, typeof listaAmigosInseridos);
+            atualizarLista();
+            atualizarSorteio();
+        }
     }
 };
 
@@ -30,14 +36,13 @@ function sortear() {
     } else {
         embaralharArray(listaAmigosInseridos);
         listaAmigosInseridos.forEach((amigoAtual, i) => {
-            if(i == listaAmigosInseridos.length -1){
+            if (i == listaAmigosInseridos.length - 1) {
                 document.getElementById('lista-sorteio').innerHTML += `${listaAmigosInseridos[i]} => ${listaAmigosInseridos[0]}<br>`;
-            }else{
+            } else {
                 document.getElementById('lista-sorteio').innerHTML += `${listaAmigosInseridos[i]} => ${listaAmigosInseridos[i + 1]}<br>`;
-            }
-            // console.log(listaAmigosInseridos[i]);
+            };
         });
-    }
+    };
 };
 
 function excluirAmigo(index) {
@@ -68,7 +73,7 @@ function atualizarLista() {
         let paragrafo = document.createElement('p');
         paragrafo.textContent = listaAmigosInseridos[i];
         // Adiciona um evento de clique para excluir o amigo
-        paragrafo.addEventListener('click', function() {
+        paragrafo.addEventListener('click', function () {
             excluirAmigo(i);
         });
         // Adiciona o parágrafo à lista
@@ -78,16 +83,6 @@ function atualizarLista() {
 
 function reiniciar() {
     listaAmigosInseridos = [];
-    // document.getElementById('nome-amigo').value = '';
     document.getElementById('lista-amigos').innerHTML = '';
     document.getElementById('lista-sorteio').innerHTML = '';
 };
-
-
-// Exercício
-// for (let numero = 1; numero <= 100; numero++) {
-//     // if (numero / 5) {
-//     if (numero % 5 == 0) {
-//         console.log(numero);
-//     }
-// }
