@@ -4468,5 +4468,83 @@ console.log("Soma dos pares:", resultado.somaPares);
 console.log("Produto dos ímpares:", resultado.produtoImpares);
 ```
 
-### Aula 6 -  - Vídeo 4
-### Aula 6 -  - Vídeo 5
+### Aula 6 - Referências
+
+1. [Lógica de Programação Crie seus primeiros programas usando Javascript e HTML](https://www.casadocodigo.com.br/products/livro-programacao?_pos=1&_sid=4661f8240&_ss=r)
+
+Este livro apresenta uma abordagem totalmente prática. Uma didática pensada no iniciante, com a qual os conceitos são apresentados com motivações práticas, através do surgimento da necessidade para depois mostrar a solução.
+
+2. [Lógica de programação com Portugol](https://www.casadocodigo.com.br/products/livro-portugol?_pos=2&_sid=4661f8240&_ss=r)
+
+Neste livro, Joice Mendes e Rafael Muniz apresentam todos os conceitos necessários para a criação da lógica de programação e dos algoritmos. Você vai aprimorar sua percepção lógica e aprender a aplicá-la na programação, cobrindo tópicos desde a sintaxe do Portugol, variáveis, comandos, estruturas condicionais, operadores relacionais e lógicos, estruturas de repetição, até vetores, matrizes e funções. O material é recheado com 85 exemplos de código, 55 exercícios de fixação com gabarito e um projeto prático ao longo do aprendizado. Todos os capítulos contam com um vídeo complementar disponibilizado na internet.
+
+3. Livro: ["Estruturas de Dados e Algoritmos com JavaScript"](https://www.google.com.br/books/edition/Estruturas_de_dados_e_algoritmos_com_Jav/0nWKDwAAQBAJ?hl=pt-BR&gbpv=1&dq=estrutura+de+dados+javascript&printsec=frontcover)
+
+Este livro aborda de forma detalhada as estruturas de dados e algoritmos mais comuns, fornecendo exemplos práticos em JavaScript.
+
+4. Site: [MDN Web Docs](https://developer.mozilla.org/pt-BR/)
+
+A documentação oficial da Mozilla Developer Network (MDN) é uma excelente fonte de informações sobre JavaScript. Lá você encontrará explicações detalhadas sobre a sintaxe, recursos da linguagem e exemplos de código.
+
+5. [Eloquent JavaScript 3rd edition (2018)](https://eloquentjavascript.net/)
+
+Este é um livro sobre JavaScript, programação e as maravilhas do mundo digital. Um guia essencial para toda a pessoa desenvolvedora web. Em inglês.
+
+6. [Alura+ Funções no JavaScript que você precisa conhecer](https://cursos.alura.com.br/extra/alura-mais/funcoes-no-javascript-que-voce-precisa-conhecer-c1503)
+
+Neste Alura+, o instrutor Luan Alves ensina as especificidades das funções: function declaration e function expression no JavaScript, realizando um desafio de checagem de palavras palíndromas.
+
+7. [Algoritmos - Teoria e Prática, Thomas H. Cormen](https://books.google.com.br/books/about/Algoritmos_Teoria_e_Pr%C3%A1tica.html?id=6iA4LgEACAAJ&source=kp_book_description&redir_esc=y)
+
+Este livro apresenta um texto abrangente sobre o moderno estudo de algoritmos para computadores. É uma obra clássica, cuja primeira edição tornou-se amplamente adotada nas melhores universidades em todo o mundo, bem como padrão de referência para profissionais da área.
+
+8. [JavaScript: O Guia Definitivo](https://www.amazon.com.br/JavaScript-Guia-Definitivo-David-Flanagan/dp/856583719X/ref=sr_1_1?keywords=javascript&qid=1701835643&sr=8-1&ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d)
+
+Referência completa para programadores, JavaScript: O guia definitivo fornece uma ampla descrição da linguagem JavaScript básica e das APIs JavaScript do lado do cliente definidas pelos navegadores Web. Recomendado para programadores experientes que desejam aprender a linguagem de programação da Web e para programadores JavaScript que desejam ampliar seus conhecimentos e dominar a linguagem, este é o guia do programador e manual de referência de JavaScript completo e definitivo.
+
+### Aula 6 - O que aprendemos?
+
+Nessa aula, você aprendeu como:
+
+- Realizar validações das informações, com o uso de condicionais;
+
+- Interromper a execução de uma função, com o uso do return;
+
+- Obter o número de elementos em um array, com a propriedade length;
+
+- Checar se um elemento existe em um array, com o uso da função includes.
+
+### Aula 6 - Conclusão - Vídeo 4
+
+Transcrição  
+Jacqueline: Chegamos ao final de mais um curso. Parabéns para você que nos acompanhou até aqui. Realizamos projetos incríveis, não é mesmo, Rodrigo?
+
+Rodrigo: Sim, nós fizemos vários projetos, cada um com um certo nível de complexidade. Cada um desses projetos tinha suas funcionalidades específicas. Alguns eram apenas para capturar valores no formulário, realizar validações. Outros tivemos que manipular a página HTML. Vamos fazer um resumo dos projetos, não é, Jaque?
+
+Jacqueline: Vamos sim, Rodrigo. Nosso primeiro projeto foi o aluguel de jogos, certo?
+
+Rodrigo: Foi o projeto mais simples dos quatro. A ideia era apenas realizar a funcionalidade de alugar e devolver, recuperar o elemento e verificar se o botão estava com determinado texto. Esse foi bastante tranquilo, um projeto bem interessante.
+
+Depois, partimos para o carrinho de compras, com um pouco mais de complexidade. Tivemos que recuperar as informações do formulário, fazer esse tratamento da string, usar o split, e adicionar na listagem, fazer o cálculo do subtotal. Esse foi mais avançado, não é, Jaque?
+
+Jacqueline: Sim. Trabalhamos com variáveis acumuladoras. A variável total, que tinha que ficar sempre acumulando o que já tinha e mais o valor obtido do subtotal.
+
+Rodrigo: E depois, realizamos nosso projeto de ingressos, onde podíamos escolher o tipo, certo? Se era cadeira, ou pista, quantidade. E tivemos que fazer validações de acordo com a quantidade disponível para não permitir que as pessoas comprassem mais ingressos do que havia disponível.
+
+Por fim, finalizamos com o nosso projeto de amigo secreto, realizando essa funcionalidade de adicionar as pessoas, realizar o sorteio. E finalizamos, na última aula, com aquelas validações para deixar esse projeto mais polido.
+
+Não permitir cadastrar uma pessoa que não tenha um nome, não permitir duas pessoas com o mesmo nome e haver pelo menos quatro pessoas para fazer o sorteio. Então, nesse projeto, realizamos desafios extras para treinar essa parte de validação.
+
+E, com isso, temos quatro projetos incríveis que desenvolvemos ao longo do curso, não é mesmo, Jaque?
+
+Jacqueline: Exatamente, são projetos que vão servir para você como portfólio, para você compartilhar em suas redes, mencionar a gente, mencionar a Alura.
+
+Os projetos serviram para você praticar tudo que tem sido desenvolvido ao longo dessa formação. Então, a parte de variáveis, de condicionais, de estruturas de repetição, essa interação com o HTML, que também vai ser uma constante quando precisarmos interagir com o nosso front-end. Espero que vocês tenham gostado.
+
+Rodrigo: Espero que vocês tenham gostado, tenham aprendido bastante. Como a Jaque mencionou, inclua esses projetos no seu portfólio.
+
+Depois que você fizer o curso de GitHub, você pode subir cada projeto no repositório lá do GitHub. E, claro, se tiver alguma dúvida, você pode recorrer ao Fórum ou ao Discord, a nossa comunidade. Aqui está só começando a sua jornada.
+
+Há os cursos de front-end para você aprender essa parte do HTML e do CSS, que nós já preparamos. Tem também os cursos de back-end para você aprender mais essa parte do JavaScript e de outras linguagens. Nós nos vemos por aí, nesses cursos.
+
+Jacqueline: Isso aí. Até os próximos cursos!
